@@ -48,10 +48,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $city = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $SessionSD = null;
+    private ?\DateTimeInterface $sessionSD = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $SessionED = null;
+    private ?\DateTimeInterface $sessionED = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Post::class, orphanRemoval: true)]
     private Collection $posts;
@@ -198,26 +198,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSessionSD(): ?\DateTimeInterface
+    public function getsessionSD(): ?\DateTimeInterface
     {
-        return $this->SessionSD;
+        return $this->sessionSD;
     }
 
-    public function setSessionSD(\DateTimeInterface $SessionSD): static
+    public function setsessionSD(\DateTimeInterface $sessionSD): static
     {
-        $this->SessionSD = $SessionSD;
+        $this->sessionSD = $sessionSD;
 
         return $this;
     }
 
-    public function getSessionED(): ?\DateTimeInterface
+    public function getsessionED(): ?\DateTimeInterface
     {
-        return $this->SessionED;
+        return $this->sessionED;
     }
 
-    public function setSessionED(\DateTimeInterface $SessionED): static
+    public function setsessionED(\DateTimeInterface $sessionED): static
     {
-        $this->SessionED = $SessionED;
+        $this->sessionED = $sessionED;
 
         return $this;
     }
