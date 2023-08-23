@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 
 use App\Form\PostType;
+use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PostController extends AbstractController
 {
     #[Route('/post', name: 'app_post')]
-    public function index(): Response
+    public function index(PostRepository $posts): Response
     {
         return $this->render('post/index.html.twig', [
-            'controller_name' => 'PostController',
+            'posts' =>$posts->findAll() ,
         ]);
     }
     #[Route('/post/add', name: 'app_post_add',priority:1)]
