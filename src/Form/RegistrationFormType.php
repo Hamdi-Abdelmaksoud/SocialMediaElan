@@ -23,6 +23,7 @@ class RegistrationFormType extends AbstractType
         ->add('lastName')
         ->add('email')
         ->add('birthDate', DateType::class, ['widget' => 'single_text'])
+        ->add('city')
         ->add('sessionSD',DateType::class, ['widget' => 'single_text'])
         ->add('sessionED',DateType::class, ['widget' => 'single_text'])
         ->add('bio')
