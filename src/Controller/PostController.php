@@ -17,8 +17,16 @@ class PostController extends AbstractController
     #[Route('/post', name: 'app_post')]
     public function index(PostRepository $posts): Response
     {
-        return $this->render('post/index.html.twig', [
+        return $this->render('post/allposts.html.twig', [
             'posts' =>$posts->findAll() ,
+        ]);
+    }
+    #[Route('/post/{post}', name: 'app_post_show')]
+    public function showOne(Post $post): Response
+    {
+
+        return $this->render('post/onepost.html.twig', [
+            'post' => $post
         ]);
     }
     #[Route('/post/add', name: 'app_post_add',priority:1)]
