@@ -47,5 +47,26 @@ class CommentController extends AbstractController
             ]
         );
     }
+    #[Route('/post/{post}/{comment}/edit', name: 'app_comment_edit')]
+    public function edit(Post $post, Comment $comment,Request $request, EntityManagerInterface $entiyManager): Response
+    {
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+
+            $entiyManager->persist($comment);
+            $entiyManager->flush();
+            $this->addFlash('success', 'commentt updated successfully');
+            return $this->redirectToRoute('app_post');
+        }
+        return $this->render(
+            'post/comment.html.twig',
+            [
+                'form' => $form
+            ]
+        );
+    }
 }
 
