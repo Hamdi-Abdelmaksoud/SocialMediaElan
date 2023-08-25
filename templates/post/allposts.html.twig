@@ -6,7 +6,12 @@
 {% block body %}
 	{% if posts %}
 		{% for post in posts %}
+
 			<div id="post">
+			{% if app.user == post.author  %}
+			<a href="{{path('app_post_delete',{post:post.id})}}">delete</a>
+				
+			{% endif %}
 				<div>{{ post.text }}</div>
 				<div style="color:gray">{{ post.created | date("M j,Y") }}</div>
 				<div>{{ post.author.firstname }}</div><br>
