@@ -65,11 +65,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'likedBy')]
     private Collection $liked;
 
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'followers')]
+    #[ORM\JoinTable('followers')]
+    private Collection $follows;
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follows')]
+    private Collection $followers;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->liked = new ArrayCollection();
+        $this->follows = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -320,6 +328,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->liked->removeElement($liked)) {
             $liked->removeLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollows(): Collection
+    {
+        return $this->follows;
+    }
+
+    public function follow(self $follow): static
+    {
+        if (!$this->follows->contains($follow)) {
+            $this->follows->add($follow);
+        }
+
+        return $this;
+    }
+
+    public function unfollow(self $follow): static
+    {
+        $this->follows->removeElement($follow);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(self $follower): static
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers->add($follower);
+            $follower->follow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): static
+    {
+        if ($this->followers->removeElement($follower)) {
+            $follower->unfollow($this);
         }
 
         return $this;
