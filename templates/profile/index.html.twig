@@ -3,5 +3,10 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
- 
+  {{user.firstName}} {{user.lastName}} <br>
+  {{user.birthDate | date("M j,Y") }} <br>
+  {{user.city}} <br>
+  {{user.bio}}<br>
+  <hr>
+
 {% endblock %}

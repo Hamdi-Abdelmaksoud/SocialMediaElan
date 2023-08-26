@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
+{  
+    #[Route('/profile/{user}', name: 'app_profile')]
+public function editProfile(User $user,PostRepository $postRepository): Response
 {
-    #[Route('/profile', name: 'app_profile')]
-    public function index(): Response
-    {
-        return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
-        ]);
-    }
+
+    return $this->render('profile/index.html.twig', [
+        'user' => $user,
+        
+    ]);
+}
 }
