@@ -17,11 +17,15 @@ class LikeController extends AbstractController
   
     public function like(Post $post,EntityManagerInterface $entityManager,Request $request):Response
         {
+          // Obtient l'utilisateur courant
       $currentUser = $this->getUser();
+       // Ajoute l'utilisateur courant à la liste des personnes ayant aimé cette publication
       $post->addLikedBy($currentUser);
+      // Persiste les changements en base de données
       $entityManager->persist($post);
-      
       $entityManager->flush();
+              // Récupère l'URL de la page précédente (le referer) pour rediriger l'utilisateur.
+
       $referer = $request->headers->get('referer');
       return $this->redirect($referer);
 
@@ -37,9 +41,5 @@ class LikeController extends AbstractController
       $entityManager->flush();
       $referer = $request->headers->get('referer');
             return $this->redirect($referer);
-
-
+           }
     }
-    
-  
-}
