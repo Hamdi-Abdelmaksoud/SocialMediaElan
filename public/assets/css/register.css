@@ -82,7 +82,7 @@
     }
     
     .nav-links li a:hover {
-        color: #61DAFB;
+        color: #d3fa37;
     }
     
     .nav-links li {
@@ -94,7 +94,7 @@
         display: block;
         height: 3px;
         width: 0%;
-        background-color: #61DAFB;
+        background-color: #e0ff30;
         position: absolute;
         transition: all ease-in-out 250ms;
         margin: 0 0 0 10%;

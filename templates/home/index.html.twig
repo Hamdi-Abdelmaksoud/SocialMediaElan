@@ -4,7 +4,13 @@
 
 {% block body %}
 {{ include('home/_nav_home.html.twig') }}
+<div style="display:flex">
+<div class="asside">
+{{ include('home/_asside.html.twig') }}
+</div>
+<div class="homePosts">
 {{ include('post/_allposts.html.twig', posts) }}
  
-
+</div>
+</div>
 {% endblock %}

@@ -8,49 +8,50 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<h1>Register</h1>
+	{{include('registration/_nav_registre.html.twig')}}
 	<div id="register">
 
 		{{ form_errors(registrationForm) }}
 
 		{{ form_start(registrationForm) }}
 		<div id="formBox">
-			
-				{{ form_widget(registrationForm.firstName, {'attr': {'placeholder': 'first Name'}, 'label': false}) }}
-				<div>
-					{{ form_widget(registrationForm.lastName, {'attr': {'placeholder': 'Last Name'}, 'label': false}) }}
-				</div>
-				<div>
-					<div>Birth date :</div>
-					{{ form_widget(registrationForm.birthDate, {'label': false}) }}
-				</div>
-				<div>
-					{{ form_row(registrationForm.city,{'attr': {'placeholder': 'City of training'}, 'label': false}) }}
-				</div>
+			<h1>Register</h1>
 
+			{{ form_widget(registrationForm.firstName, {'attr': {'placeholder': 'first Name'}, 'label': false}) }}
+			<div>
+				{{ form_widget(registrationForm.lastName, {'attr': {'placeholder': 'Last Name'}, 'label': false}) }}
+			</div>
+			<div>
+				<div>Birth date :</div>
+				{{ form_widget(registrationForm.birthDate, {'label': false}) }}
+			</div>
+			<div>
+				{{ form_row(registrationForm.city,{'attr': {'placeholder': 'City of training'}, 'label': false}) }}
+			</div>
+
+			<div>
+				<div>training start date :</div>
+				{{ form_widget(registrationForm.sessionSD,{label : false }) }}
 				<div>
 					<div>training start date :</div>
-					{{ form_widget(registrationForm.sessionSD,{label : false }) }}
-					<div>
-						<div>training start date :</div>
-						{{ form_widget(registrationForm.sessionED,{label : false }) }}
-					</div>
-					<div>
-						{{ form_widget(registrationForm.bio,{'attr': {'placeholder': 'Bio **optionnel'}, 'label': false}) }}
-					</div>
-					<div>
-						{{ form_widget(registrationForm.email,{'attr': {'placeholder': 'Your Email'}, 'label': false}) }}
-					</div>
-					<div>
-						{{ form_widget(registrationForm.plainPassword , {'label': false}) }}
-					</div>
-					<div>
-						{{ form_row(registrationForm.agreeTerms) }}
-					</div>
-					<div>
-						<button type="submit" class="btn">Register</button>
-					</div>
-				
+					{{ form_widget(registrationForm.sessionED,{label : false }) }}
+				</div>
+				<div>
+					{{ form_widget(registrationForm.bio,{'attr': {'placeholder': 'Bio **optionnel'}, 'label': false}) }}
+				</div>
+				<div>
+					{{ form_widget(registrationForm.email,{'attr': {'placeholder': 'Your Email'}, 'label': false}) }}
+				</div>
+				<div>
+					{{ form_widget(registrationForm.plainPassword , {'label': false}) }}
+				</div>
+				<div>
+					{{ form_row(registrationForm.agreeTerms) }}
+				</div>
+				<div>
+					<button type="submit" class="btn">Register</button>
+				</div>
+
 			</div>
 		</div>
 		{{ form_end(registrationForm) }}

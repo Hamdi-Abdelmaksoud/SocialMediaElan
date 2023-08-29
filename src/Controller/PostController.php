@@ -25,7 +25,7 @@ class PostController extends AbstractController
     public function showOne(Post $post): Response
     {
 
-        return $this->render('post/onepost.html.twig', [
+        return $this->render('post/showpost.html.twig', [
             'post' => $post
         ]);
     }
