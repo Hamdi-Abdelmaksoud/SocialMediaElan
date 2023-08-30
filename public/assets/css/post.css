@@ -1,4 +1,10 @@
-img {
+:root {
+    --firstcolor: #9b9b9b;
+    --secondcolor: #f9b233;
+    --whitecolor: #ffffff;
+}
+
+-- img {
     max-width: 100%;
 }
 
@@ -13,18 +19,18 @@ img {
 }
 
 .tweet-wrap {
-    max-width: 490px;
-    background: #fff;
-    margin: 0 auto;
+    width: 100%;
+    background: var(--whitecolor);
+    margin-left: 10px;
     margin-top: 50px;
     border-radius: 3px;
     padding: 30px;
-    border-bottom: 1px solid #e6ecf0;
-    border-top: 1px solid #e6ecf0;
-    -webkit-border-radius: ;
-    -moz-border-radius: ;
-    -ms-border-radius: ;
-    -o-border-radius: ;
+    border-bottom: px solid var(--firstcolor, black);
+    border-top: 1px solid var(--whitecolor);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
 }
 
 .tweet-header {
@@ -38,7 +44,7 @@ img {
 }
 
 .tweet-header-info span {
-    color: #657786;
+    color: var(--firstcolor);
     font-weight: normal;
     margin-left: 5px;
 }
@@ -64,11 +70,35 @@ img {
 }
 
 .tweet-info-counts div svg {
-    color: #657786;
+    color: var(--firstcolor);
     margin-right: 10px;
 }
 
-@media screen and (max-width:430px) {
+.likes-count {
+    position: relative;
+}
+
+#likersList {
+    position: absolute;
+    left: -10px;
+    display: flex;
+    background-color: var(--firstcolor);
+    width: 220px;
+    flex-direction: column;
+    display: none;
+}
+
+.likes-count:hover #likersList {
+    display: block;
+}
+
+#liker {
+    color: var(--whitecolor);
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+@media screen and (max-width: 430px) {
     body {
         padding-left: 20px;
         padding-right: 20px;

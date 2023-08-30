@@ -1,0 +1,36 @@
+:root {
+    --firstcolor: #9b9b9b;
+    --secondcolor: #f9b233;
+    --whitecolor: #ffffff;
+}
+
+#avatarComment {
+    display: flex;
+    background-color: var(--firstcolor);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin-right: 2px;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+}
+
+#commentText {
+    padding-left: 70px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.input-div {
+    background: var(--whitecolor);
+    padding: 0px 10px;
+    height: 35px;
+    border-radius: 10000px;
+}

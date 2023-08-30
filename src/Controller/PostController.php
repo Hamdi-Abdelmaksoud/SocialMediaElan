@@ -20,7 +20,7 @@ class PostController extends AbstractController
         return $this->render('post/_allposts.html.twig', [
             'posts' =>$posts->findAll() ,
         ]);
-    }
+    } 
     #[Route('/post/{post}', name: 'app_post_show')]
     public function showOne(Post $post): Response
     {
@@ -44,7 +44,8 @@ class PostController extends AbstractController
             
             
             $this->addFlash('success', 'Post added successfully');
-            return $this->redirectToRoute('app_post');
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
         }
         return $this->render(
             'post/add.html.twig',
@@ -65,7 +66,7 @@ class PostController extends AbstractController
             $entiyManager->persist($post);
             $entiyManager->flush();
             $this->addFlash('success', 'Post updated successfully');
-            return $this->redirectToRoute('app_post');
+            return $this->redirectToRoute('app_home');
         }
         return $this->render(
             'post/add.html.twig',

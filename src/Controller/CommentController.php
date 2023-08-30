@@ -24,12 +24,12 @@ class CommentController extends AbstractController
     #[Route('/post/{post}/comment', name: 'app_post_comment')]
     public function addComment(Request $request,Post $post, EntityManagerInterface $entiyManager): Response
     {
+        if ($request->isMethod('POST')) {
+            $commentText = $request->request->get('comment');
+       
         $comment= new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData();
+      
+            $comment -> setText($commentText);
             $comment->setAuthor($this->getUser());
             $comment->setPost($post);
             $entiyManager->persist($comment);
@@ -37,15 +37,11 @@ class CommentController extends AbstractController
             
             
             $this->addFlash('success', 'comment added successfully');
-            return $this->redirectToRoute('app_post');
+            
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
         }
-        return $this->render(
-            'post/comment.html.twig',
-            [
-                'form' => $form,
-                'post' => $post
-            ]
-        );
+        
     }
     #[Route('/post/{post}/{comment}/edit', name: 'app_comment_edit')]
     public function edit(Post $post, Comment $comment,Request $request, EntityManagerInterface $entiyManager): Response
@@ -59,14 +55,23 @@ class CommentController extends AbstractController
             $entiyManager->persist($comment);
             $entiyManager->flush();
             $this->addFlash('success', 'commentt updated successfully');
-            return $this->redirectToRoute('app_post');
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
         }
         return $this->render(
             'post/comment.html.twig',
             [
-                'form' => $form
+                'formComment' => $form
             ]
         );
+    }
+    #[Route('/post/{post}/{comment}/delete', name: 'app_comment_delete')]
+    public function delete(Post $post, Comment $comment,Request $request, EntityManagerInterface $entiyManager): Response
+    {
+        $entiyManager->remove($comment);
+        $entiyManager->flush();
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 }
 
