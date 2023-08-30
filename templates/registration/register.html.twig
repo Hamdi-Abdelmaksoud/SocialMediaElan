@@ -17,6 +17,7 @@
 		<div id="formBox">
 			<h1>Register</h1>
 
+			{{ form_widget(registrationForm.image, {'attr': {'placeholder': 'upload picture'}, 'label': false}) }}
 			{{ form_widget(registrationForm.firstName, {'attr': {'placeholder': 'first Name'}, 'label': false}) }}
 			<div>
 				{{ form_widget(registrationForm.lastName, {'attr': {'placeholder': 'Last Name'}, 'label': false}) }}

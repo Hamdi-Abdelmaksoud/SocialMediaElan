@@ -71,6 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follows')]
     private Collection $followers;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -380,6 +383,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->followers->removeElement($follower)) {
             $follower->unfollow($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

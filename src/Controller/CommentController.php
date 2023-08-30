@@ -21,13 +21,14 @@ class CommentController extends AbstractController
             'controller_name' => 'CommentController',
         ]);
     }
-    #[Route('/post/{post}/comment', name: 'app_post_comment')]
-    public function addComment(Request $request,Post $post, EntityManagerInterface $entiyManager): Response
+    #[Route('/post/{post}/comment/{action}', name: 'app_post_comment')]
+    public function addComment(Request $request,Post $post, EntityManagerInterface $entiyManager,$action =null): Response
     {
         if ($request->isMethod('POST')) {
             $commentText = $request->request->get('comment');
-       
-        $comment= new Comment();
+       if(!$action)
+       {$comment= new Comment();}
+        
       
             $comment -> setText($commentText);
             $comment->setAuthor($this->getUser());
