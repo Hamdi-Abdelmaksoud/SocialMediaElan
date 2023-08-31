@@ -33,11 +33,16 @@ class Post
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'liked')]
     private Collection $likedBy;
 
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $pics = null;
+
+  
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->created=new DateTime();
         $this->likedBy = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -134,4 +139,21 @@ class Post
 
         return $this;
     }
+
+    public function getPics(): ?array
+    {
+        return $this->pics;
+    }
+
+    public function setPics(?array $pics): static
+    {
+        $this->pics = $pics;
+
+        return $this;
+    }
+
+   
+ 
+
+    
 }
