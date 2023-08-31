@@ -33,6 +33,9 @@ class Post
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'liked')]
     private Collection $likedBy;
 
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: PostPics::class, orphanRemoval: true,cascade:['persist','remove'])]
+    private Collection $pics;
+
 
   
     public function __construct()
@@ -40,6 +43,7 @@ class Post
         $this->comments = new ArrayCollection();
         $this->created=new DateTime();
         $this->likedBy = new ArrayCollection();
+        $this->pics = new ArrayCollection();
         
     }
 
@@ -134,6 +138,36 @@ class Post
     public function removeLikedBy(User $likedBy): static
     {
         $this->likedBy->removeElement($likedBy);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostPics>
+     */
+    public function getPics(): Collection
+    {
+        return $this->pics;
+    }
+
+    public function addPic(PostPics $pic): static
+    {
+        if (!$this->pics->contains($pic)) {
+            $this->pics->add($pic);
+            $pic->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePic(PostPics $pic): static
+    {
+        if ($this->pics->removeElement($pic)) {
+            // set the owning side to null (unless already changed)
+            if ($pic->getPost() === $this) {
+                $pic->setPost(null);
+            }
+        }
 
         return $this;
     }
