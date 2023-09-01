@@ -159,6 +159,10 @@ nav {
     background-color: transparent;
     border: 1.5px solid var(--whitecolor);
     transition: all ease-in-out 350ms;
+    -webkit-transition: all ease-in-out 350ms;
+    -moz-transition: all ease-in-out 350ms;
+    -ms-transition: all ease-in-out 350ms;
+    -o-transition: all ease-in-out 350ms;
 }
 
 
