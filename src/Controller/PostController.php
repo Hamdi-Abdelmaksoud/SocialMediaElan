@@ -23,23 +23,18 @@ class PostController extends AbstractController
             'posts' => $posts->findAll(),
         ]);
     }
-    #[Route('/post/{post}', name: 'app_post_show')]
-    public function showOne(Post $post): Response
-    {
-
-        return $this->render('post/showpost.html.twig', [
-            'post' => $post
-        ]);
-    }
-    #[Route('/post/add', name: 'app_post_add', priority: 1)]
+    
+    #[Route('/post/add', name: 'app_post_add')]
     public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            // on récupère les images
-            $pics = $form->get('pics')->getData();
+            
+            //on récupère les images
+            $pics = $form->get('pic')->getData();
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
             if ($pics) 
@@ -65,7 +60,8 @@ class PostController extends AbstractController
                     }
                     $postPics = new PostPics();
                     $postPics->setPic($newFilename);
-                    $post->addPic($pic);
+                    $postPics->setPost($post);
+                    $post->addPic($postPics);
                 }
             }
             $post = $form->getData();
@@ -76,7 +72,7 @@ class PostController extends AbstractController
 
             $this->addFlash('success', 'Post added successfully');
             
-            return $this->redirect('app_home');
+            return $this->redirectToRoute('app_home');
         }
         return $this->render(
             'post/add.html.twig',
@@ -85,6 +81,16 @@ class PostController extends AbstractController
             ]
         );
     }
+
+    #[Route('/post/{post}', name: 'app_post_show')]
+    public function showOne(Post $post): Response
+    {
+
+        return $this->render('post/showpost.html.twig', [
+            'post' => $post
+        ]);
+    }
+
     #[Route('/post/{post}/edit', name: 'app_post_edit')]
     public function edit(Post $post, Request $request, EntityManagerInterface $entiyManager): Response
     {

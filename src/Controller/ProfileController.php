@@ -14,7 +14,7 @@ class ProfileController extends AbstractController
 public function editProfile(User $user,PostRepository $postRepository): Response
 {
 
-    return $this->render('profile/index.html.twig', [
+    return $this->render('profile/show.html.twig', [
         'user' => $user,
         
     ]);

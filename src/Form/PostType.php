@@ -18,7 +18,8 @@ class PostType extends AbstractType
     {
         $builder
             ->add('text',TextType::class)
-            ->add('pics', FileType::class, [
+            
+            ->add('pic', FileType::class, [
                 'label' => 'add pictures',
     
                 // unmapped means that this field is not associated to any entity property
@@ -30,7 +31,7 @@ class PostType extends AbstractType
     
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
+               /* 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
@@ -40,8 +41,8 @@ class PostType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Please upload a valid picture document',
                     ])
-                ],
-                ])
+                ],*/
+            ])
                
             
             ->add('submit', SubmitType::class, ['label' => 'publish'])    
