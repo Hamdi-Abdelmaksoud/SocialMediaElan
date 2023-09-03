@@ -7,3 +7,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+:root {
+    --firstcolor: #9b9b9b;
+    --secondcolor: #f9b233;
+    --whitecolor: #ffffff;
+}

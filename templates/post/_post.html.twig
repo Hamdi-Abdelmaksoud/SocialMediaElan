@@ -1,4 +1,4 @@
-<div class="tweet-wrap">
+{# <div class="tweet-wrap">
 	<div class="tweet-header">
 		<img src="{{asset('assets/images/logo.svg')}}" alt="" class="avator">
 		<div class="tweet-header-info">
@@ -103,4 +103,37 @@
 		</span>
 	</form>
 
+</div> #}
+
+ 	<!--posts-->
+	<!--posts-->
+
+	<div class="post">
+	<div class="author_pic">
+		<img src="{{ asset('uploads/userPic/'~ post.author.image)}}" alt="user pic"/>
+
+	</div>
+	<div class="post_body">
+		<div class="post_header">
+			<div class="post_author">
+				<h3>{{post.author.firstName}}
+					{{post.author.lastName}}
+					<span class="material-icons post_padge">verified</span>
+				</h3>
+			</div>
+			<div class="post_content">
+				<p>{{post.text}}</p>
+			</div>
+		</div>
+		{% for pic in post.pics %}
+			<img src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'/>
+		{% endfor %}
+		<div class="post_footer">
+		<span class="material-icons">
+favorite_border
+</span>
+<span class="material-icons">
+question_answer
+</span>
 </div>
+	</div></div>

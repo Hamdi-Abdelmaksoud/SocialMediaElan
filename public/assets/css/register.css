@@ -131,6 +131,10 @@ nav {
     margin-left: 2vw;
     font-size: 1rem;
     cursor: pointer;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    -ms-border-radius: 2em;
+    -o-border-radius: 2em;
 }
 
 .login-button:hover {
@@ -152,6 +156,10 @@ nav {
     padding: 0.6rem 0.8rem;
     font-size: 1rem;
     cursor: pointer;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    -ms-border-radius: 2em;
+    -o-border-radius: 2em;
 }
 
 .join-button:hover {

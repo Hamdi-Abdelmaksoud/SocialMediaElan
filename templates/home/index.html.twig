@@ -4,21 +4,32 @@
 {% endblock %}
 
 {% block body %}
-	{{ include('home/_nav_home.html.twig') }}
-	<div style="display:flex">
-		<div class="asside">
+	{# {{ include('home/_nav_home.html.twig') }} #}
+	<div class="homeContainer">
+		<div>
 			{{ include('home/_asside.html.twig') }}
 		</div>
 		<div class="homePosts">
-			{{ include('post/_allposts.html.twig', posts) }}
+			{% set userData = {
+    'pic': app.user.image,
+    
+} %}
+			{{ include('home/_postBox.html.twig', userData) }}
+			{% if posts %}
 
-		</div>
-			<div class="asside">
-				<ul>
-					<li>hello</li>
-					<li>hello</li>
-					<li>hello</li>
-				</ul>
-			</div>
+				{{ include('post/_allposts.html.twig', posts) }} #}
+			{% else %}
+				<p>Welcom to our comunity follow friends and share youre experiences with them</p>
+		
+		{% endif %}
+
+
 	</div>
-{% endblock %}
+	<div class="asside">
+		<ul>
+			<li>hello</li>
+			<li>hello</li>
+			<li>hello</li>
+		</ul>
+	</div>
+</div>{% endblock %}
