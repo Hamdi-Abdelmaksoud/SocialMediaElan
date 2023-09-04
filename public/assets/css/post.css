@@ -1,211 +1,57 @@
-    /* -- img {
-    max-width: 100%;
-}
-
-.avator {
-    border-radius: 100px;
-    width: 48px;
-    margin-right: 15px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    -ms-border-radius: 100px;
-    -o-border-radius: 100px;
-}
-
-.tweet-wrap {
-    width: 100%;
-    background: var(--whitecolor);
-    margin-left: 10px;
-    margin-top: 50px;
-    border-radius: 3px;
-    padding: 30px;
-    border-bottom: px solid var(--firstcolor, black);
-    border-top: 1px solid var(--whitecolor);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
-}
-
-.tweet-header {
-    display: flex;
-    align-items: flex-start;
-    font-size: 14px;
-}
-
-.tweet-header-info {
-    font-weight: bold;
-}
-
-.tweet-header-info span {
-    color: var(--firstcolor);
-    font-weight: normal;
-    margin-left: 5px;
-}
-
-.tweet-header-info p {
-    font-weight: normal;
-    margin-top: 5px;
-}
-
-.tweet-img-wrap {
-    padding-left: 60px;
-}
-
-.tweet-info-counts {
-    display: flex;
-    margin-left: 60px;
-    margin-top: 10px;
-}
-
-.tweet-info-counts div {
-    display: flex;
-    margin-right: 20px;
-}
-
-.tweet-info-counts div svg {
-    color: var(--firstcolor);
-    margin-right: 10px;
-}
-
-.likes-count {
-    position: relative;
-}
-
-#likersList {
-    position: absolute;
-    left: -10px;
-    display: flex;
-    background-color: var(--firstcolor);
-    width: 220px;
-    flex-direction: column;
-    display: none;
-}
-
-.likes-count:hover #likersList {
-    display: block;
-}
-
-#liker {
-    color: var(--whitecolor);
-    padding-left: 5px;
-    padding-top: 5px;
-}
-
-@media screen and (max-width: 430px) {
-    body {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .tweet-header {
-        flex-direction: column;
-    }
-    .tweet-header img {
-        margin-bottom: 20px;
-    }
-    .tweet-header-info p {
-        margin-bottom: 30px;
-    }
-    .tweet-img-wrap {
-        padding-left: 0;
-    }
-    .tweet-info-counts {
-        display: flex;
-        margin-left: 0;
-    }
-    .tweet-info-counts div {
-        margin-right: 10px;
-    }
-} */
-    /* <div class="post">
-</div>
-<div class="author_pic">
-<img src="{{ asset('uploads/userPic/'~ post.author.image)}}" alt="user pic"/>
-</div>
-<div class="post_body">
-<div class="post_header">
-<div class="post_author"><h3> {
-    {
-        post.author.firstName
-    }
-}
-
-{
-    {
-        post.author.lastName
-    }
-}
-
-<span class="material-icons post_padge">verified</span></h3></div><div class="post_content"><p> {
-    {
-        post.text
-    }
-}
-
-</p></div></div> {
-    % for pic in post.pics %
-}
-
-<img src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'/> {
-    % endfor %
-}
-
-<div class="post_footer"><span class="material-icons">favorite_border </span><span class="material-icons">question_answer </span></div></div> */
-    
-    .author_pic img {
-        border-radius: 50;
-        -webkit-border-radius: 50;
-        -moz-border-radius: 50;
-        -ms-border-radius: 50;
-        -o-border-radius: 50;
-        height: 40px;
-        width: 40px;
-    }
-    
-    .post {
-        display: flex;
-        align-items: flex-start;
-        border-bottom: 1px solid var(--firstcolor);
-        padding-bottom: 10px;
-    }
-    
-    .post_body img {
-        width: 450px;
-        object-fit: contain;
-        border: radius 20px;
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        -ms-border-radius: 20px;
-        -o-border-radius: 20px;
-    }
-    
-    .post_footer {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
-    
-    .post_padge {
-        font-size: 14px!important;
-        color: var(--firstcolor);
-        margin-right: 5px;
-    }
-    
-    .post_author {
-        font-size: 15px;
-        margin-bottom: 5px;
-    }
-    
-    .post_content {
-        margin-bottom: 10px;
-        font-size: 10px;
-    }
-    
-    .post_body {
-        flex: 1;
-        padding: 10px;
-    }
-    
-    .author_pic {
-        padding: 20px;
-    }
+  .author_pic img {
+      border-radius: 50;
+      -webkit-border-radius: 50;
+      -moz-border-radius: 50;
+      -ms-border-radius: 50;
+      -o-border-radius: 50;
+      height: 40px;
+      width: 40px;
+  }
+  
+  .post {
+      display: flex;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--firstcolor);
+      padding-bottom: 10px;
+  }
+  
+  .post_body img {
+      width: 450px;
+      object-fit: contain;
+      border: radius 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+  }
+  
+  .post_footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+  }
+  
+  .post_padge {
+      font-size: 14px!important;
+      color: var(--firstcolor);
+      margin-right: 5px;
+  }
+  
+  .post_author {
+      font-size: 15px;
+      margin-bottom: 5px;
+  }
+  
+  .post_content {
+      margin-bottom: 10px;
+      font-size: 10px;
+  }
+  
+  .post_body {
+      flex: 1;
+      padding: 10px;
+  }
+  
+  .author_pic {
+      padding: 20px;
+  }

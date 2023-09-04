@@ -110,14 +110,15 @@
 
 	<div class="post">
 	<div class="author_pic">
+		<a href="{{path('app_profile',{user:post.author.id})}}">
 		<img src="{{ asset('uploads/userPic/'~ post.author.image)}}" alt="user pic"/>
-
+</a>
 	</div>
 	<div class="post_body">
 		<div class="post_header">
 			<div class="post_author">
-				<h3>{{post.author.firstName}}
-					{{post.author.lastName}}
+				<a href="{{path('app_profile',{user:post.author.id})}}"><h3>{{post.author.firstName}}
+					{{post.author.lastName}}</a>
 					<span class="material-icons post_padge">verified</span>
 				</h3>
 			</div>
