@@ -1,44 +1,37 @@
-<div class="wrapper">
-  <div class="profile-card js-profile-card">
-    <div class="profile-card-img">
-      <img src="{{ asset('uploads/userPic/'~ user.image) }}" alt="profile card">
-    </div>
+<div class="profile-card js-profile-card">
+	<div class="profile-card-img">
+		<img src="{{ asset('uploads/userPic/'~ user.image) }}" alt="profile card">
+	</div>
 
-    <div class="profile-card-cnt js-profile-cnt">
-      <div class="profile-card-name">{{user.firstName}} {{user.lastName}}</div>
-      <div class="profile-card-txt">{{user.bio}}</div>
-      <div class="profile-card-loc">
-        <span class="profile-card-city">
-          {{user.city}}, France
-        </span>
-      </div>
+	<div class="profile-card-cnt js-profile-cnt">
+		<div class="profile-card-name">{{user.firstName}}
+			{{user.lastName}}</div>
+		<div class="profile-card-txt">{{user.bio}}</div>
+		<div class="profile-card-loc">
+			<span class="profile-card-city">
+				{{user.city}}, France
+			</span>
+		</div>
 
-      <div class="profile-card-info">
-        <div class="profile-card-inf-item">
-          <div class="profile-card-inf__title">{{user.followers.count}}</div>
-          <div class="profile-card-inf__txt">Followers</div>
-        </div>
+		<div class="profile-card-info">
+			<div class="profile-card-inf-item">
+				<div class="profile-card-inf__title">{{user.followers.count}}</div>
+				<div class="profile-card-inf__txt">Followers</div>
+			</div>
 
-        <div class="profile-card-inf-item">
-          <div class="profile-card-inf__title">{{user.follows.count}}</div>
-          <div class="profile-card-inf__txt">Following</div>
-        </div>
+			<div class="profile-card-inf-item">
+				<div class="profile-card-inf__title">{{user.follows.count}}</div>
+				<div class="profile-card-inf__txt">Following</div>
+			</div>
 
-        <div class="profile-card-inf-item">
-          <div class="profile-card-inf__title">{{user.posts.count}}</div>
-          <div class="profile-card-inf__txt">posts</div>
-        </div>
+			<div class="profile-card-inf-item">
+				<div class="profile-card-inf__title">{{user.posts.count}}</div>
+				<div class="profile-card-inf__txt">posts</div>
+			</div>
 
-        
-      </div>
-         
-  </div>
 
-     
-    </div>
+		</div>
+
+
+	</div>
 </div>
-
-</div>
-
- 
-  

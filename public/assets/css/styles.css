@@ -13,3 +13,7 @@
     --secondcolor: #f9b233;
     --whitecolor: #ffffff;
 }
+
+a {
+    text-decoration: none;
+}

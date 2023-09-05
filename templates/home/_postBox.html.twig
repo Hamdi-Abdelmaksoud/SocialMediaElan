@@ -2,12 +2,13 @@
 	<h2>Home</h2>
 	<!-- postBox-->
 	<div class="postBox">
-		<form>
+		<form method="post" action="{{ path('app_post_addtwo') }}"  enctype="multipart/form-data">
 			<div class="postBox_input">
 				<img class="picBox" src="{{ asset('uploads/userPic/'~ userData.pic) }}" alt="profile card">
-				<input type="text" placeholder="What's happening">
+				<input type="text" placeholder="What's happening" name="text">
+				<input type="file" placeholder="" name="pics[]" multiple>
 			</div>
-			<button class="postButton">Post</button>
+			<button class="postButton" type="submit">Post</button>
 		</form>
 	</div>
 

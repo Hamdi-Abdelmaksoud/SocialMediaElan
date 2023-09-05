@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	{# {{ include('home/_nav_home.html.twig') }} #}
+ 
 	<div class="homeContainer">
 		<div>
 			{{ include('home/_asside.html.twig') }}
@@ -17,7 +17,7 @@
 			{{ include('home/_postBox.html.twig', userData) }}
 			{% if posts %}
 
-				{{ include('post/_allposts.html.twig', posts) }} #}
+				{{ include('post/_allposts.html.twig', posts) }} 
 			{% else %}
 				<p>Welcom to our comunity follow friends and share youre experiences with them</p>
 		
@@ -32,4 +32,5 @@
 			<li>hello</li>
 		</ul>
 	</div>
-</div>{% endblock %}
+</div>
+<div id="footer">hello foooter nav</div>{% endblock %}

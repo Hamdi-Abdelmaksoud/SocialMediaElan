@@ -23,21 +23,23 @@ class PostController extends AbstractController
             'posts' => $posts->findAll(),
         ]);
     }
-    
-    #[Route('/post/add', name: 'app_post_add')]
-    public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
-    {
-        $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            
+    #[Route('/post/addtwo', name: 'app_post_addtwo')]
+    public function addtwo(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager, $action = NULL): Response
+    {
+        if ($request->isMethod('POST')) 
+        {
+            $postText = $request->request->get('text');
+            if (!$action) {
+                $post = new Post();
+            }
+            $post->setText($postText);
+            $post->setAuthor($this->getUser());
             //on récupère les images
-            $pics = $form->get('pic')->getData();
+            $pics = $request->files->get('pics');
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
-            if ($pics) 
+            if ($pics)
             {
                 foreach ($pics as $pic)
                 {
@@ -48,14 +50,57 @@ class PostController extends AbstractController
                     $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
 
                     // Move the file to the directory where brochures are stored
-                    try
-                    {
+                    try {
                         $pic->move(
                             $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
                             $newFilename
                         );
-                    } catch (FileException $e)
-                    {
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+                    $postPics = new PostPics();
+                    $postPics->setPic($newFilename);
+                    $postPics->setPost($post);
+                    $post->addPic($postPics);
+                }
+
+
+            }
+            $entiyManager->persist($post);
+            $entiyManager->flush();
+            $this->addFlash('success', 'Post added successfully');
+
+            return $this->redirectToRoute('app_home');
+        }
+    }
+    #[Route('/post/add', name: 'app_post_add')]
+    public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            //on récupère les images
+            $pics = $form->get('pic')->getData();
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($pics) {
+                foreach ($pics as $pic) {
+
+                    $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $pic->move(
+                            $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
                         // ... handle exception if something happens during file upload
                     }
                     $postPics = new PostPics();
@@ -71,7 +116,7 @@ class PostController extends AbstractController
 
 
             $this->addFlash('success', 'Post added successfully');
-            
+
             return $this->redirectToRoute('app_home');
         }
         return $this->render(

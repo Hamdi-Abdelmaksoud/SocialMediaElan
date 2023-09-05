@@ -2,6 +2,7 @@
 	{% if posts %}
 {% for post in posts %}
 	{% include "/post/_post.html.twig"  with  {'post' : post}  %}
+	
 {% endfor %}  
 
 	{% endif %}

@@ -3,7 +3,11 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
+<div class="wrapper">
   {{ include("profile/_header.html.twig", [user]) }}
+  {{ include("post/_allposts.html.twig", [posts])}}
+   </div>
+
   
 
 {% endblock %}
