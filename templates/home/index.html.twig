@@ -4,33 +4,29 @@
 {% endblock %}
 
 {% block body %}
- 
+
 	<div class="homeContainer">
 		<div>
 			{{ include('home/_asside.html.twig') }}
 		</div>
 		<div class="homePosts">
 			{% set userData = {
-    'pic': app.user.image,
-    
-} %}
+    			'pic': app.user.image,}
+			 %}
 			{{ include('home/_postBox.html.twig', userData) }}
 			{% if posts %}
-
-				{{ include('post/_allposts.html.twig', posts) }} 
+				{{ include('post/_allposts.html.twig', posts) }}
 			{% else %}
 				<p>Welcom to our comunity follow friends and share youre experiences with them</p>
-		
-		{% endif %}
-
-
+			{% endif %}
+		</div>
+		<div class="asside">
+			<ul>
+				<li>hello</li>
+				<li>hello</li>
+				<li>hello</li>
+			</ul>
+		</div>
 	</div>
-	<div class="asside">
-		<ul>
-			<li>hello</li>
-			<li>hello</li>
-			<li>hello</li>
-		</ul>
-	</div>
-</div>
-<div id="footer">hello foooter nav</div>{% endblock %}
+	<div id="footer">hello foooter nav</div>
+{% endblock %}

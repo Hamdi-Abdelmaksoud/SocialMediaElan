@@ -109,55 +109,12 @@ vert padding orange margin*/
         width: 0 !important
     }
     
-    .postBox_input img {
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-order-radius: 50%;
-        height: 40px;
-        width: 40px;
-        -o-border-radius: 50%;
+    #left {
+        border-right: 1px solid black;
     }
     
-    .postBox {
-        padding-bottom: 10px;
-        /* border-bottom: 8px solid var(--firstcolor); */
-        padding-right: 10px;
-    }
-    
-    .postBox form {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .postBox_input {
-        display: flex;
-        padding: 20px;
-    }
-    
-    .postBox_input input {
-        flex: 1;
-        margin-left: 20px;
-        font-size: 20px;
-        border: none;
-        outline: none;
-    }
-    
-    .postButton {
-        background-color: var(--firstcolor);
-        border: none;
-        color: white;
-        font-weight: 900;
-        border-radius: 30px;
-        -webkit-border-radius: 30px;
-        -moz-border-radius: 30px;
-        -ms-border-radius: 30px;
-        -o-border-radius: 30px;
-        width: 80px;
-        height: 40px;
-        margin-top: 20px;
-        margin-left: auto;
+    #midle {
+        padding-left: 10px;
     }
     
     #footer {

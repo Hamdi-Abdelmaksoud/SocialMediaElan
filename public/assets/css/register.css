@@ -34,6 +34,10 @@ label {
     display: none;
 }
 
+#label_photo {
+    display: block;
+}
+
  ::placeholder {
     padding: 4px;
 }

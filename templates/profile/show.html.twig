@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Hello ProfileController!
+{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {{ include("profile/_header.html.twig", [user]) }}
-  {{ include("post/_allposts.html.twig", [posts])}}
-   </div>
-
-  
-
+<div id="profile_container">
+  <div>
+		{{ include('home/_asside.html.twig') }}
+  </div>
+	<div class="wrapper">
+		{{ include("profile/_header.html.twig", [user]) }}
+		{{ include("post/_allposts.html.twig", [posts])}}
+	</div>
+  <div>right</div>
+</div 
 {% endblock %}

@@ -11,7 +11,6 @@
     .post {
         display: flex;
         align-items: flex-start;
-        border-bottom: 1px solid var(--firstcolor);
         padding-bottom: 10px;
     }
     
@@ -34,11 +33,12 @@
     .post_author {
         font-size: 15px;
         margin-bottom: 5px;
+        display: flex;
     }
     
     .post_content {
-        margin-bottom: 10px;
-        font-size: 10px;
+        margin: 15px;
+        font-size: 14px;
     }
     
     .post_body {
@@ -96,6 +96,10 @@
         position: absolute;
         left: 28px;
         top: 2px;
+    }
+    
+    #add_photo {
+        display: none;
     }
     /*
     @media screen and (max-width: 430px) {
