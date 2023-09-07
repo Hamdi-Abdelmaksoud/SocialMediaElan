@@ -13,11 +13,19 @@
 				</h3>
 				<span>{{post.created |  date("M j,Y")}}</span>
 				{% if app.user == post.author  %}
-					<span>
-						<a href="{{path('app_post_delete',{post:post.id})}}">
-							<i class="fa-solid fa-circle-xmark" style="color: #a2a9b3;"></i>
-						</a>
-					</span>
+				<div class="author_action">
+					<h3 >...</h3>
+					<ul class="author_autorisations">
+						<li><a href="{{path('app_post_delete',{post:post.id})}}">
+							delete post
+						</a></li>
+						<li><a href="{{path('app_post_edit',{post:post.id})}}">
+							edit post
+						</a></li> 
+					</ul>
+				</div>
+					
+						
 				{% endif %}
 			</div><!--close postauthor-->
 			<div class="post_content">
@@ -27,7 +35,7 @@
 
 	<!--*****************************body******************-->
 		{% for pic in post.pics %}
-			<img src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'/>
+			<img src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'>
 		{% endfor %}
 	<!--*****************************footer******************-->
 		<div class="post_footer">
@@ -52,9 +60,9 @@
 						{% if post.likedBy.count > 0 %}
 							<span id="likersList">
 								{% for user in post.likedBy %}
-									<div id="liker">{{user.firstName}}
+									<span id="liker">{{user.firstName}}
 										{{user.lastName}}
-									</div>
+									</span>
 								{% endfor %}
 							</span>
 						{% endif %}

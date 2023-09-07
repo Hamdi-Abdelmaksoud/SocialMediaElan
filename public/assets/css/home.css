@@ -1,122 +1,112 @@
-    /* .homePosts {
-    width: 50%;
+.homeContainer {
     display: flex;
-    flex-direction: column;
-    padding-top: 50px;
+    /* height: 100vh; */
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+}
+
+
+/** sidebar start**/
+
+.sidebarOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebarOption .material-icons {
+    padding: 20px;
+}
+
+.sidebarOption h2 {
+    font-weight: 800;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.sidebarOption:hover {
+    background-color: var(--secondcolor);
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    color: var(--firstcolor) !important;
+    transition: color 100ms ease-out;
+    -webkit-transition: color 100ms ease-out;
+    -moz-transition: color 100ms ease-out;
+    -ms-transition: color 100ms ease-out;
+    -o-transition: color 100ms ease-out;
+}
+
+.sidebarOption.active {
+    color: var(--secondcolor);
+}
+
+.sidebar {
+    border-right: 1px solid var(--firstcolor);
+    flex: 0.2;
+    min-width: 250px;
+    margin-top: 20px;
     padding-left: 20px;
-    margin: 10px auto;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    padding-right: 20px;
 }
 
-.asside {
-    width: 25%;
+.homePosts {
+    flex: 0.5;
+    border-right: 1px solid var(--firstcolor);
+    min-width: fit-content;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    /* Pour Internet Explorer */
+    scrollbar-width: none;
+    /* Pour les navigateurs modernes */
 }
 
-.navhome {
-    color: black;
-} 
-vert padding orange margin*/
-    
+.homePosts::-webkit-scrollbar {
+    display: none;
+    /* Pour les navigateurs WebKit (Chrome, Safari, etc.) */
+}
+
+.feed_header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    /* border: 1px solid var(--firstcolor); */
+    padding: 15px 20px;
+}
+
+.feed_header h2 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.feed::-webkit-scrollbar {
+    display: none;
+}
+
+.feed::-webkit-scrollbar {
+    width: 0 !important
+}
+
+#left {
+    border-right: 1px solid black;
+}
+
+#midle {
+    padding-left: 10px;
+}
+
+#footer {
+    margin-top: 200px;
+}
+
+@media screen and (max-width: 768px) {
     .homeContainer {
         display: flex;
-        /* height: 100vh; */
-        max-width: 1300px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0 10px;
+        flex-direction: column;
     }
-    /** sidebar start**/
-    
-    .sidebarOption {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
-    
-    .sidebarOption .material-icons {
-        padding: 20px;
-    }
-    
-    .sidebarOption h2 {
-        font-weight: 800;
-        font-size: 20px;
-        margin-right: 20px;
-    }
-    
-    .sidebarOption:hover {
-        background-color: var(--secondcolor);
-        border-radius: 30px;
-        -webkit-border-radius: 30px;
-        -moz-border-radius: 30px;
-        -ms-border-radius: 30px;
-        -o-border-radius: 30px;
-        color: var(--firstcolor) !important;
-        transition: color 100ms ease-out;
-        -webkit-transition: color 100ms ease-out;
-        -moz-transition: color 100ms ease-out;
-        -ms-transition: color 100ms ease-out;
-        -o-transition: color 100ms ease-out;
-    }
-    
-    .sidebarOption.active {
-        color: var(--secondcolor);
-    }
-    
-    .sidebar {
-        border-right: 1px solid var(--firstcolor);
-        flex: 0.2;
-        min-width: 250px;
-        margin-top: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    
-    .homePosts {
-        flex: 0.5;
-        border-right: 1px solid var(--firstcolor);
-        min-width: fit-content;
-        overflow-y: scroll;
-        -ms-overflow-style: none;
-        /* Pour Internet Explorer */
-        scrollbar-width: none;
-        /* Pour les navigateurs modernes */
-    }
-    
-    .homePosts::-webkit-scrollbar {
-        display: none;
-        /* Pour les navigateurs WebKit (Chrome, Safari, etc.) */
-    }
-    
-    .feed_header {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 100;
-        /* border: 1px solid var(--firstcolor); */
-        padding: 15px 20px;
-    }
-    
-    .feed_header h2 {
-        font-size: 20px;
-        font-weight: 800;
-    }
-    
-    .feed::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .feed::-webkit-scrollbar {
-        width: 0 !important
-    }
-    
-    #left {
-        border-right: 1px solid black;
-    }
-    
-    #midle {
-        padding-left: 10px;
-    }
-    
-    #footer {
-        margin-top: 200px;
-    }
+}

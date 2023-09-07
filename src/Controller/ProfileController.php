@@ -21,5 +21,20 @@ public function editProfile(User $user,PostRepository $postRepository): Response
         
     ]);
 }
+#[Route('/profile/{user}/follows', name: 'app_profile_follows')]
+public function follows(User $user): Response
+{
+    return $this->render('profile/follows.html.twig', [
+        'user' => $user
+    ]);
+}
+
+#[Route('/profile/{user}/followers', name: 'app_profile_followers')]
+public function followers(User $user): Response
+{
+    return $this->render('profile/followers.html.twig', [
+        'user' => $user
+    ]);
+}
 
 }

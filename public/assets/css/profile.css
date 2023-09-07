@@ -21,6 +21,14 @@
         min-height: 100vh;
         padding-top: 100px;
     }
+    #profile_container {
+        flex-direction: column;
+        padding: 0px;
+    }
+    .asside_left {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
 
 .profile-card-img {
