@@ -12,6 +12,7 @@
 		{{ include("profile/_header.html.twig", [user]) }}
 		{{ include("post/_allposts.html.twig", [posts])}}
 	</div>
-  <div>right</div>
+  <div><a href="{{ path('app_profile_followers',{user:user.id})}}">followers</a></div><br>
+  <div><a href="{{ path('app_profile_follows',{user:user.id})}}">follows</a></div>
 </div 
 {% endblock %}

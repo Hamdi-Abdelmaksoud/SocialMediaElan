@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile → Follows{% endblock %}
+
+ 
+
+{% block body %}
+{{ include ('profile/_header.html.twig') }}
+
+{{ include ('follower/_follower_list.html.twig', { users: user.follows }) }}
+{% endblock %}  

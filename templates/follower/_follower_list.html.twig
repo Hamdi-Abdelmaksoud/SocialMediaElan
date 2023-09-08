@@ -1,0 +1,27 @@
+{% if users|length >0 %}
+  <div class="hello">
+    {% for otherUser in users %}
+    <div class="hi">
+      <div class="author_pic">
+		<img src="{{ asset('uploads/userPic/'~ otherUser.image)}}" alt="user pic"/>
+
+	</div>
+      <div>
+        <a href="{{ path('app_profile', { user: otherUser.id }) }}">
+        
+          <div class="what">
+            {{ otherUser.firstName}}
+            {{ otherUser.lastName}}
+          </div>
+        </a>
+      </div>
+      {# <div>
+        {{ include('follower/_follow_button.html.twig', { userToFollow: otherUser }) }}
+      </div> #}
+    </div>
+    {% endfor %}
+  </div>
+
+{% else %} 
+<div class="font-bold text-gray-600">The list is currently empty </div>
+{% endif %}
