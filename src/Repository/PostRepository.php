@@ -23,67 +23,37 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
-    public function findAllWithComments(): array
+    // public function findAllWithComments(): array
+    // {
+    //     return $this->createQueryBuilder('p') //alias to current entity
+    //         ->addSelect('c') //select all the fields for the comment entity realated to this post
+    //         ->leftJoin('p.comments', 'c') //c alias we give it to p.comments
+    //         ->orderBy('p.created', 'DESC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    // public function findAllWithlikes(): array
+    // {
+    //     return $this->createQueryBuilder('p') //alias to current entity
+    //         ->addSelect('l') //select all the fields for the likes entity realated to this post
+    //         ->leftJoin('p.likedBy', 'l') //c alias we give it to p.comments
+    //         ->orderBy('p.created', 'DESC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    public function findHomePosts(Collection|array $authors):array
     {
         return $this->createQueryBuilder('p') //alias to current entity
-            ->addSelect('c') //select all the fields for the comment entity realated to this post
-            ->leftJoin('p.comments', 'c') //c alias we give it to p.comments
-            ->orderBy('p.created', 'DESC')
-            ->getQuery()
-            ->getResult();
+        ->where('p.author IN (:authors)')
+        ->setParameter(
+            'authors',
+            $authors
+        ) ->orderBy('p.created', 'DESC')
+        ->getQuery()
+        ->getResult();
     }
-  
-    /*public function findALlByAuthor(
-        int| User $author
-    ): array {
-        return $this->findAllQuerry(
-            withComments: true,
-            withLikes: true,
-            withAuthors: true
-
-        )->where('p.author= :author')
-            ->setParameter(
-                'author',
-                $author instanceof User ? $author->getId() : $author
-            )
-            ->getQuery()->getResult();
-    }
-    public function findAllQuerry(
-        bool $withComments = false,
-        bool $withLikes = false,
-        bool $withAuthors = false,
-
-    ): QueryBuilder {
-        $query = $this->createQueryBuilder('p');
-        if ($withComments) {
-            $query->leftJoin('p.comments', 'c')
-                ->addSelect('c');
-        }
-        if ($withLikes) {
-            $query->leftJoin('p.likedBy', 'l')
-                ->addSelect('l');
-        }
-        if ($withAuthors) {
-            $query->leftJoin('p.author', 'a')
-                ->addSelect('a');
-        }
-        return $query->orderBy('p.created', 'DESC');
-    }
-    public function findPostsFromFollows(
-        Collection| array $authors
-    ): array {
-        return $this->findAllQuerry(
-            withComments: true,
-            withLikes: true,
-            withAuthors: true
-
-        )->where('p.author IN (:authors)')
-            ->setParameter(
-                'authors',
-                $authors
-            )->getQuery()->getResult();
-    }*/
-    //    /**
+      //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */
     //    public function findByExampleField($value): array

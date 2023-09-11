@@ -31,6 +31,7 @@ class Post
     private ?User $author = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'liked')]
+    #[ORM\JoinTable('Likes')]
     private Collection $likedBy;
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: PostPics::class, orphanRemoval: true,cascade:['persist','remove'])]

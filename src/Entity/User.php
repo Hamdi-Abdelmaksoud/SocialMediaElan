@@ -63,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'likedBy')]
+    #[ORM\JoinTable('Likes')]
     private Collection $liked;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'followers')]
