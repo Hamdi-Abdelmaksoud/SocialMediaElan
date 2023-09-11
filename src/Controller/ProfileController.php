@@ -17,7 +17,7 @@ public function editProfile(User $user,PostRepository $postRepository): Response
 
     return $this->render('profile/show.html.twig', [
         'user' => $user,
-        'posts'=>$postRepository->findALlByAuthor($user)
+        'posts'=>$user->getPosts(),
         
     ]);
 }

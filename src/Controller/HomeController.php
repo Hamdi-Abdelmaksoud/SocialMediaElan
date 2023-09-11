@@ -11,23 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function followsPosts(PostRepository $postRepository, UserRepository $userRepository): Response
+    public function homePosts(PostRepository $postRepository): Response
     {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
-        if ($currentUser->getFollows() !=null) 
-        {
-            return $this->render('home/index.html.twig', [
-                'posts' => $postRepository->findPostsFromFollows(
-                    $currentUser->getFollows()
-                ),
-            ]);
-        } else 
-        {
-            return $this->render('home/index.html.twig', [
-                'friends' => $userRepository->findAll(),
-
-            ]);
-        }
+     if (!$currentUser){
+        return $this->redirectToRoute('app_login');
+       
+     }
+     else{
+        $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
+        return $this->render('home/index.html.twig', [
+            'posts'=>$postRepository->findHomePosts($authors)
+        ]); 
+     }
     }
 }

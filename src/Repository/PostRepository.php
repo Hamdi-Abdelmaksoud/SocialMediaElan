@@ -32,7 +32,8 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function findALlByAuthor(
+  
+    /*public function findALlByAuthor(
         int| User $author
     ): array {
         return $this->findAllQuerry(
@@ -81,7 +82,7 @@ class PostRepository extends ServiceEntityRepository
                 'authors',
                 $authors
             )->getQuery()->getResult();
-    }
+    }*/
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */
