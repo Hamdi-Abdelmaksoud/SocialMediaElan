@@ -2,6 +2,9 @@
 	<div class="profile-card-img">
 		<img src="{{ asset('uploads/userPic/'~ user.image) }}" alt="profile card">
 	</div>
+	<span><i class="fa-regular fa-image" style="color: #5f88ce;"></i><a href="{{ path('app_profile_edit') }}">edit</a></span>
+
+ </span>
 
 	<div class="profile-card-cnt js-profile-cnt">
 		<div class="profile-card-name">{{user.firstName}}
