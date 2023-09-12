@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessageController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="message">
+		<div>
+			{{ include('home/_asside.html.twig') }}
+		</div>
+        <div>
+		{% for message in discussion %}
+			<div>{{message.sender.firstName}}</div>
+			{% if app.user == message.sender %}
+				<div style="color:gray">{{message.text}}</div>
+			{% else %}
+				<div style="color:black">{{message.text}}</div>
+			{% endif %}
+		{% endfor %}
+		{% if form %}
+			{{ form(form)}}{% endif %}
+		</div>
+		<div>
+			{{ include('home/_asside_right.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

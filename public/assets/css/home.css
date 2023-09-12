@@ -7,6 +7,10 @@
     padding: 0 10px;
 }
 
+.message {
+    display: flex;
+}
+
 
 /** sidebar start**/
 

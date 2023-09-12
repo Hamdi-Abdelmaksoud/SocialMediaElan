@@ -1,9 +1,13 @@
 
-<div class="widgets_input">
+{# <div class="widgets_input">
     <span class="material-icons widgets__searchIcon">
         search
     </span>
     <input type="text" placeholder="search"/>
-</div>	
+</div>	 #}
+{% for friend in app.user.follows %}
+<div><a href="{{path('app_message_send',{id:friend.id})}}">{{friend.firstName}} {{friend.lastName}}</a></div>
+    
+{% endfor %}
 <div>
 

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessageController!{% endblock %}
+
+{% block body %}
+<h2>Recieved messages</h2>
+<div id="message">
+{% for message in app.user.recived %}
+<div><a href="#">{{messsage.sender}}</a></div>
+{% if  message.is_read %}
+<div style="color:gray"><a href="{{path('app_message_read',{id:message.id})}}">{{message.title}}</a></div>
+{% else %}
+<div style="color:black"><a href="{{path('app_message_read',{id:message.id})}}">{{message.title}}</a></div>
+{% endif %}
+
+    
+<div>{{messsage.created}}</div>
+</div>
+    
+{% endfor %}
+{% endblock %}

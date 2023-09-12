@@ -13,29 +13,34 @@ class Message
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public function __construct()
-    {
-        $this->created = new DateTime();
-    }
     private ?int $id = null;
-
+    
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
-
+    
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created = null;
-
+    
     #[ORM\Column]
     private ?bool $is_read = null;
-
+    
     #[ORM\ManyToOne(inversedBy: 'sent')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $sender = null;
-
+    
     #[ORM\ManyToOne(inversedBy: 'recived')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $recipient = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+    
+    public function __construct()
+    {
+        $this->created = new DateTime();
+        $this->is_read=0;
+        $this->title='a';
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -45,14 +50,14 @@ class Message
     {
         return $this->text;
     }
-
+    
     public function setText(string $text): static
     {
         $this->text = $text;
-
+        
         return $this;
     }
-
+    
     public function getCreated(): ?\DateTimeInterface
     {
         return $this->created;
@@ -97,6 +102,18 @@ class Message
     public function setRecipient(?User $recipient): static
     {
         $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
 
         return $this;
     }
