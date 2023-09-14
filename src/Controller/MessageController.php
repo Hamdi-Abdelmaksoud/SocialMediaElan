@@ -46,7 +46,8 @@ class MessageController extends AbstractController
         }
         return $this->render('message/index.html.twig', [
             'form' => $form->createView(),
-            'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser())
+            'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser()),
+       'recipient' => $recipient
         ]);
     }
     // #[Route('/message/{id}/read', name: 'app_message_read')]

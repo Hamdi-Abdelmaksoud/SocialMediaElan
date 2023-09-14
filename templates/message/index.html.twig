@@ -9,10 +9,12 @@
 		<div>
 			{{ include('home/_asside.html.twig') }}
 		</div>
+
 		<div class="chat-container">
-			{% for message in discussion %}
 			
-				<div class="message_container">
+			{% for message in discussion %}
+
+			<div class="message_container">
 					{% if app.user == message.sender %}
 
 						<div class="my_message">
@@ -21,33 +23,33 @@
 					{% else %}
 						<div class="message_author">
 							<div class="author_pic">
-								<img src="{{ asset('uploads/userPic/'~ message.sender.image)}}" alt="user pic"/>
+								<a href="{{path('app_profile',{user:message.sender.id})}}"><img src="{{ asset('uploads/userPic/'~ message.sender.image)}}" alt="user pic"/>
 							</div>
-							
-								<p>{{message.text}}</p>
-							
+
+							<p>{{message.text}}</p>
+
 						</div>
 					{% endif %}
-				</div>
-				
+			</div>
+
 			{% endfor %}
 			<div class="form_container">
 				{% if form %}
 					{{  form_start(form) }}
-					<div  class="input-container">
-					{{ form_widget(form.text) }}
-					{{ form_widget(form.send) }}
+					<div class="input-container">
+						{{ form_widget(form.text) }}
+						{{ form_widget(form.send) }}
 					</div>
 					{{  form_end(form) }}
-					
-					{% endif %}
-					
+
+				{% endif %}
+
 
 			</div>
-			</div>
-		<div>
-				{{ include('home/_asside_right.html.twig') }}
+		</div>
+		<div class="friends_list">
+			{{ include('home/_asside_right.html.twig') }}
 		</div>
 
-		</div>
-	{% endblock %}
+	</div>
+{% endblock %}

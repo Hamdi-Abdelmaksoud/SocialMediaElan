@@ -6,8 +6,11 @@
     <input type="text" placeholder="search"/>
 </div>	 #}
 {% for friend in app.user.follows %}
-<div><a href="{{path('app_message_send',{id:friend.id})}}">{{friend.firstName}} {{friend.lastName}}</a></div>
+<div class="sidebarOption"><span class="material-icons">
+		person
+	</span><a href="{{path('app_message_send',{id:friend.id})}}"><h2>{{friend.firstName}} {{friend.lastName}}</h2></a></div>
     
 {% endfor %}
 <div>
+
 
