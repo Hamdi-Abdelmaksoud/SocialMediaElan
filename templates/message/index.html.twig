@@ -5,24 +5,49 @@
 
 {% block body %}
 
-	<div class="message">
+	<div class="homeContainer">
 		<div>
 			{{ include('home/_asside.html.twig') }}
 		</div>
-        <div>
-		{% for message in discussion %}
-			<div>{{message.sender.firstName}}</div>
-			{% if app.user == message.sender %}
-				<div style="color:gray">{{message.text}}</div>
-			{% else %}
-				<div style="color:black">{{message.text}}</div>
-			{% endif %}
-		{% endfor %}
-		{% if form %}
-			{{ form(form)}}{% endif %}
-		</div>
+		<div class="chat-container">
+			{% for message in discussion %}
+			
+				<div class="message_container">
+					{% if app.user == message.sender %}
+
+						<div class="my_message">
+							<p>{{message.text}}</p>
+						</div>
+					{% else %}
+						<div class="message_author">
+							<div class="author_pic">
+								<img src="{{ asset('uploads/userPic/'~ message.sender.image)}}" alt="user pic"/>
+							</div>
+							
+								<p>{{message.text}}</p>
+							
+						</div>
+					{% endif %}
+				</div>
+				
+			{% endfor %}
+			<div class="form_container">
+				{% if form %}
+					{{  form_start(form) }}
+					<div  class="input-container">
+					{{ form_widget(form.text) }}
+					{{ form_widget(form.send) }}
+					</div>
+					{{  form_end(form) }}
+					
+					{% endif %}
+					
+
+			</div>
+			</div>
 		<div>
-			{{ include('home/_asside_right.html.twig') }}
+				{{ include('home/_asside_right.html.twig') }}
 		</div>
-	</div>
-{% endblock %}
+
+		</div>
+	{% endblock %}

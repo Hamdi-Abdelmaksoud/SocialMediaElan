@@ -37,7 +37,6 @@ class Message
     
     public function __construct()
     {
-        $this->created = new DateTime();
         $this->is_read=0;
         $this->title='a';
     }

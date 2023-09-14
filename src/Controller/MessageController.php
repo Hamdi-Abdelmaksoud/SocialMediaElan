@@ -15,14 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MessageController extends AbstractController
 {
-    #[Route('/message', name: 'app_message')]
-     public function index(): Response
-     {
+    // #[Route('/message', name: 'app_message')]
+    //  public function index(): Response
+    //  {
 
-       return $this->render('message/index.html.twig', [
-             'controller_name' => 'MessageController',
-        ]);
-     }
+    //    return $this->render('message/index.html.twig', [
+    //          'controller_name' => 'MessageController',
+    //     ]);
+    //  }
     #[Route('/message/{id}', name: 'app_message_send')]
     public function send(Request $request, User $recipient, EntityManagerInterface $entiyManager,MessageRepository $messageRepository): Response
     {
@@ -33,8 +33,11 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->getData();
 
+            $now = new \DateTime();
+
             $message->setSender($this->getUser());
             $message->setRecipient($recipient);
+            $message->setCreated($now);
             $entiyManager->persist($message);
             $entiyManager->flush();
 
@@ -46,16 +49,16 @@ class MessageController extends AbstractController
             'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser())
         ]);
     }
-    #[Route('/message/{id}/read', name: 'app_message_read')]
-    public function read(Message $message, EntityManagerInterface $entiyManager): Response
-    {
-        $message->setIsRead(true);
-        $entiyManager->persist($message);
-        $entiyManager->flush();
-        return $this->render('message/index.html.twig', [
-            'recipient' => $message->getSender(),
+    // #[Route('/message/{id}/read', name: 'app_message_read')]
+    // public function read(Message $message, EntityManagerInterface $entiyManager): Response
+    // {
+    //     $message->setIsRead(true);
+    //     $entiyManager->persist($message);
+    //     $entiyManager->flush();
+    //     return $this->render('message/index.html.twig', [
+    //         'recipient' => $message->getSender(),
             
-        ]);
-    }
+    //     ]);
+    // }
 
 }

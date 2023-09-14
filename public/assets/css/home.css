@@ -7,10 +7,6 @@
     padding: 0 10px;
 }
 
-.message {
-    display: flex;
-}
-
 
 /** sidebar start**/
 
@@ -63,16 +59,7 @@
     flex: 0.5;
     border-right: 1px solid var(--firstcolor);
     min-width: fit-content;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    /* Pour Internet Explorer */
-    scrollbar-width: none;
     /* Pour les navigateurs modernes */
-}
-
-.homePosts::-webkit-scrollbar {
-    display: none;
-    /* Pour les navigateurs WebKit (Chrome, Safari, etc.) */
 }
 
 .feed_header {
@@ -87,14 +74,6 @@
 .feed_header h2 {
     font-size: 20px;
     font-weight: 800;
-}
-
-.feed::-webkit-scrollbar {
-    display: none;
-}
-
-.feed::-webkit-scrollbar {
-    width: 0 !important
 }
 
 #left {
