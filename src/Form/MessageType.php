@@ -17,7 +17,7 @@ class MessageType extends AbstractType
         ->add('text', TextareaType::class, [
             'attr' => [
                 'class' => 'chat-textarea', // Utilisez la classe CSS personnalisée
-                'placeholder' => 'Écrivez votre message ici...', // Placeholder option
+                'placeholder' => 'write your message here...', // Placeholder option
             ],
         ])
         ->add('send', SubmitType::class,[
