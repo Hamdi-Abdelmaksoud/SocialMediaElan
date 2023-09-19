@@ -1,25 +1,16 @@
-<div class="feed_header">
-	
-	<!-- postBox-->
-	<div class="postBox">
-		<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
-			<div class="postBox_input">
-				<img class="picBox" src="{{ asset('uploads/userPic/'~ userData.pic) }}" alt="profile card">
-				<input type="text" placeholder="What's happening ?..." name="text">
-			</div>
-			<div class="postBox_footer">
-				<div>
-					<label for="add_photo" id="label_photo">
-						<span class="material-icons">
-							add_a_photo
-						</span>
-					</label>
-					<input id="add_photo" type="file" placeholder="" name="pics[]" multiple>
-				</div>
-				<div>
-					<button class="postButton" type="submit">Post</button>
-				</div>
-			</div>
-		</form>
+<img class="small_img" src="{{ asset('uploads/userPic/'~ userData.pic) }}" alt="user picture">
+<div class="details">
+	<input id="input_text" type="text" placeholder="What's happening ?" name="text">
+
+	<div class="actions">
+		<label for="add_photo" id="label_photo">
+			<span class="material-icons">
+				add_a_photo
+			</span>
+		</label>
+		<input id="add_photo" type="file" placeholder="" name="pics[]" multiple>
+
+	<button class="post_button" type="submit">Post</button>
 	</div>
+
 </div>

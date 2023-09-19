@@ -1,0 +1,63 @@
+<div
+	class="nav_links">
+	{# <div class="menu">
+					<span class="material-icons" id="menu-icon">
+						menu
+					</span>
+				</div> #}
+
+	<a href="{{path('app_home')}}">
+		<span class="material-icons">
+			home
+		</span>
+		<span>home</span>
+	</a>
+
+
+	<a>
+		<span class="material-icons">
+			search
+		</span>
+		<span>Explore</span>
+	</a>
+
+	<a>
+		<span class="material-icons">
+			notifications
+		</span>
+		<span>Notification</span>
+	</a>
+
+	<a href="{{path('app_profile',{user:app.user.id})}}">
+		<span class="material-icons">
+			person
+		</span>
+		<span>Profile</span>
+	</a>
+	<a href="{{path('app_profile',{user:app.user.id})}}">
+		<span class="material-icons">
+			person
+		</span>
+		<span>followers</span>
+	</a>
+	<a href="{{path('app_profile',{user:app.user.id})}}">
+		<span class="material-icons">
+			person
+		</span>
+		<span>follow</span>
+	</a>
+	<button class="post_button">post</button>
+</div>
+<div class="side_bottom">
+	
+		<img class="small_img" src="{{ asset('uploads/userPic/'~ app.user.image) }}" alt="user picture">
+		<div class="account-details">
+			<span>{{app.user}}</span>
+			<a href="{{ path('app_logout') }}">
+				<span>
+					logout
+				</span>
+			</a>
+		</div>
+	
+</div>

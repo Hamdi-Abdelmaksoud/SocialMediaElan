@@ -22,31 +22,24 @@ class CommentController extends AbstractController
         ]);
     }
     #[Route('/post/{post}/comment', name: 'app_post_comment')]
-    public function addComment(Request $request,Post $post, EntityManagerInterface $entiyManager,$action =null): Response
+    public function addComment(Request $request, Post $post, EntityManagerInterface $entiyManager): Response
     {
         if ($request->isMethod('POST')) 
         {
             $commentText = $request->request->get('comment');
-       if(!$action)
-       {$comment= new Comment();}
-        
-      
-            $comment -> setText($commentText);
+                $comment = new Comment();
+            $comment->setText($commentText);
             $comment->setAuthor($this->getUser());
             $comment->setPost($post);
             $entiyManager->persist($comment);
             $entiyManager->flush();
-            
-            
             $this->addFlash('success', 'comment added successfully');
-            
-            $referer = $request->headers->get('referer');
-            return $this->redirect($referer);
         }
-        
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
     #[Route('/post/{post}/{comment}/edit', name: 'app_comment_edit')]
-    public function edit(Post $post, Comment $comment,Request $request, EntityManagerInterface $entiyManager): Response
+    public function edit(Post $post, Comment $comment, Request $request, EntityManagerInterface $entiyManager): Response
     {
 
         $form = $this->createForm(CommentType::class, $comment);
@@ -68,7 +61,7 @@ class CommentController extends AbstractController
         );
     }
     #[Route('/post/{post}/{comment}/delete', name: 'app_comment_delete')]
-    public function delete(Post $post, Comment $comment,Request $request, EntityManagerInterface $entiyManager): Response
+    public function delete(Post $post, Comment $comment, Request $request, EntityManagerInterface $entiyManager): Response
     {
         $entiyManager->remove($comment);
         $entiyManager->flush();
@@ -76,4 +69,3 @@ class CommentController extends AbstractController
         return $this->redirect($referer);
     }
 }
-

@@ -1,36 +1,15 @@
-.page {
-    display: flex;
-}
-
-.chat-container {
-    overflow-y: scroll !important;
-    flex: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.main_chat {
+    width: 71%;
     height: 100vh;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    margin-left: 29%;
+    display: flex;
+    align-items: flex-end;
 }
 
-.message-container {
-    flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-
-.friends_list {
-    flex: 25%;
+.message_container {
+    overflow-y: scroll;
+    width: 50%;
+    height: 100%;
 }
 
 .form_container {
@@ -89,6 +68,7 @@
     color: white;
     margin: 5px;
     padding: 5px;
+    font-size: 1.5rem;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -100,4 +80,14 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
     /*Ajoutezcetteligne*/
+}
+
+@media screen and (max-width: 1050px) {
+    .chat_page {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .friends_list {
+        padding-right: 0px;
+    }
 }

@@ -1,42 +1,26 @@
-.homeContainer {
+main {
+    width: 71%;
+    height: 100%;
+    margin-left: 29%;
+}
+
+.main_container {
     display: flex;
-    /* height: 100vh; */
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 10px;
+    width: 100%;
 }
 
-.homePosts {
-    width: 60%;
-    border-right: 1px solid var(--firstcolor);
-    min-width: fit-content;
-    /* Pour les navigateurs modernes */
+.main_feed {
+    width: 50%;
+    border-left: 1px solid rgb(47, 51, 54);
+    border-right: 1px solid rgb(47, 51, 54);
 }
 
-.feed_header {
+.home_bar {
+    padding: 0 15px;
+    font-size: 2rem;
+    font-weight: 400;
     position: sticky;
     top: 0;
-    background-color: white;
-    z-index: 100;
-    /* border: 1px solid var(--firstcolor); */
-    padding: 15px 20px;
-}
-
-.feed_header h2 {
-    font-size: 20px;
-    font-weight: 800;
-}
-
-#left {
-    border-right: 1px solid black;
-}
-
-#midle {
-    padding-left: 10px;
-}
-
-#footer {
-    margin-top: 200px;
 }
 
 @media screen and (max-width: 768px) {
