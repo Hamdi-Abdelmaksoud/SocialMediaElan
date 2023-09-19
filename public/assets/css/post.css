@@ -3,18 +3,31 @@
     flex-direction: column;
     max-width: 100%;
     min-height: 100px;
-    padding: 12px 16px 0 16px;
+    padding-top: 12px;
     border-top: 1px solid rgb(47, 51, 54);
     cursor: pointer;
 }
 
-
-/* .post {
+.post_header {
     display: flex;
-    align-items: flex-start;
-    padding-bottom: 10px;
-    max-width: 90%;
-} */
+    align-items: center;
+    padding-left: 16px;
+    gap: 5px;
+}
+
+.author_name {
+    display: flex;
+    align-items: center;
+}
+
+.author_name span {
+    font-size: 1.5rem;
+}
+
+.author_action {
+    margin-left: auto;
+    padding-right: 16px;
+}
 
 .author_pic img {
     border-radius: 50%;
@@ -26,33 +39,8 @@
     width: 40px;
 }
 
-.post_body img {
-    max-width: 500px;
-    max-height: 500px;
-    object-fit: contain;
-    border: radius 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-}
 
-.post_padge {
-    font-size: 14px!important;
-    color: var(--firstcolor);
-    margin-right: 5px;
-}
-
-.post_author {
-    font-size: 15px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-}
-
-.author_action {
-    margin-left: auto;
-}
+/* .author_action {} */
 
 .author_action {
     position: relative;
@@ -75,6 +63,30 @@
     -o-border-radius: 5%;
 }
 
+.post_body img {
+    max-width: 500px;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.post_padge {
+    font-size: 14px!important;
+    color: var(--firstcolor);
+    margin-right: 5px;
+}
+
+.post_author {
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
 .author_action:hover ul {
     display: flex;
     flex-direction: column;
@@ -92,12 +104,11 @@
 }
 
 .post_body {
-    flex: 1;
-    padding: 10px;
+    padding-left: 60px;
 }
 
 .author_pic {
-    padding: 20px;
+    padding-right: 10px;
 }
 
 .post_footer {

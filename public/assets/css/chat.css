@@ -87,7 +87,4 @@
         display: flex;
         justify-content: flex-start;
     }
-    .friends_list {
-        padding-right: 0px;
-    }
 }

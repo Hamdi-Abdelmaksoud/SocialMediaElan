@@ -101,21 +101,70 @@
         .side_feed {
             width: 50%;
             padding: 0% 2%;
+            position: fixed;
+            margin-left: 35%;
+            top: 0;
         }
         
         .search {
             display: flex;
             height: 55px;
             max-width: 355px;
-            position: sticky;
-            top: 0;
+            /* position: sticky;
+            top: 0; */
             padding-top: 5px;
+        }
+        
+        .search input {
+            background-color: var(--firstcolor);
+            -webkit-border-radius: 9999px;
+            -moz-border-radius: 9999px;
+            -ms-border-radius: 9999px;
+            -o-border-radius: 9999px;
+            height: 45px;
+            width: 100%;
+            border: none;
+            padding-left: 30px;
+            font-size: 1.5rem;
+            line-height: 20px;
+            font-weight: 400;
+        }
+        
+        .trending {
+            display: flex;
+            flex-direction: column;
+            height: 270px;
+            max-width: 355px;
+            border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            background-color: var(--firstcolor);
+            margin-top: 16px;
         }
         
         .friends_list {
             display: flex;
-            gap: 5px;
-            padding-top: 10px;
+            flex-direction: column;
+            border-radius: 16px;
+            margin-top: 16px;
+            background-color: var(--firstcolor);
+            height: 570px;
+            max-width: 355px;
+            /*position: sticky;
+            top: 90%;
+            */
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+        }
+        
+        .friend a {
+            font-size: 1.5rem;
+            color: black;
         }
         
         .side #menu-icon {
