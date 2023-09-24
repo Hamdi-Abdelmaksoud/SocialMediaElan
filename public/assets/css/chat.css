@@ -81,10 +81,3 @@
     word-wrap: break-word;
     /*Ajoutezcetteligne*/
 }
-
-@media screen and (max-width: 1050px) {
-    .chat_page {
-        display: flex;
-        justify-content: flex-start;
-    }
-}

@@ -4,17 +4,13 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="home-main">	
 
 	<div class="side_left">
 		{{ include('home/_side.html.twig') }}
 	</div>
 	<main>
-		<div class="main_container">
-			<div class="main_feed">
-				<div class="home_bar">
-					Home
-				</div>
+
 				<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
 					<div class="new_post">
 						{% set userData = {
@@ -23,6 +19,7 @@
 						{{ include('home/_postBox.html.twig', userData) }}
 					</div>
 				</form>
+				
 				{% if posts %}
 
 					{{ include('post/_allposts.html.twig', posts) }}
@@ -30,12 +27,17 @@
 				{% else %}
 					<p>Welcom to our comunity follow friends and share youre experiences with them</p>
 				{% endif %}
-			</div>
-			<div class="side_feed">
+			
+		 
+	</main>
+			<div class="menu-icon"><span class="material-icons">
+menu_open
+</span></div>
+			<div class="side_right">
+	
 				{{ include('home/_side_right.html.twig') }}
 			</div>
-		</div>
-	</main>
+</div>{# end .home-main #}
 
 
 {% endblock %}

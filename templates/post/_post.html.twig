@@ -4,6 +4,7 @@
 			<img src="{{ asset('uploads/userPic/'~ post.author.image)}}" alt="user pic"/>
 
 		</div>
+		
 		<div class="author_name">
 			<span>{{post.author}}</span>
 			<span class="material-icons post_padge">verified</span>
@@ -46,7 +47,7 @@
 		
 			<!--*****************************body******************-->
 			{% for pic in post.pics %}
-				<img src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'>
+				<img class="post_pics"src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'>
 			{% endfor %}
 			<!--*****************************footer******************-->
 			<div class="post_footer">

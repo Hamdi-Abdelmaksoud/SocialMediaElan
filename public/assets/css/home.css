@@ -1,31 +1,18 @@
-main {
-    width: 71%;
-    height: 100%;
-    margin-left: 29%;
-}
-
-.main_container {
-    display: flex;
-    width: 100%;
-}
-
-.main_feed {
-    width: 50%;
-    border-left: 1px solid rgb(47, 51, 54);
-    border-right: 1px solid rgb(47, 51, 54);
-}
-
-.home_bar {
-    padding: 0 15px;
-    font-size: 2rem;
-    font-weight: 400;
-    position: sticky;
-    top: 0;
-}
-
-@media screen and (max-width: 768px) {
-    .homeContainer {
+    .home-main {
+        display: grid;
+        grid-template-columns: minmax(15%, 30%) minmax(380px, 35%) minmax(380px, 35%);
+        gap: 5px;
+    }
+    
+    .home_bar {
+        padding: 0 15px;
+        font-size: 2rem;
+        font-weight: 400;
+        position: sticky;
+        top: 0;
+    }
+    
+    main {
         display: flex;
         flex-direction: column;
     }
-}

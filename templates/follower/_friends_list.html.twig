@@ -1,0 +1,7 @@
+{% if friends %}
+{% for friend in friends %}
+<a href="{{path('app_message_send',{id:friend.id})}}">{{friend}}</a>
+    
+{% endfor %}
+    
+{% endif %}
