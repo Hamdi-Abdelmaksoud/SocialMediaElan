@@ -13,9 +13,7 @@
 
 				<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
 					<div class="new_post">
-						{% set userData = {
-    			'pic': app.user.image,}
-			 %}
+						{% set userData = {'pic': app.user.image,}	%}
 						{{ include('home/_postBox.html.twig', userData) }}
 					</div>
 				</form>
@@ -23,16 +21,26 @@
 				{% if posts %}
 
 					{{ include('post/_allposts.html.twig', posts) }}
-
+		<div class="friends-list-hidden">
+    		<i class="fa-solid fa-comment-dots fa-2xl" onclick="toggle_div_fun('list-cachee');"></i>
+	
+			<ul id="list-cachee">
+				{% if app.user.follows %}
+				<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
+					close
+				</span>
+				{% for friend in app.user.follows  %}
+				<li>{{friend}}</li>
+	
+				{% endfor %}	
+				{% endif %} 
+			</ul>
+		</div>		
 				{% else %}
 					<p>Welcom to our comunity follow friends and share youre experiences with them</p>
 				{% endif %}
 			
-		 
-	</main>
-			<div class="menu-icon"><span class="material-icons">
-menu_open
-</span></div>
+	</main> 
 			<div class="side_right">
 	
 				{{ include('home/_side_right.html.twig') }}
