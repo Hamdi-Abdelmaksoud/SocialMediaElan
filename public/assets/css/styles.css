@@ -9,9 +9,10 @@
 }
 
 :root {
-    --firstcolor: #9b9b9b;
-    --secondcolor: #f9b233;
-    --whitecolor: #ffffff;
+    --firstcolor: #14171A;
+    --secondcolor: #AAB8C2;
+    --bgcolor: #E1E8ED;
+    --btncolor: #1DA1F2;
     font-size: 10px;
 }
 

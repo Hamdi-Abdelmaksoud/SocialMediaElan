@@ -1,103 +1,103 @@
-        /*xx-large devices*/
-        
-        @media screen and (min-width: 1400px) {
-            .home-main {
-                max-width: 1400px;
-                margin: auto;
+            /*xx-large devices*/
+            
+            @media screen and (min-width: 1400px) {
+                .home-main {
+                    max-width: 1400px;
+                    margin: auto;
+                }
             }
-        }
-        
-        @media screen and (min-width: 790px) and (max-width:992px) {
-            .icon_title {
-                display: none;
+            
+            @media screen and (min-width: 790px) and (max-width:992px) {
+                .icon-title {
+                    display: none;
+                }
+                .side-links a {
+                    padding: 0;
+                }
+                .side-links {
+                    align-items: center;
+                }
+                .side-links a .material-icons {
+                    margin: 0;
+                }
+                .home-main {
+                    grid-template-columns: 40px minmax(370px, 475px) minmax(370px, 475px);
+                }
+                .side-left {
+                    width: 100%;
+                    justify-self: start;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                }
             }
-            .nav_links a {
-                padding: 0;
+            
+            @media screen and (min-width: 350px)and (max-width: 790px) {
+                .side-right {
+                    display: none;
+                }
+                .menu-icon {
+                    display: block;
+                    cursor: pointer;
+                }
+                .menu-icon:hover {
+                    background-color: var(--secondcolor);
+                    border-radius: 9999px;
+                    -webkit-border-radius: 9999px;
+                    -moz-border-radius: 9999px;
+                    -ms-border-radius: 9999px;
+                    -o-border-radius: 9999px;
+                }
+                .icon-title {
+                    display: none;
+                }
+                .side-links a {
+                    padding: 0;
+                }
+                .side-links {
+                    align-items: center;
+                }
+                .side-links a .material-icons {
+                    margin: 0;
+                }
+                .home-main {
+                    grid-template-columns: 50px minmax(300px, 640px);
+                    gap: 0;
+                }
+                .new-post {
+                    padding-right: 0px;
+                    padding-left: 0px;
+                }
+                .post-header {
+                    padding-left: 0px;
+                }
+                .side-left {
+                    width: 100%;
+                    justify-self: start;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                }
+                #list-cachee {
+                    background-color: black;
+                    position: fixed;
+                    left: 50px;
+                    z-index: 200;
+                    height: 200px;
+                    top: 55%;
+                    list-style: none;
+                    width: 180px;
+                    display: none;
+                    flex-direction: column;
+                }
+                #list-cachee li {
+                    padding: 10px;
+                    cursor: pointer;
+                }
+                #list-cachee span {
+                    align-self: end;
+                    cursor: pointer;
+                }
+                #list-cachee li:hover {
+                    background-color: grey;
+                }
+                .friends-list-hidden {
+                    display: block;
+                }
             }
-            .nav_links {
-                align-items: center;
-            }
-            .nav_links a .material-icons {
-                margin: 0;
-            }
-            .home-main {
-                grid-template-columns: 40px minmax(370px, 475px) minmax(370px, 475px);
-            }
-            .side_left {
-                width: 100%;
-                justify-self: start;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-            }
-        }
-        
-        @media screen and (min-width: 350px)and (max-width: 790px) {
-            .side_right {
-                display: none;
-            }
-            .menu-icon {
-                display: block;
-                cursor: pointer;
-            }
-            .menu-icon:hover {
-                background-color: var(--secondcolor);
-                border-radius: 9999px;
-                -webkit-border-radius: 9999px;
-                -moz-border-radius: 9999px;
-                -ms-border-radius: 9999px;
-                -o-border-radius: 9999px;
-            }
-            .icon_title {
-                display: none;
-            }
-            .nav_links a {
-                padding: 0;
-            }
-            .nav_links {
-                align-items: center;
-            }
-            .nav_links a .material-icons {
-                margin: 0;
-            }
-            .home-main {
-                grid-template-columns: 50px minmax(300px, 640px);
-                gap: 0;
-            }
-            .new_post {
-                padding-right: 0px;
-                padding-left: 0px;
-            }
-            .post_header {
-                padding-left: 0px;
-            }
-            .side_left {
-                width: 100%;
-                justify-self: start;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-            }
-            #list-cachee {
-                background-color: black;
-                position: fixed;
-                left: 50px;
-                z-index: 200;
-                height: 200px;
-                top: 55%;
-                list-style: none;
-                width: 180px;
-                display: none;
-                flex-direction: column;
-            }
-            #list-cachee li {
-                padding: 10px;
-                cursor: pointer;
-            }
-            #list-cachee span {
-                align-self: end;
-                cursor: pointer;
-            }
-            #list-cachee li:hover {
-                background-color: grey;
-            }
-            .friends-list-hidden {
-                display: block;
-            }
-        }

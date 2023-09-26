@@ -6,13 +6,13 @@
 {% block body %}
 <div class="home-main">	
 
-	<div class="side_left">
+	<div class="side-left">
 		{{ include('home/_side.html.twig') }}
 	</div>
 	<main>
 
 				<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
-					<div class="new_post">
+					<div class="new-post">
 						{% set userData = {'pic': app.user.image,}	%}
 						{{ include('home/_postBox.html.twig', userData) }}
 					</div>
@@ -35,13 +35,14 @@
 				{% endfor %}	
 				{% endif %} 
 			</ul>
-		</div>		
+		</div>	
+	
 				{% else %}
 					<p>Welcom to our comunity follow friends and share youre experiences with them</p>
 				{% endif %}
 			
 	</main> 
-			<div class="side_right">
+			<div class="side-right">
 	
 				{{ include('home/_side_right.html.twig') }}
 			</div>

@@ -1,10 +1,10 @@
     .home-main {
         display: grid;
         grid-template-columns: minmax(15%, 30%) minmax(380px, 35%) minmax(380px, 35%);
-        gap: 5px;
+        gap: 10px;
     }
     
-    .home_bar {
+    .home-bar {
         padding: 0 15px;
         font-size: 2rem;
         font-weight: 400;
@@ -15,4 +15,5 @@
     main {
         display: flex;
         flex-direction: column;
+        gap: 20px;
     }
