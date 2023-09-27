@@ -1,254 +1,258 @@
- .feed-post {
-     display: flex;
-     flex-direction: column;
-     max-width: 100%;
-     min-height: 100px;
-     cursor: pointer;
- }
- 
- .post-header {
-     display: flex;
-     align-items: center;
-     padding-left: 16px;
-     gap: 5px;
- }
- 
- .author-name {
-     display: flex;
-     align-items: center;
- }
- 
- .author-name span {
-     font-size: 2rem;
- }
- 
- .author-action {
-     margin-left: auto;
-     padding-right: 16px;
- }
- 
- .author-pic img {
-     border-radius: 50%;
-     -webkit-border-radius: 50%;
-     -moz-border-radius: 50%;
-     -ms-border-radius: 50%;
-     -o-border-radius: 50%;
-     height: 40px;
-     width: 40px;
- }
- /* .author_action {} */
- 
- .author-action {
-     position: relative;
- }
- 
- .author-action ul {
-     background-color: var(--firstcolor);
-     width: 120px;
-     display: none;
-     list-style: none;
-     text-align: center;
-     padding-top: 0px;
-     border-radius: 5%;
-     position: absolute;
-     left: -100px;
-     top: -18px;
-     -webkit-border-radius: 5%;
-     -moz-border-radius: 5%;
-     -ms-border-radius: 5%;
-     -o-border-radius: 5%;
- }
- 
- .author-action ul li:hover {
-     background-color: var(--secondcolor);
- }
- 
- .post-pics {
-     min-width: 75%;
-     max-height: 300px;
-     border-radius: 10px;
-     -webkit-border-radius: 10px;
-     -moz-border-radius: 10px;
-     -ms-border-radius: 10px;
-     -o-border-radius: 10px;
-     align-self: center;
- }
- 
- .post-padge {
-     color: var(--btncolor);
-     margin-right: 5px;
- }
- 
- .post-author {
-     font-size: 15px;
-     margin-bottom: 5px;
-     display: flex;
-     align-items: center;
- }
- 
- .author-action:hover ul {
-     display: flex;
-     flex-direction: column;
- }
- 
- .author-action li a {
-     display: block;
-     color: white;
- }
- 
- .post-body {
-     display: flex;
-     flex-direction: column;
-     gap: 10px;
-     padding-left: 60px;
- }
- 
- .post-content {
-     margin: 15px 45px 0 0px;
-     font-size: 1.5rem;
-     max-width: 100%;
- }
- 
- .author-pic {
-     padding-right: 10px;
- }
- 
- .post-footer {
-     display: grid;
-     grid-template-columns: 50% 50%
- }
- 
- #likes-post {
-     position: relative;
- }
- 
- #likes-count {
-     position: absolute;
-     left: 30px;
-     top: 2px;
- }
- 
- #likersList {
-     position: absolute;
-     left: 8px;
-     top: -4px;
-     background-color: var(--firstcolor);
-     width: 160px;
-     flex-direction: column;
-     display: none;
-     overflow: hidden;
- }
- 
- #liker {
-     color: var(--whitecolor);
-     padding-left: 5px;
-     padding-top: 5px;
- }
- 
- #likes-count:hover #likersList {
-     display: block;
- }
- 
- .info {
-     display: none;
- }
- 
- #comment-deco {
-     position: relative;
-     margin: auto;
- }
- 
- #comment-deco:hover .info {
-     display: block;
-     position: absolute;
-     z-index: 10;
-     left: -70px;
-     top: -30px;
-     background-color: var(--firstcolor);
-     color: white;
-     padding: 5px;
-     border-radius: 13px 0 30px 0;
-     -webkit-border-radius: 13px 0 30px 0;
-     -moz-border-radius: 13px 0 30px 0;
-     -ms-border-radius: 13px 0 30px 0;
-     -o-border-radius: 13px 0 30px 0;
- }
- 
- #comment-count {
-     position: absolute;
-     left: 28px;
-     top: 2px;
- }
- 
- .post-content p {
-     word-wrap: break-word;
- }
- 
- #add-photo {
-     display: none;
- }
- /*on cible tous les éléments dont l'attribut id commence par "comment-input-*/
- 
- [id^="comment-input-"] {
-     position: fixed;
-     width: 300px;
-     height: 200px;
-     background-color: white;
-     z-index: 1000;
-     border-radius: 10px;
-     overflow: hidden;
-     left: calc((100% - 300px)/2);
-     top: calc((100% - 200px)/2);
-     -moz-border-radius: 10px;
-     -ms-border-radius: 10px;
-     -o-border-radius: 10px;
-     display: none;
-     flex-direction: column;
-     -webkit-border-radius: 10px;
- }
- 
- .replying-to {
-     font-size: 1.4rem;
-     background-color: #C4C4C4;
-     min-height: 50px;
-     padding-left: 30px;
-     padding-top: 5px;
-     color: black;
- }
- 
- .replying-to span {
-     padding-left: 30px;
- }
- 
- .input-form {
-     display: flex;
-     margin-left: 20px;
-     gap: 5px;
-     height: 100px;
-     align-items: center;
- }
- 
- .input-form form {
-     flex-grow: 1;
- }
- 
- [id^="comment-input-"] form textarea {
-     width: 100%;
-     resize: none;
-     border: none;
-     outline: none;
-     padding: 10px;
- }
- 
- [id^="comment-input-"] .post-button {
-     width: 80px;
-     height: 34px;
-     font-size: 1.4rem;
-     margin-left: 200px;
-     margin-top: 8px;
- }
- 
- .button-background {
-     background-color: #C4C4C4;
-     height: 50px;
- }
+    .feed-post {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        min-height: 100px;
+        cursor: pointer;
+    }
+    
+    .post-header {
+        display: flex;
+        align-items: center;
+        padding-left: 16px;
+        gap: 5px;
+    }
+    
+    .author-name {
+        display: flex;
+        align-items: center;
+    }
+    
+    .author-name span {
+        font-size: 2rem;
+    }
+    
+    .author-action {
+        margin-left: auto;
+        padding-right: 16px;
+    }
+    
+    .author-pic img {
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        height: 40px;
+        width: 40px;
+    }
+    /* .author_action {} */
+    
+    .author-action {
+        position: relative;
+    }
+    
+    .author-autorisations {
+        position: absolute;
+        right: 30px;
+    }
+    
+    .author-action ul {
+        display: none;
+        text-align: center;
+    }
+    
+    .post-pics {
+        max-width: 75%;
+        max-height: 300px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+    
+    .post-padge {
+        color: var(--btncolor);
+        margin-right: 5px;
+    }
+    
+    .post-author {
+        font-size: 15px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .author-action:hover ul {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .author-action li a {
+        display: block;
+    }
+    
+    .post-body {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 60px;
+    }
+    
+    .post-content {
+        margin: 15px 45px 0 0px;
+        font-size: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .author-pic {
+        padding-right: 10px;
+    }
+    
+    .post-footer {
+        display: grid;
+        grid-template-columns: 50% 50%
+    }
+    
+    #likes-post {
+        padding-left: 40px;
+        display: flex;
+        align-items: inherit;
+        gap: 10px;
+        padding-bottom: -80px;
+        font-size: 1.5rem;
+    }
+    
+    #likersList {
+        display: none;
+        position: absolute;
+        border-bottom: white solid 1px;
+        top: -9px;
+        left: 15px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+    
+    #comment-count {
+        position: relative;
+    }
+    
+    #comment-count:hover .comment-authors-list {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .comment-authors-list {
+        display: none;
+        position: absolute;
+        border-bottom: white solid 1px;
+    }
+    
+    #liker {
+        color: var(--whitecolor);
+        padding-left: 5px;
+        padding-top: 5px;
+    }
+    
+    #likes-count {
+        position: relative;
+    }
+    
+    #likes-count:hover #likersList {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .info {
+        display: none;
+    }
+    
+    #comment-deco {
+        display: flex;
+    }
+    
+    #comments-logo:hover .info {
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 1px solid black;
+        color: var(--firstcolor);
+        padding: 5px;
+        border-radius: 13px 0 30px 0;
+        -webkit-border-radius: 13px 0 30px 0;
+        -moz-border-radius: 13px 0 30px 0;
+        -ms-border-radius: 13px 0 30px 0;
+        -o-border-radius: 13px 0 30px 0;
+    }
+    
+    #comment-deco {
+        display: flex;
+        font-size: 1.5rem;
+        gap: 10px;
+    }
+    
+    .post-content p {
+        word-wrap: break-word;
+    }
+    
+    #add-photo {
+        display: none;
+    }
+    /*on cible tous les éléments dont l'attribut id commence par "comment-input-*/
+    
+    [id^="comment-input-"] {
+        position: fixed;
+        width: 300px;
+        height: 200px;
+        background-color: white;
+        z-index: 1000;
+        border-radius: 10px;
+        overflow: hidden;
+        left: calc((100% - 300px)/2);
+        top: calc((100% - 200px)/2);
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        display: none;
+        flex-direction: column;
+        -webkit-border-radius: 10px;
+    }
+    
+    .replying-to {
+        font-size: 1.4rem;
+        background-color: #C4C4C4;
+        min-height: 50px;
+        padding-left: 30px;
+        padding-top: 5px;
+        color: black;
+    }
+    
+    .replying-to span {
+        padding-left: 30px;
+    }
+    
+    .input-form {
+        display: flex;
+        margin-left: 20px;
+        gap: 5px;
+        height: 100px;
+        align-items: center;
+    }
+    
+    .input-form form {
+        flex-grow: 1;
+    }
+    
+    [id^="comment-input-"] form textarea {
+        width: 100%;
+        resize: none;
+        border: none;
+        outline: none;
+        padding: 10px;
+    }
+    
+    [id^="comment-input-"] .post-button {
+        width: 80px;
+        height: 34px;
+        font-size: 1.4rem;
+        margin-left: 200px;
+        margin-top: 8px;
+    }
+    
+    .button-background {
+        background-color: #C4C4C4;
+        height: 50px;
+    }

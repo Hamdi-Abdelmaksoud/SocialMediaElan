@@ -29,18 +29,45 @@
 		</span>
 		<span class="icon-title">Profile</span>
 	</a>
-	<a href="{{path('app_profile',{user:app.user.id})}}">
-		<span class="material-icons">
-			person
-		</span>
-		<span class="icon-title">followers</span>
-	</a>
-	<a href="{{path('app_profile',{user:app.user.id})}}">
-		<span class="material-icons">
-			person
-		</span>
-		<span class="icon-title">follow</span>
-	</a>
+<a>
+    		  
+	<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
+people_alt
+</span> 	<span class="icon-title" id="followers" onclick="toggle_div_fun('list-cachee');">Followers</span>
+			<span id="list-cachee">
+			<ul>
+				{% if app.user.followers %}
+				
+				{% for friend in app.user.followers  %}
+				<li>{{friend}}</li>
+	
+				{% endfor %}
+				<span class="material-icons" >
+					close
+				</span> 
+				{% endif %} 
+			</ul>
+			</span>
+		</a>
+ 
+		<a >
+    		  
+	<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
+people_alt
+</span> 	<span class="icon-title" onclick="toggle_div_fun('list-cachee');">Follows</span>
+			<ul id="list-cachee">
+				{% if app.user.follows %}
+				
+				{% for friend in app.user.follows  %}
+				<li>{{friend}}</li>
+	
+				{% endfor %}
+				<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
+					close
+				</span> 
+				{% endif %} 
+			</ul>
+		</a>	
  
 	<a href="{{ path('app_logout') }}">
 	<span class="material-icons">

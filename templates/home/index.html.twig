@@ -21,22 +21,6 @@
 				{% if posts %}
 
 					{{ include('post/_allposts.html.twig', posts) }}
-		<div class="friends-list-hidden">
-    		<i class="fa-solid fa-comment-dots fa-2xl" onclick="toggle_div_fun('list-cachee');"></i>
-	
-			<ul id="list-cachee">
-				{% if app.user.follows %}
-				<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
-					close
-				</span>
-				{% for friend in app.user.follows  %}
-				<li>{{friend}}</li>
-	
-				{% endfor %}	
-				{% endif %} 
-			</ul>
-		</div>	
-	
 				{% else %}
 					<p>Welcom to our comunity follow friends and share youre experiences with them</p>
 				{% endif %}

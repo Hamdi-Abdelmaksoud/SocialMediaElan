@@ -17,7 +17,8 @@
 				<span class="material-icons">
 					more_horiz
 				</span>
-				<ul class="author-autorisations">
+				<span class="author-autorisations">
+				<ul >
 					<li>
 						<a href="{{path('app_post_delete',{post:post.id})}}">
 							delete post
@@ -29,6 +30,7 @@
 						</a>
 					</li>
 				</ul>
+				</span>
 			</div>
 
 
@@ -52,7 +54,7 @@
 			<!--*****************************footer******************-->
 			<div class="post-footer">
 				<div id="likes-post">
-					<span id="like_logo">
+					<span id="like-logo">
 						{% if post.likedBy.contains(app.user) %}
 							<a href="{{path('app_unlike',{id:post.id})}}">
 								<svg class="feather feather-heart sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="yellow" stroke="yellow" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -71,36 +73,50 @@
 						{{post.likedBy.count}}
 						{% if post.likedBy.count > 0 %}
 							<span id="likersList">
+							<ul>
 								{% for user in post.likedBy %}
-									<span id="liker">{{user.firstName}}
-										{{user.lastName}}
-									</span>
+									<li id="liker">{{user }}
+									</li>
 								{% endfor %}
+							</ul>
 							</span>
 						{% endif %}
 					</span>
 				</div>
 				<!--close likespost-->
 				<div id="comment-deco">
-	{% set element = "comment-input-" ~  post.id  %}
-		<span id="comments-logo" onclick="toggle_div_fun('{{element}}');">
+						{% set element = "comment-input-" ~  post.id  %}
+		            <span id="comments-logo" onclick="toggle_div_fun('{{element}}');">
 							<svg class="feather feather-message-circle sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 								<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
 							</svg>
-							<p class='info'>add your comment</p>
-						</span>				 
+							<span class='info'>add your comment</span>
+					</span>				 
 					<span id="comment-count">
-						{{post.comments.count()}}
+						{{ post.comments.count() }}
+						{% if post.comments.count() > 0 %}
+						{% set friends = [] %}
+							<ul class="comment-authors-list">
+							{% for comment  in post.comments %}
+								{% if comment.author.id not in friends %}
+								
+									<li >{{comment.author}} </li>
+									{% set friends = friends|merge([comment.author.id]) %}
+								{% endif %}			 
+							{% endfor %}
+							</ul>
+								
+						{% endif %}
 					</span>
+					
 				</div>
 				<!--close commentdeco-->
 		
 			</div>
 			<!--close postfooter-->
-		 
 	<div id="comment-input-{{ post.id }}">
  
-	 <div class="replying-to"> you're replying @ {{post.text}}	<span class="material-icons" onclick="toggle_div_fun('{{element}}');">
+	 <div class="replying-to"> you're replying @ {{post.author}}	<span class="material-icons" onclick="toggle_div_fun('{{element}}');">
 					close
 				</span> </div>
 	 <div class="input-form">
@@ -123,6 +139,6 @@
 
 
 	
-{% for comment in post.comments %}<div>
+{# {% for comment in post.comments %}<div>
  {{comment.author}}{{comment.text}}	</div>
-{% endfor %}
+{% endfor %} #}

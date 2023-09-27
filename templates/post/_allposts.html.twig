@@ -2,8 +2,9 @@
 	{% if posts %}
 {% for post in posts %}
 	{% include "/post/_post.html.twig"  with  {'post' : post}  %}
-	
 {% endfor %}  
 
+	<div id="space" style="margin-top: 200px;">...</div>
+	
 	{% endif %}
 
