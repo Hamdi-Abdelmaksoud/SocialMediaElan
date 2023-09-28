@@ -187,3 +187,28 @@
     border-top-right-radius: 50%;
     height: 30px;
 }
+
+#list-cachee-follows {
+    position: absolute;
+    left: 100%;
+    z-index: 200;
+    max-height: 30%;
+    bottom: 45%;
+    width: 200px;
+    display: none;
+    flex-direction: column;
+}
+
+#list-cachee-follows span {
+    align-self: end;
+    cursor: pointer;
+}
+
+#list-cachee-follows .material-icons {
+    background-color: var(--secondcolor);
+    margin: auto;
+    margin-top: 10px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    height: 30px;
+}

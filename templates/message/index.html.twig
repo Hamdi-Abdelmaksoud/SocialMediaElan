@@ -1,15 +1,13 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello MessageController!
-{% endblock %}
-
+{% block title %}Hello MessageController!{% endblock %}
 {% block body %}
-	<div class="side_left">
+<div class="home-main">
+	<div class="side-left">
 		{{ include('home/_side.html.twig') }}
 	</div>
-	<main class="main_chat">
-		<div class="main_container">
-				<div class="message_container">
+	 
+		<main class="main-chat">
+			<div class="message-container">
 			{% for message in discussion %}
 					{% if app.user == message.sender %}
 						<div class="my_message">
@@ -25,8 +23,9 @@
 							<p>{{ message.text }}</p>
 						</div>
 					{% endif %}
-				{% endfor %}
-				<div class="form_container">
+			{% endfor %}
+			</div>
+			<div class="form-container">
 					{% if form %}
 						{{ form_start(form) }}
 						<div class="input-container">
@@ -34,12 +33,12 @@
 							{{ form_widget(form.send) }}
 						</div>
 						{{ form_end(form) }}
-					{% endif %}
-				</div>
+					{% endif %}				 
 			</div>
-			<div class="side_feed">
+		</main>
+	 
+			<div class="side_right">
 				{{ include('home/_side_right.html.twig') }}
 			</div>
-		</div>
-	</main>
+<div>
 {% endblock %}

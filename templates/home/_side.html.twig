@@ -42,7 +42,7 @@ people_alt
 				<li>{{friend}}</li>
 	
 				{% endfor %}
-				<span class="material-icons" >
+				<span class="material-icons" onclick="toggle_div_fun('list-cachee');" >
 					close
 				</span> 
 				{% endif %} 
@@ -52,17 +52,17 @@ people_alt
  
 		<a >
     		  
-	<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
+	<span class="material-icons" onclick="toggle_div_fun('list-cachee-follows');">
 people_alt
-</span> 	<span class="icon-title" onclick="toggle_div_fun('list-cachee');">Follows</span>
-			<ul id="list-cachee">
+</span> 	<span class="icon-title" onclick="toggle_div_fun('list-cachee-follows');">Follows</span>
+			<ul id="list-cachee-follows">
 				{% if app.user.follows %}
 				
 				{% for friend in app.user.follows  %}
 				<li>{{friend}}</li>
 	
 				{% endfor %}
-				<span class="material-icons" onclick="toggle_div_fun('list-cachee');">
+				<span class="material-icons" onclick="toggle_div_fun('list-cachee-follows');">
 					close
 				</span> 
 				{% endif %} 

@@ -23,43 +23,31 @@ class MessageController extends AbstractController
     //          'controller_name' => 'MessageController',
     //     ]);
     //  }
-    #[Route('/message/{id}', name: 'app_message_send')]
+     #[Route('/message/{id}', name: 'app_message_send')]
     public function send(Request $request, User $recipient, EntityManagerInterface $entiyManager,MessageRepository $messageRepository): Response
-    {
-        $message = new Message;
+     {
+         $message = new Message;
 
-        $form = $this->createForm(MessageType::class, $message);
+         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $message = $form->getData();
+         if ($form->isSubmitted() && $form->isValid()) {
+             $message = $form->getData();
+             $now = new \DateTime();
 
-            $now = new \DateTime();
-
-            $message->setSender($this->getUser());
-            $message->setRecipient($recipient);
-            $message->setCreated($now);
+         $message->setSender($this->getUser());
+             $message->setRecipient($recipient);
+             $message->setCreated($now);
             $entiyManager->persist($message);
             $entiyManager->flush();
 
-            $referer = $request->headers->get('referer');
+             $referer = $request->headers->get('referer');
             return $this->redirect($referer);
         }
         return $this->render('message/index.html.twig', [
-            'form' => $form->createView(),
-            'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser()),
-       'recipient' => $recipient
-        ]);
-    }
-    // #[Route('/message/{id}/read', name: 'app_message_read')]
-    // public function read(Message $message, EntityManagerInterface $entiyManager): Response
-    // {
-    //     $message->setIsRead(true);
-    //     $entiyManager->persist($message);
-    //     $entiyManager->flush();
-    //     return $this->render('message/index.html.twig', [
-    //         'recipient' => $message->getSender(),
-            
-    //     ]);
-    // }
-
-}
+             'form' => $form->createView(),
+             'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser()),
+        'recipient' => $recipient
+         ]);
+     }
+     
+ }
