@@ -37,6 +37,9 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: PostPics::class, orphanRemoval: true,cascade:['persist','remove'])]
     private Collection $pics;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $alertExpiration = null;
+
 
   
     public function __construct()
@@ -169,6 +172,18 @@ class Post
                 $pic->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAlertExpiration(): ?\DateTimeInterface
+    {
+        return $this->alertExpiration;
+    }
+
+    public function setAlertExpiration(?\DateTimeInterface $alertExpiration): static
+    {
+        $this->alertExpiration = $alertExpiration;
 
         return $this;
     }
