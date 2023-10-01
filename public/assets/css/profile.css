@@ -29,6 +29,11 @@
         -o-border-radius: 50%;
     }
     
+    #btn-follow .post-button {
+        width: 90px;
+        height: 45px;
+    }
+    
     #profile-name {
         font-size: 1.5rem;
         font-weight: 700;

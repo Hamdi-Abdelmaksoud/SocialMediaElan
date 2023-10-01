@@ -11,15 +11,17 @@
 		<div id="profile-name">{{user}}</div>
 		<div>Session : {{user.sessionSD |  date("M j,Y")}} - {{user.sessionED |  date("M j,Y")}} </div>
 </div>
- 
-<div id="btn-profile"><button class="btn-follow" type="button">follow</button></div>
+ {% if app.user != user %}
+	
+{% if user in app.user.getFollows() %}
+	
+<div id="btn-follow"  ><button class="post-button" type="button">unfollow</button></div>
+{% else %}
+<div id="btn-follow"  ><button class="post-button" type="button">follow</button></div>
 </div>
-{# <div><button class="btn-follow" type="button">follow</button></div>
-</div> #}
-			<div >
-				<div >{{user.posts.count}}</div>
-				<div >posts</div>
-			</div>
+ {% endif %}
+ {% endif %}
+ </div>
 	{# <span><i class="fa-regular fa-image" style="color: #5f88ce;"></i><a href="{{ path('app_profile_edit') }}">edit</a></span>
 
  </span>

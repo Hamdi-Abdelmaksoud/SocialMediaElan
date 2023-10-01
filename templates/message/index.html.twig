@@ -10,14 +10,14 @@
 			<div class="message-container">
 			{% for message in discussion %}
 					{% if app.user == message.sender %}
-						<div class="my_message">
+						<div class="my-message">
 							<p>{{ message.text }}</p>
 						</div>
 					{% else %}
-						<div class="message_author">
-							<div class="author_pic">
+						<div class="message-author">
+							<div class="author-pic">
 								<a href="{{ path('app_profile', {user: message.sender.id}) }}">
-									<img src="{{ asset('uploads/userPic/' ~ message.sender.image) }}" alt="user pic"/>
+									<img  class="small-image" src="{{ asset('uploads/userPic/' ~ message.sender.image) }}" alt="user pic"/>
 								</a>
 							</div>
 							<p>{{ message.text }}</p>
@@ -37,7 +37,7 @@
 			</div>
 		</main>
 	 
-			<div class="side_right">
+			<div class="side-right">
 				{{ include('home/_side_right.html.twig') }}
 			</div>
 <div>
