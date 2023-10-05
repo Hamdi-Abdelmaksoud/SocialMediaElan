@@ -18,7 +18,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('text',TextType::class)
-            
+            ->add('type',TextType::class)
             ->add('pic', FileType::class, [
                 'label' => 'add pictures',
     

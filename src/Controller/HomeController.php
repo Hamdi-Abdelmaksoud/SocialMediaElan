@@ -22,7 +22,9 @@ class HomeController extends AbstractController
      else{
         $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('home/index.html.twig', [
-            'posts'=>$postRepository->findHomePosts($authors)
+            'posts'=>$postRepository->findHomePosts($authors),
+            'events' => $postRepository->findby(["type"=>"event"]),
+                 
         ]); 
      }
     }

@@ -49,11 +49,11 @@ class RegistrationFormType extends AbstractType
         ->add('firstName')
         ->add('lastName')
         ->add('email')
-        ->add('birthDate', DateType::class, ['widget' => 'single_text'])
+        ->add('linkedin')
+        ->add('github')
         ->add('city')
         ->add('sessionSD',DateType::class, ['widget' => 'single_text'])
         ->add('sessionED',DateType::class, ['widget' => 'single_text'])
-        ->add('bio')
         ->add('plainPassword', RepeatedType::class, [
             'constraints' => [
                 new Regex('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{14,}$/',

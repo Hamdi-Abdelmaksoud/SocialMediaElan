@@ -1,9 +1,8 @@
 <div class="search">
 <input type="text" placeholder="search"></div>
-<div class="trending"></div>
-<div class="friends-list">
-  
-<h3>Friends</h3> 
+ 
+ <div> {{ include('post/_events.html.twig',{'events': events}) }}<div> 
+{# <h3>Friends</h3> 
  
 <div> 
 {% set friends = [] %}
@@ -16,7 +15,7 @@
  
 {{ include('follower/_friends_list.html.twig', friends) }}
 
-</div> 
+</div>  #}
 </div>
 
  

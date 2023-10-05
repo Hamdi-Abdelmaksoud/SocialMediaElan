@@ -81,6 +81,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: Message::class)]
     private Collection $recived;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $github = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $linkedin = null;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -470,5 +476,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->firstName.' ' . $this->lastName;
+    }
+
+    public function getGithub(): ?string
+    {
+        return $this->github;
+    }
+
+    public function setGithub(?string $github): static
+    {
+        $this->github = $github;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): static
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
     }
 }

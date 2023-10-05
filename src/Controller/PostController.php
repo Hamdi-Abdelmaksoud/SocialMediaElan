@@ -23,77 +23,36 @@ class PostController extends AbstractController
             'posts' => $posts->findAll(),
         ]);
     }
+  
 
     #[Route('/post/addtwo', name: 'app_post_addtwo')]
-    public function addtwo(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager, $action = NULL): Response
+    public function addtwo(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager, $type = 'post'): Response
     {
-        if ($request->isMethod('POST')) 
+        if ($request->isMethod('POST'))
         {
-            $postText = $request->request->get('text');
-            if (!$action) {
+            if($request->request->get('text') !=NULL)
+            {
+                $postText = $request->request->get('text');
+                    if($request->request->has('type'))
+                    {
+                        $type = $request->request->get('type');
+                    }
                 $post = new Post();
-            }
-            $post->setText($postText);
-            $post->setAuthor($this->getUser());
-            //on récupère les images
-            $pics = $request->files->get('pics');
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+                $post->setType($type);
+                $post->setText($postText);
+                $post->setAuthor($this->getUser());
+                //on récupère les images
+                $pics = $request->files->get('pics');
+                // this condition is needed because the 'brochure' field is not required
+                // so the PDF file must be processed only when a file is uploaded
             if ($pics)
             {
                 foreach ($pics as $pic)
                 {
-
                     $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
                     // this is needed to safely include the file name as part of the URL
                     $safeFilename = $slugger->slug($originalFilename);
                     $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
-
-                    // Move the file to the directory where brochures are stored
-                    try {
-                        $pic->move(
-                            $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                        // ... handle exception if something happens during file upload
-                    }
-                    $postPics = new PostPics();
-                    $postPics->setPic($newFilename);
-                    $postPics->setPost($post);
-                    $post->addPic($postPics);
-                }
-
-
-            }
-            $entiyManager->persist($post);
-            $entiyManager->flush();
-            $this->addFlash('success', 'Post added successfully');
-
-            return $this->redirectToRoute('app_home');
-        }
-    }
-    #[Route('/post/add', name: 'app_post_add')]
-    public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
-    {
-        $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            //on récupère les images
-            $pics = $form->get('pic')->getData();
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-            if ($pics) {
-                foreach ($pics as $pic) {
-
-                    $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
-                    // this is needed to safely include the file name as part of the URL
-                    $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
-
                     // Move the file to the directory where brochures are stored
                     try {
                         $pic->move(
@@ -109,23 +68,61 @@ class PostController extends AbstractController
                     $post->addPic($postPics);
                 }
             }
-            $post = $form->getData();
-            $post->setAuthor($this->getUser());
             $entiyManager->persist($post);
             $entiyManager->flush();
-
-
             $this->addFlash('success', 'Post added successfully');
-
             return $this->redirectToRoute('app_home');
-        }
-        return $this->render(
-            'post/add.html.twig',
-            [
-                'form' => $form
-            ]
-        );
+        } 
     }
+    $this->addFlash('error', 'Text cannot be empty. Please enter some text.');
+    return $this->redirectToRoute('app_home');
+    }
+    // #[Route('/post/add', name: 'app_post_add')]
+    // public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
+    // {
+    //     $post = new Post();
+    //     $form = $this->createForm(PostType::class, $post);
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         //on récupère les images
+    //         $pics = $form->get('pic')->getData();
+    //         // this condition is needed because the 'brochure' field is not required
+    //         // so the PDF file must be processed only when a file is uploaded
+    //         if ($pics) {
+    //             foreach ($pics as $pic) {
+    //                 $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
+    //                 // this is needed to safely include the file name as part of the URL
+    //                 $safeFilename = $slugger->slug($originalFilename);
+    //                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
+    //                 // Move the file to the directory where brochures are stored
+    //                 try {
+    //                     $pic->move(
+    //                         $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
+    //                         $newFilename
+    //                     );
+    //                 } catch (FileException $e) {
+    //                     // ... handle exception if something happens during file upload
+    //                 }
+    //                 $postPics = new PostPics();
+    //                 $postPics->setPic($newFilename);
+    //                 $postPics->setPost($post);
+    //                 $post->addPic($postPics);
+    //             }
+    //         }
+    //         $post = $form->getData();
+    //         $post->setAuthor($this->getUser());
+    //         $entiyManager->persist($post);
+    //         $entiyManager->flush();
+    //         $this->addFlash('success', 'Post added successfully');
+    //         return $this->redirectToRoute('app_home');
+    //     }
+    //     return $this->render(
+    //         'post/add.html.twig',
+    //         [
+    //             'form' => $form
+    //         ]
+    //     );
+    // }
 
     #[Route('/post/{post}', name: 'app_post_show')]
     public function showOne(Post $post): Response
@@ -144,7 +141,6 @@ class PostController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
-
             $entiyManager->persist($post);
             $entiyManager->flush();
             $this->addFlash('success', 'Post updated successfully');
@@ -160,11 +156,9 @@ class PostController extends AbstractController
     #[Route('/post/{post}/delete', name: 'app_post_delete')]
     public function delete(Post $post, EntityManagerInterface $entiyManager,Request $request): Response
     {
-
         $entiyManager->remove($post);
         $entiyManager->flush();
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
-  
     }
 }

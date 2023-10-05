@@ -1,14 +1,11 @@
 <?php
-
 namespace App\Entity;
-
 use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
 {
@@ -39,6 +36,9 @@ class Post
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $alertExpiration = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
 
 
   
@@ -187,10 +187,14 @@ class Post
 
         return $this;
     }
-
-
-   
- 
-
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+    public function setType(string $type): static
+    {
+        $this->type = $type;
+        return $this;
+    }
     
 }
