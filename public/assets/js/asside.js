@@ -7,3 +7,11 @@ function toggle_div_fun(id) {
         element.style.display = "none";
     }
 }
+
+function nuit() {
+    const date = new Date()
+    const hour = date.getHours()
+    if (hour > 8) {
+        document.documentElement.style.setProperty('--firstcolor', '#eee')
+    }
+}

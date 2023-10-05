@@ -21,6 +21,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'posts' => $user->getPosts(),
+            'events' => $postRepository->findby(["type"=>"event"]),
 
         ]);
     }

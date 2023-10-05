@@ -1,34 +1,26 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Hello HomeController!
 {% endblock %}
-
 {% block body %}
 <div class="home-main">	
-
 	<div class="side-left">
 		{{ include('home/_side.html.twig') }}
 	</div>
 	<main>
-
 				<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
 					<div class="new-post">
 						{% set userData = {'pic': app.user.image,}	%}
 						{{ include('home/_postBox.html.twig', userData) }}
 					</div>
 				</form>
-				
 				{% if posts %}
-
 					{{ include('post/_allposts.html.twig', posts) }}			 
 				{% else %}
 					<p>Welcom to our comunity follow friends and share youre experiences with them</p>
 				{% endif %}
 			
 	</main> 
-	
-			<div class="side-right">
-	
+			<div class="side-right">	
 				{{ include('home/_side_right.html.twig') }}
 			</div>
 </div>{# end .home-main #}

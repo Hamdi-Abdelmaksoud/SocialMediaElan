@@ -118,7 +118,7 @@
     #likersList {
         display: none;
         position: absolute;
-        border-bottom: white solid 1px;
+        border-bottom: var(--bgcolor) solid 1px;
         top: -9px;
         left: 15px;
         -webkit-border-radius: 10px;
@@ -139,11 +139,11 @@
     .comment-authors-list {
         display: none;
         position: absolute;
-        border-bottom: white solid 1px;
+        border-bottom: var(--bgcolor) solid 1px;
     }
     
     #liker {
-        color: var(--whitecolor);
+        color: var(--bgcolor);
         padding-left: 5px;
         padding-top: 5px;
     }
@@ -169,7 +169,7 @@
         display: block;
         position: absolute;
         z-index: 10;
-        border: 1px solid black;
+        border: 1px solid var(--firstcolor);
         color: var(--firstcolor);
         padding: 5px;
         border-radius: 13px 0 30px 0;
@@ -198,7 +198,7 @@
         position: fixed;
         width: 300px;
         height: 200px;
-        background-color: white;
+        background-color: var(--bgcolor);
         z-index: 1000;
         border-radius: 10px;
         overflow: hidden;
@@ -214,11 +214,11 @@
     
     .replying-to {
         font-size: 1.4rem;
-        background-color: #C4C4C4;
+        background-color: var(--bgcolor);
         min-height: 50px;
         padding-left: 30px;
         padding-top: 5px;
-        color: black;
+        color: var(--firstcolor);
     }
     
     .replying-to span {
