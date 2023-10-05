@@ -22,30 +22,30 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('image', FileType::class, [
-            'label' => 'your profil image',
+        // ->add('image', FileType::class, [
+        //     'label' => 'your profil image',
 
-            // unmapped means that this field is not associated to any entity property
-            'mapped' => false,
+        //     // unmapped means that this field is not associated to any entity property
+        //     'mapped' => false,
 
-            // make it optional so you don't have to re-upload the PDF file
-            // every time you edit the Product details
-            'required' => false,
+        //     // make it optional so you don't have to re-upload the PDF file
+        //     // every time you edit the Product details
+        //     'required' => false,
 
-            // unmapped fields can't define their validation using annotations
-            // in the associated entity, so you can use the PHP constraint classes
-            'constraints' => [
-                new File([
-                    'maxSize' => '1024k',
-                    'mimeTypes' => [
-                        'image/gif',
-                        'image/jpeg',
-                        'image/jpg',
-                    ],
-                    'mimeTypesMessage' => 'Please upload a valid picture document',
-                ])
-            ],
-            ])
+        //     // unmapped fields can't define their validation using annotations
+        //     // in the associated entity, so you can use the PHP constraint classes
+        //     'constraints' => [
+        //         new File([
+        //             'maxSize' => '1024k',
+        //             'mimeTypes' => [
+        //                 'image/gif',
+        //                 'image/jpeg',
+        //                 'image/jpg',
+        //             ],
+        //             'mimeTypesMessage' => 'Please upload a valid picture document',
+        //         ])
+        //     ],
+        //     ])
         ->add('firstName')
         ->add('lastName')
         ->add('email')

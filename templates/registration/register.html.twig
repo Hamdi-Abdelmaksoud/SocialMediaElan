@@ -8,12 +8,12 @@
     {% for flash_error in app.flashes('verify_email_error') %}
       <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-     <div class="register-card">
+     <div class="register">
         <h1>Welcome in our comunity</h1>
             {{ form_errors(registrationForm) }}
              {{ form_start(registrationForm) }}
        <div class="login-card">
-        <div id="register-img">{{ form_widget(registrationForm.image, { label: true }) }}</div>
+ 
         <div>{{ form_widget(registrationForm.firstName, { attr: { placeholder: 'first Name' }, label: false }) }}</div>
         <div>{{ form_widget(registrationForm.lastName, { attr: { placeholder: 'Last Name' }, label: false }) }}</div>
         <div class="register-widget">
@@ -30,13 +30,15 @@
       <div>{{ form_widget(registrationForm.sessionED) }}</div>
       <div>{{ form_widget(registrationForm.plainPassword, { label: false }) }}</div>
       <div id="show-terms" onclick="toggle_div_fun('terms')">Click to View the Terms of Use</div>
+      
       <div class="register-footer">
       <div id="terms">
         {{ include('registration/_terms.html.twig') }}
         <div id="agree-terms" >{{ form_row(registrationForm.agreeTerms ) }}</div>
-      <div>
-        <button type="submit" class="btn">Register</button>
+      <div style="cursor: pointer;align-self:center;font-size:1.5rem;" onclick="toggle_div_fun('terms')">close</div>
       </div>
+      <div class="button">
+        <button type="submit" class="post-button">Register</button>
       </div>
       <div>
     </div>
