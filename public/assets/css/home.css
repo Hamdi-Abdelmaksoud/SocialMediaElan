@@ -1,7 +1,6 @@
     .home-main {
         display: grid;
         grid-template-columns: minmax(15%, 30%) minmax(380px, 35%) minmax(380px, 35%);
-        gap: 10px;
     }
     
     .home-bar {

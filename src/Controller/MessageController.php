@@ -6,6 +6,7 @@ use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\MessageRepository;
+use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Builder\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class MessageController extends AbstractController
     //     ]);
     //  }
      #[Route('/message/{id}', name: 'app_message_send')]
-    public function send(Request $request, User $recipient, EntityManagerInterface $entiyManager,MessageRepository $messageRepository): Response
+    public function send(Request $request, User $recipient, EntityManagerInterface $entiyManager,MessageRepository $messageRepository,PostRepository $postRepository): Response
      {
          $message = new Message;
 
@@ -46,7 +47,8 @@ class MessageController extends AbstractController
         return $this->render('message/index.html.twig', [
              'form' => $form->createView(),
              'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser()),
-        'recipient' => $recipient
+        'recipient' => $recipient,
+        'events' => $postRepository->findby(["type"=>"event"])
          ]);
      }
      

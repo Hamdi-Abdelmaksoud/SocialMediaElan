@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class ProfileController extends AbstractController
 {
     #[Route('/profile/{user}', name: 'app_profile')]
-    public function editProfile(User $user, PostRepository $postRepository): Response
+    public function show(User $user, PostRepository $postRepository): Response
     {
 
         return $this->render('profile/show.html.twig', [
@@ -55,7 +55,6 @@ class ProfileController extends AbstractController
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
-
                 // Move the file to the directory where brochures are stored
                 try {
                     $pic->move(

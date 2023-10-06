@@ -91,7 +91,7 @@
      .side-left:hover {
          width: 500%;
          z-index: 5000;
-         background-color: white;
+         background-color: var(--bgcolor);
      }
      .side-left:hover .icon-title {
          display: block;
@@ -99,5 +99,9 @@
      .side-left:hover .side-links {
          align-items: start;
          padding: 20px 2px 0 20px;
+     }
+     .stats {
+         padding-left: 5px;
+         font-size: 1.2rem;
      }
  }
