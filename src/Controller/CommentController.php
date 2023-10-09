@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Notification;
 
 
 class CommentController extends AbstractController
@@ -22,17 +23,25 @@ class CommentController extends AbstractController
         ]);
     }
     #[Route('/post/{post}/comment', name: 'app_post_comment')]
-    public function addComment(Request $request, Post $post, EntityManagerInterface $entiyManager): Response
+    public function addComment(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($request->isMethod('POST')) 
         {
             $commentText = $request->request->get('comment');
-                $comment = new Comment();
+            $comment = new Comment();
             $comment->setText($commentText);
             $comment->setAuthor($this->getUser());
             $comment->setPost($post);
-            $entiyManager->persist($comment);
-            $entiyManager->flush();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $notif = New Notification();
+            $notif->setSender($this->getUser());
+            $notif->setReciver($post->getAuthor());
+            $notif->setType('comment');
+            $notif->setLink($post->getId());
+            $entityManager->persist($notif);
+            $entityManager->flush();
+            
             $this->addFlash('success', 'comment added successfully');
         }
         $referer = $request->headers->get('referer');
