@@ -40,6 +40,9 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Notification::class)]
+    private Collection $notifications;
+
 
   
     public function __construct()
@@ -48,6 +51,7 @@ class Post
         $this->created=new DateTime();
         $this->likedBy = new ArrayCollection();
         $this->pics = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
         
     }
 
@@ -194,6 +198,36 @@ class Post
     public function setType(string $type): static
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getPost() === $this) {
+                $notification->setPost(null);
+            }
+        }
+
         return $this;
     }
     

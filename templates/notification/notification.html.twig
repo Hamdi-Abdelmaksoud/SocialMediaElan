@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Notifications {% endblock %}
+{% block body %}
+<div class="home-main">
+	<div class="side-left">
+		{{ include('home/_side.html.twig') }}
+	</div>
+	 
+		<main >
+		{% if notifications %}
+	 {% for notif in notifications %}
+     <div class="notifications">
+	 
+    <a class="sender" href="{{path('app_profile',{user: notif.sender.id})}}"><div class="author-pic">
+	<img src="{{ asset('uploads/userPic/'~ notif.sender.image)}}" alt='sender of notification'></div>
+    
+		<span>{{notif.sender}}</span></a>
+    {% if notif.type == 'like' %}
+        <span> liked your <a href="#">post</a> </span>
+     
+    {% endif %}
+	{% if notif.type == 'comment' %}
+<span> commented your <a href="#">post</a></span>		
+	{% endif %}
+	{% if notif.type == 'follow' %}
+		<span> follow you</span>
+	{% endif %}
+
+	 </div>
+     {% endfor %}
+		{% else %}
+		<p> not  notifications</p>
+			
+		{% endif %}
+		</main>
+	 
+			<div class="side-right">
+				{{ include("home/_side_right.html.twig") }}
+			</div>
+<div>
+{% endblock %}

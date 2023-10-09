@@ -204,3 +204,24 @@
         #list-cachee>div:last-child {
             align-self: center;
         }
+        
+        .nbr-notif {
+            width: 25px;
+            height: 25px;
+            color: #dcdcdc;
+            background-color: red;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            text-align: center;
+            position: absolute;
+            top: -10px;
+            left: -5px;
+        }
+        
+        .notif {
+            display: flex;
+            position: relative;
+        }

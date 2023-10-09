@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,13 +18,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ProfileController extends AbstractController
 {
     #[Route('/profile/{user}', name: 'app_profile')]
-    public function show(User $user, PostRepository $postRepository): Response
+    public function show(User $user, PostRepository $postRepository, NotificationRepository $notificationRepository): Response
     {
 
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'posts' => $user->getPosts(),
             'events' => $postRepository->findby(["type"=>"event"]),
+            'notification' => $notificationRepository->findnotification($user->getId())
 
         ]);
     }

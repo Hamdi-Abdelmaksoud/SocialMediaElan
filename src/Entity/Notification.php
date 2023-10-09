@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\NotificationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class Notification
@@ -29,6 +31,21 @@ class Notification
 
     #[ORM\Column]
     private ?bool $is_read = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $created = null;
+
+    #[ORM\ManyToOne(inversedBy: 'notifications')]
+    private ?Post $post = null;
+ 
+  
+    public function __construct()
+    {
+
+        $this->created = new DateTime();
+        $this->is_read = 0;
+    }
+
 
     public function getId(): ?int
     {
@@ -94,4 +111,29 @@ class Notification
 
         return $this;
     }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): static
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): static
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+ 
 }

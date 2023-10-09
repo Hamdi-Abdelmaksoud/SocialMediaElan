@@ -9,8 +9,14 @@
     <span class="icon-title">Explore</span>
   </a>
 
-  <a>
+  <a href="{{path('app_notification')}}">
+  <span class="notif">
     <span class="material-icons">notifications</span>
+    {% if notification %}
+<span class="nbr-notif">{{ notification|length }}</span>      
+ 
+    {% endif %}
+  <span>
     <span class="icon-title">Notification</span>
   </a>
 

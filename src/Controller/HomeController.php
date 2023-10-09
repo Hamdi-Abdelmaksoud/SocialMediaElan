@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function homePosts(PostRepository $postRepository): Response
+    public function homePosts(PostRepository $postRepository,NotificationRepository $notificationRepository): Response
     {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
@@ -24,6 +25,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'posts'=>$postRepository->findHomePosts($authors),
             'events' => $postRepository->findby(["type"=>"event"]),
+            'notification' => $notificationRepository->findnotification($currentUser->getId())
                  
         ]); 
      }
