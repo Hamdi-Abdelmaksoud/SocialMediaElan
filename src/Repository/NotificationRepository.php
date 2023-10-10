@@ -20,7 +20,7 @@ class NotificationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Notification::class);
     }
-    public function findnotification(int $reciver):array
+    public function findnotification(string $reciver):array
     {
         return $this->createQueryBuilder('n')
         ->andWhere('n.reciver = :reciver')

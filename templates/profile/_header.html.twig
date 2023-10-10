@@ -1,60 +1,31 @@
-<div id="profile-header">
-	<div class="stats">		<div class="frame-btn"><a href="#"><i class="fa-brands fa-github fa-xl" style="color: #0f0f10;"></i></a></div>
-		<div class="frame-btn"><a href="#"><i class="fa-brands fa-linkedin fa-xl" style="color: #3772d7;"></i></a></div>
-		<div class="frame-btn"><a href="#"><i class="fa-solid fa-at fa-xl" style="color: #000000;"></i></a></div></div>
+ 
 	<div id="profile-card">
 		<div class="frame">
 			<img src="{{ asset('uploads/userPic/'~ user.image) }}" alt="profile picture">
 	  	</div>
-		<div id="profile-name">{{user}}
-		<div class="session">Session : {{user.sessionSD |  date("M j,Y")}} - {{user.sessionED |  date("M j,Y")}} </div>
+		<div id="profile-name"><span>{{user}}</span>
+		<span class="session">Session : {{user.sessionSD |  date("M j,Y")}} - {{user.sessionED |  date("M j,Y")}} </span>
+		<span>{{user.city}}</span>
 		</div>
-		<div class="links">		<span>Posts : {{user.posts.count}}</span><span>Follow : {{user.follows.count}}</span><span>Followers : {{user.followers.count}}</span><span>	
+	 
+	<div class="header-btn">
+	          <div class="btn-follow"  ><a  href="{{path('app_message_send',{id:user.id})}}">chat</a></div>
+          {% if user in app.user.getFollows() %}
+              <div class="btn-follow"  ><a href="{{path('app_unfollow',{id:user.id})}}">unfollow</a></div>
+          {% else %}
+              <div class="btn-follow"  ><a  href="{{path('app_follow',{id:user.id})}}">follow</a></div>
+          {% endif %}
+    </div>
+	<div class="links">	
+		<div class="frame-btn"><a href="#"><i class="fa-brands fa-github fa-xl" style="color: #0f0f10;"></i></a></div>
+		<div class="frame-btn"><a href="#"><i class="fa-brands fa-linkedin fa-xl" style="color: #3772d7;"></i></a></div>
+		<div class="frame-btn"><a href="#"><i class="fa-solid fa-at fa-xl" style="color: #000000;"></i></a></div>
+	</div>
+ 
+{% if app.user == user %}
+	<div   class="settings"><a href="{{path('app_profile_edit',{user:app.user.id})}}">Settings</a></div>
+ {% endif %} 
 </div>
-	</div>
-
-<div id="profile-btn"> {% if app.user != user %}
-	
-{% if user in app.user.getFollows() %}
-	
-<div class="btn-follow"  ><a href="{{path('app_unfollow',{id:user.id})}}">unfollow</a></div>
-{% else %}
-<div class="btn-follow"  ><a  href="{{path('app_follow',{id:user.id})}}">follow</a></div>
-
- {% endif %}
- {% else %}
-<div class="btn-follow"><a href="{{path('app_profile_edit',{user:app.user.id})}}">Settings</a></div>
-
- {% endif %}
- </div>
- </div>
-	{# <span><i class="fa-regular fa-image" style="color: #5f88ce;"></i><a href="{{ path('app_profile_edit') }}">edit</a></span>
-
- </span>
-
-	<div class="profile-card-cnt js-profile-cnt">
-		
-
-		<div class="profile-card-info">
-			<div class="<div class="profile-card-txt">{{user.bio}}</div>
-		<div class="profile-card-loc">
-			<span class="profile-card-city">
-				{{user.city}}, France
-			</span>
-		</div>profile-card-inf-item">
-				<div class="profile-card-inf__title">{{user.followers.count}}</div>
-				<div class="profile-card-inf__txt">Followers</div>
-			</div>
-
-			<div class="profile-card-inf-item">
-				<div class="profile-card-inf__title">{{user.follows.count}}</div>
-				<div class="profile-card-inf__txt">Following</div>
-			</div>
-
-
-
-		</div>
-
-
-	</div>
-</div> #}
+ 
+ 	{# <div class="stats"><span>Posts : {{user.posts.count}}</span><span>Follow : {{user.follows.count}}</span><span>Followers : {{user.followers.count}}</span></div> #}
+ 

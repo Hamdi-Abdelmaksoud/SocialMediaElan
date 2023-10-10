@@ -20,7 +20,7 @@ class NotificationController extends AbstractController
         $notifs= $notificationRepository->findnotification($currentUser->getId());
         foreach($notifs as $notif)
         {
-            $notif->setIsRead(1);
+            $notif->setIsRead('1');
             $entiyManager->persist($notif);
             $entiyManager->flush();
         }

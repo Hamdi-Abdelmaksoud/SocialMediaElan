@@ -6,6 +6,7 @@ use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\MessageRepository;
+use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Builder\Method;
@@ -25,7 +26,7 @@ class MessageController extends AbstractController
     //     ]);
     //  }
      #[Route('/message/{id}', name: 'app_message_send')]
-    public function send(Request $request, User $recipient, EntityManagerInterface $entiyManager,MessageRepository $messageRepository,PostRepository $postRepository): Response
+    public function send(Request $request, User $recipient,NotificationRepository $notificationRepository ,EntityManagerInterface $entiyManager,MessageRepository $messageRepository,PostRepository $postRepository): Response
      {
          $message = new Message;
 
@@ -48,7 +49,8 @@ class MessageController extends AbstractController
              'form' => $form->createView(),
              'discussion' => $messageRepository->findDiscussion($recipient,$this->getUser()),
         'recipient' => $recipient,
-        'events' => $postRepository->findby(["type"=>"event"])
+        'events' => $postRepository->findby(["type"=>"event"]),
+        'notification' => $notificationRepository->findnotification($this->getUser()->getUserIdentifier())
          ]);
      }
      

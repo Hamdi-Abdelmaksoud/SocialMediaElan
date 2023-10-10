@@ -1,130 +1,148 @@
-    /* Profile header start */
-    
-    #profile-header {
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        background: var(--bgcolor);
-        box-shadow: var(--boxshadow);
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-    }
-    
-    #profile-card {
-        height: 300px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-around;
-        flex: 0.5;
-    }
-    
-    #btn-profile {
-        flex: 0.3;
-        margin-left: 10px;
-    }
-    
-    #profile-card img {
-        width: 125px;
-        height: 125px;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-border-radius: 50%;
-        background-size: cover;
-    }
-    
-    #btn-follow .post-button {
-        width: 90px;
-        height: 45px;
-    }
-    
-    #profile-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-    
-    .stats {
-        align-self: normal;
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-        flex-direction: column;
-        flex: 0.2;
-        height: 75%;
-        font-size: 1.5rem;
-        padding-left: 15px;
-    }
-    
-    .links a i {
-        box-shadow: var(--boxshadow);
-    }
-    
-    .frame {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: var(--bgcolor);
-        box-shadow: var(--boxshadow);
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-border-radius: 50%;
-    }
-    
-    .frame-btn {
-        background: var(--bgcolor);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: var(--boxshadow);
-    }
-    
-    .frame-btn:hover {
-        box-shadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
-    }
-    
-    #profile-btn {
-        flex: 0.2;
-        height: 60%;
-        cursor: pointer;
-    }
-    
-    .btn-follow {
-        width: 100px;
-        height: 30px;
-        box-shadow: var(--boxshadow);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-    }
-    
-    .btn-follow:hover {
-        box-shadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
-    }
-    
-    .session {
-        font-size: 0.9rem;
-        color: var(--firstcolor);
-    }
-    
-    .links {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-    }
+/* Profile header start */
+
+#profile-card {
+    border-radius: 10px;
+    background: var(--bgcolor);
+    box-shadow: var(--boxshadow);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    height: 370px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 5px;
+    position: relative;
+}
+
+#profile-card img {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    background-size: cover;
+}
+
+#btn-follow .post-button {
+    width: 90px;
+    height: 45px;
+}
+
+#profile-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    gap: 5px;
+}
+
+.links {
+    display: flex;
+    font-size: 1.5rem;
+    gap: 20px
+}
+
+.links a i {
+    box-shadow: var(--boxshadow);
+}
+
+.frame {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bgcolor);
+    box-shadow: var(--boxshadow);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.frame-btn {
+    background: var(--bgcolor);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--boxshadow);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.frame-btn:hover {
+    box-shadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
+}
+
+#profile-btn {
+    cursor: pointer;
+}
+
+.btn-follow {
+    width: 120px;
+    height: 60px;
+    box-shadow: var(--boxshadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.settings:hover,
+.btn-follow:hover {
+    box-shadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
+}
+
+.session {
+    font-size: 1rem;
+    color: var(--firstcolor);
+}
+
+.stats {
+    display: flex;
+    gap: 10px;
+}
+
+.stats span {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.header-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.settings {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    width: 70px;
+    height: 30px;
+    box-shadow: var(--boxshadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}

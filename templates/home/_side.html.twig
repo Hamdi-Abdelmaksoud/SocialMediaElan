@@ -1,7 +1,7 @@
 <div class="side-links">
   <a href="{{ path('app_home') }}">
     <span class="material-icons">home</span>
-    <span class="icon-title">home</span>
+    <span class="icon-title">Home</span>
   </a>
 
   <a>
@@ -12,7 +12,7 @@
   <a href="{{path('app_notification')}}">
   <span class="notif">
     <span class="material-icons">notifications</span>
-    {% if notification %}
+    {% if notification   %}
 <span class="nbr-notif">{{ notification|length }}</span>      
  
     {% endif %}
@@ -33,7 +33,7 @@
  
 <a>
 	<span class="material-icons" onclick="toggle_div_fun('list-cachee');">chat</span>
-    <span class="icon-title" onclick="toggle_div_fun('list-cachee');">chat</span>
+    <span class="icon-title" onclick="toggle_div_fun('list-cachee');">Chat</span>
 	</a>
 
     {% set friends = [] %}
@@ -64,6 +64,6 @@
     {% endif %}
   <a href="{{ path('app_logout') }}">
     <span class="material-icons">logout</span>
-    <span class="icon-title">logout</span>
+    <span class="icon-title">Logout</span>
   </a>
 </div>
