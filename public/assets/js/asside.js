@@ -8,10 +8,10 @@ function toggle_div_fun(id) {
     }
 }
 
-function nuit() {
-    const date = new Date()
-    const hour = date.getHours()
-    if (hour > 8) {
-        document.documentElement.style.setProperty('--firstcolor', '#eee')
-    }
-}
+document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById("mode");
+
+    btn.addEventListener('click', function() {
+        document.body.classList.toggle("darkmode");
+    });
+});

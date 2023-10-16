@@ -8,35 +8,28 @@
     </div>
 </form> #}
 
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Edit Profile
+  Edit Profile
 {% endblock %}
 
 {% block body %}
-    
-     <div class="register">
-  
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+  <div class="home-main">
+    <div class="side-left">{{ include('home/_side.html.twig') }}</div>
+    <div class="register">
+      {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
 
-    {% for message in app.flashes('error') %}
-        <div style=" color:red;" class="alert alert-danger">
-            {{ message }}
-        </div>
-    {% endfor %}
+      {% for message in app.flashes('error') %}
+        <div style=" color:red;" class="alert alert-danger">{{ message }}</div>
+      {% endfor %}
 
-        <h1>Welcome in our comunity</h1>
-            {{ form_errors(form) }}
-             {{ form_start(form) }}
-       <div class="login-card">
- 
+      <h1 class="edit">Edit your profile</h1>
+      {{ form_errors(form) }}
+      {{ form_start(form) }}
+      <div class="login-card">
         <div>{{ form_widget(form.firstName, { attr: { placeholder: 'first Name' }, label: false }) }}</div>
         <div>{{ form_widget(form.lastName, { attr: { placeholder: 'Last Name' }, label: false }) }}</div>
         <div class="register-widget">
@@ -47,21 +40,26 @@ Edit Profile
           <div>{{ form_row(form.linkedin, { attr: { placeholder: 'Your Linkedin link' }, label: false }) }}</div>
           <div>{{ form_row(form.github, { attr: { placeholder: 'Your Github link' }, label: false }) }}</div>
         </div>
-      <div class="session">Session start ?</div>
-      <div>{{ form_widget(form.sessionSD) }}</div>
-      <div class="session">session End ?</div>
-      <div>{{ form_widget(form.sessionED) }}</div>
-      <div>Please enter your password to save the changes </div>
-<div>{{ form_widget(form.password) }}</div>
- 
- 
-      <div class="button">
-        <button type="submit" class="post-button" name="password">save</button>
-      </div>
-      <div>
-    </div>
-  </div>
-    {{ form_end(form) }}
-  
-{% endblock %}
+        <div class="session">Session start ?</div>
+        <div>{{ form_widget(form.sessionSD) }}</div>
+        <div class="session">session End ?</div>
+        <div>{{ form_widget(form.sessionED) }}</div>
+        <div>Please enter your password to save the changes</div>
+        <div>{{ form_widget(form.password) }}</div>
 
+        <div class="button">
+          <button type="submit" class="post-button" name="password">save</button>
+        </div>
+        <div></div>
+      </div>
+      {{ form_end(form) }}
+  <div style="margin: 50px;color:red;font-size:1.5rem; cursor:pointer" onclick="toggle_div_fun('delete')">
+    delete my account
+    <span id="delete" style="display: none;"><a href="{{path('app_profile_delete')}}">deleting</a></span>   
+</div>
+
+    <div class="side-right">
+				{{ include('home/_side_right.html.twig') }}
+			</div>
+  </div>
+{% endblock %}

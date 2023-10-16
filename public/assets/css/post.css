@@ -16,6 +16,11 @@
     .author-name {
         display: flex;
         align-items: center;
+        color: var(--firstcolor);
+    }
+    
+    #postTime {
+        color: var(--firstcolor);
     }
     
     .author-name span {
@@ -129,6 +134,7 @@
     
     #comment-count {
         position: relative;
+        color: var(--firstcolor);
     }
     
     #comment-count:hover .comment-authors-list {
@@ -150,6 +156,7 @@
     
     #likes-count {
         position: relative;
+        color: var(--firstcolor);
     }
     
     #likes-count:hover #likersList {

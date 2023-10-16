@@ -53,10 +53,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $sessionED = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Post::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Post::class, orphanRemoval: true,cascade:['remove'])]
     private Collection $posts;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true,cascade:['remove'])]
     private Collection $comments;
 
     #[ORM\Column(type: 'boolean')]
@@ -75,10 +75,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class, orphanRemoval: true,cascade:['remove'])]
     private Collection $sent;
 
-    #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: Message::class)]
+    #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: Message::class,orphanRemoval: true,cascade:['remove'])]
     private Collection $recived;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -87,7 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $linkedin = null;
 
-    #[ORM\OneToMany(mappedBy: 'reciver', targetEntity: Notification::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'reciver', targetEntity: Notification::class, orphanRemoval: true,cascade:['remove'])]
     private Collection $notifications;
 
     public function __construct()

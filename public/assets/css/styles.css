@@ -12,15 +12,31 @@
      :root {
         --firstcolor: #14171A;
         --secondcolor: #AAB8C2;
-        --bgcolor: #ecf0f3;
+        --bgcolor: #f5f5f5;
         --btncolor: #1DA1F2;
         font-size: 10px;
         --list-index: 1000;
         --boxshadow: -3px -3px 7px #ffff, 3px 3px 5px #ceced1;
+        --secondboxshadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
+    }
+    
+    body.darkmode {
+        --firstcolor: #f5f5f5;
+        --bgcolor: #1d1e22;
+        --boxshadow: -3px -3px 7px #1d1e22, 3px 3px 5px #000000;
+        --secondboxshadow: inset 8px 8px 8px #514a4a, inset -8px -8px 8px #343030;
     }
     
     body {
         background-color: var(--bgcolor);
+    }
+    
+    svg {
+        color: var(--firstcolor);
+    }
+    
+    i {
+        color: #1DA1F2;
     }
     
     ul {
@@ -64,6 +80,7 @@
     
     p {
         font-size: 1.5rem;
+        color: var(--firstcolor);
     }
     
     .small-image {
@@ -98,7 +115,11 @@
         max-width: 450px;
         border-radius: 50px;
         background: var(--bgcolor);
-        box-shadow: 13px 13px 20px #dcdcdc, -13px -13px 20px #fff;
+        box-shadow: var(--boxshadow);
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+        -o-border-radius: 50px;
     }
     
     #register-path {
@@ -128,16 +149,16 @@
         background-color: var(--bgcolor);
         font-size: 1.5em;
         min-width: 100%;
-        box-shadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
-        transition: box-shadow 0.3s ease;
+        box-shadow: var(--secondboxshadow);
+        transition: 0.3s ease;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         -ms-border-radius: 5px;
         -o-border-radius: 5px;
-        -webkit-transition: box-shadow 0.3s ease;
-        -moz-transition: box-shadow 0.3s ease;
-        -ms-transition: box-shadow 0.3s ease;
-        -o-transition: box-shadow 0.3s ease;
+        -webkit-transition: 0.3s ease;
+        -moz-transition: 0.3s ease;
+        -ms-transition: 0.3s ease;
+        -o-transition: 0.3s ease;
     }
     
     input[type="email"]::placeholder,

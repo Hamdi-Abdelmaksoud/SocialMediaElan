@@ -8,7 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
@@ -17,15 +19,15 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class)
-            ->add('firstName')
-            ->add('lastName')
-            ->add('bio')           
-            ->add('city')
+            ->add('firstName',TextType::class)
+            ->add('lastName',TextType::class)
+                    
+            ->add('city',TextType::class)
             ->add('sessionSD',DateType::class, ['widget' => 'single_text'])
             ->add('sessionED',DateType::class, ['widget' => 'single_text'])
             // ->add('image',FileType::class)
-            ->add('github')
-            ->add('linkedin')
+            ->add('github' ,UrlType::class)
+            ->add('linkedin', UrlType::class)
             ->add('password', PasswordType::class, [
                 'mapped' => false, // Ce champ ne sera pas mappé à l'entité utilisateur
                 'label' => 'Current Password',

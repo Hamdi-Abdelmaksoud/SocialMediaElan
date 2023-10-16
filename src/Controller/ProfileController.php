@@ -7,12 +7,14 @@ use App\Form\UserType;
 use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Notifier\Notifier;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController
@@ -84,9 +86,13 @@ class ProfileController extends AbstractController
     //         '/profile/edit.html.twig'
     //     );
     // }
-    #[Route('/profile/{user}/edit', name: 'app_profile_edit')]
-    public function editProfile(Request $request, UserPasswordHasherInterface $passwordHasher, User $user, EntityManagerInterface $entityManager): Response
+
+    #[Route('/profile/edit', name: 'app_profile_edit',priority:1)]
+    public function editProfile(Request $request, 
+    UserPasswordHasherInterface $passwordHasher ,PostRepository $postRepository ,NotificationRepository $notificationRepository,EntityManagerInterface $entityManager): Response
     {
+             /** @var User $user */
+             $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
     
@@ -109,6 +115,8 @@ class ProfileController extends AbstractController
                 $this->addFlash('error', 'wrong password');
                 return $this->render('profile/edit.html.twig', [
                     'form' => $form->createView(),
+                    'events' => $postRepository->findby(["type"=>"event"]),
+                    'notification' => $notificationRepository->findnotification($user->getId())
                 ]);
 
             }
@@ -116,6 +124,17 @@ class ProfileController extends AbstractController
     
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
+            'events' => $postRepository->findby(["type"=>"event"]),
+            'notification' => $notificationRepository->findnotification($user->getId())
         ]);
+    }
+    #[Route('/profile/delete', name: 'app_profile_delete',priority:1)]
+    public function delete(EntityManagerInterface $entityManager):Response
+    {
+        $user=$this->getUser();
+        $entityManager->remove($user);
+        $entityManager->flush();
+        return  $this->redirectToRoute('app_register');
+        
     }
 }

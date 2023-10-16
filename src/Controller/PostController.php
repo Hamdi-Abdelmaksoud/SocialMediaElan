@@ -154,11 +154,10 @@ class PostController extends AbstractController
         );
     }
     #[Route('/post/{post}/delete', name: 'app_post_delete')]
-    public function delete(Post $post, EntityManagerInterface $entiyManager,Request $request): Response
+    public function delete(Post $post, EntityManagerInterface $entityManager,Request $request): Response
     {
-        $entiyManager->remove($post);
-        $entiyManager->flush();
-        $referer = $request->headers->get('referer');
-        return $this->redirect($referer);
+        $entityManager->remove($post);
+        $entityManager->flush();
+      return $this->redirectToRoute('app_register');
     }
 }

@@ -64,7 +64,7 @@
             -moz-border-radius: 9999px;
             -ms-border-radius: 9999px;
             -o-border-radius: 9999px;
-            box-shadow: inset 8px 8px 8px #dcdcdc, inset -8px -8px 8px #fff;
+            box-shadow: var(--secondboxshadow);
         }
         
         .post-button {
@@ -113,7 +113,7 @@
             display: flex;
             height: 55px;
             max-width: 355px;
-            padding-top: 5px;
+            padding: 5px;
         }
         
         .search input {
