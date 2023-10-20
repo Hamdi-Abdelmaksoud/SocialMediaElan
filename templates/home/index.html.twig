@@ -9,6 +9,7 @@
 	</div>
 	<main>
 				<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
+					  <input type="hidden" name="token" value="{{ csrf_token('add-post') }}">
 					<div class="new-post">
 						{% set userData = {'pic': app.user.image,}	%}
 						{{ include('home/_postBox.html.twig', userData) }}

@@ -13,8 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
@@ -22,43 +25,20 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        // ->add('image', FileType::class, [
-        //     'label' => 'your profil image',
-
-        //     // unmapped means that this field is not associated to any entity property
-        //     'mapped' => false,
-
-        //     // make it optional so you don't have to re-upload the PDF file
-        //     // every time you edit the Product details
-        //     'required' => false,
-
-        //     // unmapped fields can't define their validation using annotations
-        //     // in the associated entity, so you can use the PHP constraint classes
-        //     'constraints' => [
-        //         new File([
-        //             'maxSize' => '1024k',
-        //             'mimeTypes' => [
-        //                 'image/gif',
-        //                 'image/jpeg',
-        //                 'image/jpg',
-        //             ],
-        //             'mimeTypesMessage' => 'Please upload a valid picture document',
-        //         ])
-        //     ],
-        //     ])
-        ->add('firstName')
-        ->add('lastName')
-        ->add('email')
-        ->add('linkedin')
-        ->add('github')
-        ->add('city')
+        ->add('firstName',TextType::class)
+        ->add('lastName',TextType::class)
+        ->add('email',EmailType::class)
+        ->add('linkedin',UrlType::class)
+        ->add('github',UrlType::class)
+        ->add('city',TextType::class)
         ->add('sessionSD',DateType::class, ['widget' => 'single_text'])
         ->add('sessionED',DateType::class, ['widget' => 'single_text'])
         ->add('plainPassword', RepeatedType::class, [
             'constraints' => [
                 new Regex('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{14,}$/',
-                "Il faut au moins 14 caractères 
-                avec 1 majuscule, 1 miniscule, 1 chiffre ")
+                "You need at least 14 characters, 
+                including 1 uppercase letter, 
+                1 lowercase letter, and 1 number.")
             ],
             'mapped' => false,
             'type' => PasswordType::class,

@@ -14,6 +14,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
+
 class PostController extends AbstractController
 {
     #[Route('/post', name: 'app_post')]
@@ -26,7 +27,11 @@ class PostController extends AbstractController
   
 
     #[Route('/post/addtwo', name: 'app_post_addtwo')]
-    public function addtwo(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager, $type = 'post'): Response
+    public function addtwo(Request $request ,SluggerInterface $slugger, EntityManagerInterface $entiyManager, $type = 'post'): Response
+    {
+            // je vérifie le token
+            $submittedToken = $request->request->get('token');
+    if ($this->isCsrfTokenValid('add-post', $submittedToken))
     {
         if ($request->isMethod('POST'))
         {
@@ -75,8 +80,13 @@ class PostController extends AbstractController
         } 
     }
     $this->addFlash('error', 'Text cannot be empty. Please enter some text.');
-    return $this->redirectToRoute('app_home');
+    $referer = $request->headers->get('referer');
+    return $this->redirect($referer);
     }
+    $referer = $request->headers->get('referer');
+    return $this->redirect($referer);
+}
+
     // #[Route('/post/add', name: 'app_post_add')]
     // public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
     // {

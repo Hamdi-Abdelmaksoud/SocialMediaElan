@@ -7,11 +7,10 @@ function toggle_div_fun(id) {
         element.style.display = "none";
     }
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById("mode");
-
-    btn.addEventListener('click', function() {
-        document.body.classList.toggle("darkmode");
+document.addEventListener('DOMContentLoaded',
+    function() {
+        var btn = document.getElementById("mode");
+        btn.addEventListener('click', function() {
+            document.body.classList.toggle("darkmode");
+        });
     });
-});

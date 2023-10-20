@@ -8,13 +8,17 @@
 	 
 		<main class="main-chat">
 			<div class="message-container">
+			{# si il y a une ancienne discussion #}
+			{% if discussion %}
 			{% for message in discussion %}
+			{# pour spérarer les messages reçus et les messages envoyées #}
 					{% if app.user == message.sender %}
 						<div class="my-message">
 							<p>{{ message.text }}</p>
 						</div>
 					{% else %}
 						<div class="message-author">
+						{# on affiche la photo de l'autre utilisateur #}
 							<div class="author-pic">
 								<a href="{{ path('app_profile', {user: message.sender.id}) }}">
 									<img  class="small-image" src="{{ asset('uploads/userPic/' ~ message.sender.image) }}" alt="user pic"/>
@@ -24,13 +28,15 @@
 						</div>
 					{% endif %}
 			{% endfor %}
+			{% endif %}{#fin discussion#}
 			</div>
+			{#formulaire d'enovie du message#}
 			<div class="form-container">
 					{% if form %}
 						{{ form_start(form) }}
 						<div class="input-container">
 							{{ form_widget(form.text) }}
-							{{ form_widget(form.send) }}
+							{{ form_widget(form.send) }}{#button send#}
 						</div>
 						{{ form_end(form) }}
 					{% endif %}				 

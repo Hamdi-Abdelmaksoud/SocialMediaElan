@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
@@ -137,4 +136,21 @@ class ProfileController extends AbstractController
         return  $this->redirectToRoute('app_register');
         
     }
+    // public function setModePrefere()
+    // {
+    //     // Définir le mode préféré de l'utilisateur
+    //     $modePrefere = 'clair';
+
+    //     // Créer un cookie avec un nom distinctif en ajoutant un préfixe
+    //     $cookie = new Cookie('monsite_mode_prefere', $modePrefere, time() + 3600 * 24 * 365); // expire après 1 an
+
+    //     // Ajouter le cookie à la réponse
+    //     $response = new Response();
+    //     $response->headers->setCookie($cookie);
+    //     $response->send();
+
+    //     // ... Faire quelque chose d'autre après avoir défini le cookie
+
+    //     return $this->redirectToRoute('nom_de_votre_route');
+    // }
 }

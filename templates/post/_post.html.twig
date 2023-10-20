@@ -13,6 +13,8 @@
 					<div >
 						<span id="postTime">{{post.created |  date("M j,Y")}}</span>
 					</div>
+					{# si l'utilisateur connécté est postauthor 
+					il peut supprimer ou editer la poste#}
 			{% if app.user == post.author  %}
 				<div class="author-action">
 					<span class="material-icons">
@@ -50,12 +52,14 @@
 			
 				<!--*****************************body******************-->
 				{% for pic in post.pics %}
+				{#à faire pour gérer l'affichage de plusieurs photos dans poste#}
 					<img class="post-pics"src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'>
 				{% endfor %}
 				<!--*****************************footer******************-->
 				<div class="post-footer">
 					<div id="likes-post">
 						<span id="like-logo">
+						{# on vérifie si l'utilisateur à déja liker ce poste#}
 							{% if post.likedBy.contains(app.user) %}
 								<a href="{{path('app_unlike',{id:post.id})}}">
 									<svg class="feather feather-heart sc-dnqmqq jxshSx" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="yellow" stroke="yellow" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -71,6 +75,7 @@
 							{% endif %}
 						</span>
 						<span id="likes-count">
+						{#affichage de la liste qui ont aimé cette poste#}
 							{{post.likedBy.count}}
 							{% if post.likedBy.count > 0 %}
 								<span id="likersList">
@@ -94,6 +99,7 @@
 								<span class='info'>add your comment</span>
 						</span>				 
 						<span id="comment-count">
+						{#affichage de la liste des gens qui ont commenté cette poste#}
 							{{ post.comments.count() }}
 							{% if post.comments.count() > 0 %}
 							{% set friends = [] %}

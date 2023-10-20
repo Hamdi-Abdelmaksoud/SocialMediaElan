@@ -14,16 +14,16 @@
     <a class="sender" href="{{path('app_profile',{user: notif.sender.id})}}"><div class="author-pic">
 	<img src="{{ asset('uploads/userPic/'~ notif.sender.image)}}" alt='sender of notification'></div>
     
-		<span>{{notif.sender}}</span></a>
+		<div>{{notif.sender}}</div></a>
     {% if notif.type == 'like' %}
-        <span> liked your <a href="#">post</a> </span>
+        <div> liked your <a href="#">post</a> </div>
      
     {% endif %}
 	{% if notif.type == 'comment' %}
-<span> commented your <a href="#">post</a></span>		
+<div> commented your <a href="#">post</a></div>		
 	{% endif %}
 	{% if notif.type == 'follow' %}
-		<span> follow you</span>
+		<div> follow you</div>
 	{% endif %}
 
 	 </div>
