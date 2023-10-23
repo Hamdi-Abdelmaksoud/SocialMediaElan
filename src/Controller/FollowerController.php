@@ -26,7 +26,7 @@ class FollowerController extends AbstractController
          }
          $notif = New Notification();
          $notif->setSender($currentUser);
-         $notif->setReciver($userToFollow);
+         $notif->setReceiver($userToFollow);
          $notif->setType('follow');
          $notif->setLink($currentUser->getId());
          $entityManager->persist($notif);

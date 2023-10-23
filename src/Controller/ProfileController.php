@@ -44,17 +44,25 @@ class ProfileController extends AbstractController
 
         ]);
     }
-    #[Route('/profile', name: 'app_profile_mode')]
+    #[Route('/darkmode', name: 'app_profile_mode')]
     public function mode(EntityManagerInterface $entityManager,Request $request): Response
     {
         /** @var User $user */
-        $user = $this->getUser();
-        $user->setDarkMode(1);
+        $user = $this->getUser();  
+        if($user->isDarkMode())
+        {
+        $user->setDarkMode(false);
+        }
+        else
+        {
+            $user->setDarkMode(true);
+        }
         $entityManager->persist($user);
         $entityManager->flush();
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }
+
     #[Route('/profile/{user}/follows', name: 'app_profile_follows')]
     public function follows(User $user): Response
     {

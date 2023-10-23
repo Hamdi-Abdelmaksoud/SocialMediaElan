@@ -93,7 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $linkedin = null;
 
-    #[ORM\OneToMany(mappedBy: 'reciver', targetEntity: Notification::class, orphanRemoval: true,cascade:['remove'])]
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Notification::class, orphanRemoval: true,cascade:['remove'])]
     private Collection $notifications;
 
     #[ORM\Column(nullable: true)]
@@ -530,7 +530,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->notifications->contains($notification)) {
             $this->notifications->add($notification);
-            $notification->setReciver($this);
+            $notification->setReceiver($this);
         }
 
         return $this;
@@ -540,25 +540,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->notifications->removeElement($notification)) {
             // set the owning side to null (unless already changed)
-            if ($notification->getReciver() === $this) {
-                $notification->setReciver(null);
+            if ($notification->getReceiver() === $this) {
+                $notification->setReceiver(null);
             }
         }
 
         return $this;
     }
-
-    public function isMode(): ?bool
-    {
-        return $this->mode;
-    }
-
-    public function setMode(?bool $mode): static
-    {
-        $this->mode = $mode;
-
-        return $this;
-    }
+ 
 
     public function isDarkMode(): ?bool
     {

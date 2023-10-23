@@ -28,7 +28,7 @@ class LikeController extends AbstractController
               // Récupère l'URL de la page précédente (le referer) pour rediriger l'utilisateur.
       $notif = New Notification();
       $notif->setSender($currentUser);
-      $notif->setReciver($post->getAuthor());
+      $notif->setReceiver($post->getAuthor());
       $notif->setType('like');
       $notif->setLink($post->getId());
       $entityManager->persist($notif);

@@ -17,7 +17,7 @@ class Notification
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $reciver = null;
+    private ?User $receiver = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -52,14 +52,14 @@ class Notification
         return $this->id;
     }
 
-    public function getReciver(): ?User
+    public function getReceiver(): ?User
     {
-        return $this->reciver;
+        return $this->receiver;
     }
 
-    public function setReciver(?User $reciver): static
+    public function setReceiver(?User $receiver): static
     {
-        $this->reciver = $reciver;
+        $this->receiver = $receiver;
 
         return $this;
     }

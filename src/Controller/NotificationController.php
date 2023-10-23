@@ -18,15 +18,19 @@ class NotificationController extends AbstractController
         /** @var User $currentUser */
         $currentUser = $this->getUser();
         $notifs= $notificationRepository->findnotification($currentUser->getId());
+        $nbrNotifications = $notificationRepository->count([
+            'receiver' => $currentUser,
+            'is_read' => false,
+        ]);
         foreach($notifs as $notif)
         {
             $notif->setIsRead('1');
             $entiyManager->persist($notif);
-            $entiyManager->flush();
         }
+        $entiyManager->flush();//appele une seule fois pour la perfermance 
         return $this->render('notification/notification.html.twig', [
-            "notifications" => $notificationRepository->findby(["reciver"=>$currentUser->getId()]),
-            "notification"=>Null,
+            "notifications" => $notificationRepository->findby(["receiver"=>$currentUser->getId()]),
+            "notification"=>$nbrNotifications,
             'events' => $postRepository->findby(["type"=>"event"]),
         ]);
     }

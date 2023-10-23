@@ -27,7 +27,7 @@ class PostController extends AbstractController
         ]);
     }
   
-    #[Security("is_granted('Role_User')")]
+    #[Security("is_granted('ROLE_USER')")]
     #[Route('/post/addtwo', name: 'app_post_addtwo')]
     public function addtwo(Request $request ,SluggerInterface $slugger, EntityManagerInterface $entiyManager, $type = 'post'): Response
     {

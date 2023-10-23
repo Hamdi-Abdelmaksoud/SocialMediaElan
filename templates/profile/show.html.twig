@@ -6,6 +6,9 @@
     <meta name="description" content="page profile d'un utilisateur">
 {% endblock %}
 {% block body %}
+ {% if app.user.darkMode == 1 %}
+        <script>document.body.classList.add("darkmode");</script>
+    {% endif %}
 <div class="home-main">	
 <div class="side-left">
 		{{ include('home/_side.html.twig') }}

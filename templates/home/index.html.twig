@@ -3,7 +3,9 @@
 {% endblock %}
 
 {% block body %}
-
+ {% if app.user.darkMode == 1 %}
+        <script>document.body.classList.add("darkmode");</script>
+    {% endif %}
 
 <div class="home-main">	
 	<div class="side-left">

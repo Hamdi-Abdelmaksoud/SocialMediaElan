@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block title %}Notifications {% endblock %}
 {% block body %}
+ {% if app.user.darkMode == 1 %}
+        <script>document.body.classList.add("darkmode");</script>
+    {% endif %}
 <div class="home-main">
 	<div class="side-left">
 		{{ include('home/_side.html.twig') }}
@@ -16,20 +19,20 @@
     
 		<div>{{notif.sender}}</div></a>
     {% if notif.type == 'like' %}
-        <div> liked your <a href="#">post</a> </div>
+        <div> <p>liked your </p> <a href="#">post</a> </div>
      
     {% endif %}
 	{% if notif.type == 'comment' %}
-<div> commented your <a href="#">post</a></div>		
+<div><p> commented your </p> <a href="#">post</a></div>		
 	{% endif %}
 	{% if notif.type == 'follow' %}
-		<div> follow you</div>
+		<div><p> follow you</p></div>
 	{% endif %}
 
 	 </div>
      {% endfor %}
 		{% else %}
-		<p> not  notifications</p>
+		<p>you have  not a notifications</p>
 			
 		{% endif %}
 		</main>
