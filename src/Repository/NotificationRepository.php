@@ -23,15 +23,13 @@ class NotificationRepository extends ServiceEntityRepository
     public function findnotification(string $reciver):array
     {
         return $this->createQueryBuilder('n')
-        ->andWhere('n.reciver = :reciver')
-        ->andWhere('n.is_read = :val' )
-        ->setParameter('val',0)
-        ->setParameter('reciver',$reciver)
+        ->andWhere('n.reciver = :reciver')//<-Préparation
+        ->andWhere('n.is_read = :val' )//<-Préparation
+        ->setParameter('val',0)//<-Compilation
+        ->setParameter('reciver',$reciver)//<-Compilation
         ->orderBy('n.created','DESC')
         ->getQuery()
-        ->getResult();
-
-
+        ->getResult();//<-Execution 
     }
 
 //    /**

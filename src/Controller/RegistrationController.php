@@ -67,6 +67,7 @@ class RegistrationController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setImage($newFilename);}
+                $user->setDarkMode(0);
 
             $entityManager->persist($user);
             $entityManager->flush();

@@ -25,7 +25,8 @@ class MessageRepository extends ServiceEntityRepository
     public function findDiscussion(User $sender,User $recipient):array
     {
         return $this->createQueryBuilder('m')
-        ->where('(m.sender = :sender AND m.recipient = :recipient) OR (m.sender = :recipient AND m.recipient = :sender)' ) 
+        ->where('(m.sender = :sender AND m.recipient = :recipient) 
+        OR (m.sender = :recipient AND m.recipient = :sender)' ) 
         ->setParameters([
             'sender' => $sender,
             'recipient' => $recipient,

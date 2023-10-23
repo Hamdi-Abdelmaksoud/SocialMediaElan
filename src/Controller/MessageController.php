@@ -17,40 +17,42 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MessageController extends AbstractController
 {
-    // #[Route('/message', name: 'app_message')]
-    //  public function index(): Response
-    //  {
-
-    //    return $this->render('message/index.html.twig', [
-    //          'controller_name' => 'MessageController',
-    //     ]);
-    //  }
+ 
     #[Route('/message/{id}', name: 'app_message_send')]
-    public function send(Request $request, User $recipient, NotificationRepository $notificationRepository, EntityManagerInterface $entiyManager, MessageRepository $messageRepository, PostRepository $postRepository): Response
+    public function send(Request $request, User $recipient,
+     NotificationRepository $notificationRepository, 
+    EntityManagerInterface $entiyManager, MessageRepository $messageRepository,
+     PostRepository $postRepository): Response
     {
+        //création d'une nouvelle instance de classe message
         $message = new Message;
-
+        /*  on envoie l'objet message stocker 
+        dans la variable $message vide au formulaire de type message*/
         $form = $this->createForm(MessageType::class, $message);
+        //récuppération des donées enovyées de not formulaire
         $form->handleRequest($request);
+        //si les donées sont valides
         if ($form->isSubmitted() && $form->isValid()) {
-            $message = $form->getData();
+            $message = $form->getData();//on affecte les données du form dans notre objet 
             $now = new \DateTime();
-
-            $message->setSender($this->getUser());
-            $message->setRecipient($recipient);
+            $message->setSender($this->getUser());//l'utilisateur connecté en session
+            $message->setRecipient($recipient);//l'utilisateur à qui on envoie le message
             $message->setCreated($now);
-            $entiyManager->persist($message);
-            $entiyManager->flush();
-
+            $entiyManager->persist($message);//signaler à doctrine les changements 
+            $entiyManager->flush();//synchorniser avec la base de données 
             $referer = $request->headers->get('referer');
-            return $this->redirect($referer);
+            return $this->redirect($referer);//pour rester sur la meme page
         }
+        //si le formulaire pas encore submitter 
         return $this->render('message/index.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView(),//formulaire d'ajout message
             'discussion' => $messageRepository->findDiscussion($recipient, $this->getUser()),
-            'recipient' => $recipient,
-            'events' => $postRepository->findby(["type" => "event"]),
-            'notification' => $notificationRepository->findnotification($this->getUser()->getUserIdentifier())
+            //l'ancienne discussion
+            'recipient' => $recipient,//à qui on veut envoyer le message on le réccupére de l'url
+            'events' => $postRepository->findby(["type" => "event"]),//les evenelents pour le sidebar
+            'notification' => $notificationRepository
+            ->findnotification($this->getUser()->getUserIdentifier())
+        //les notifs pour le sidebar
         ]);
     }
 }

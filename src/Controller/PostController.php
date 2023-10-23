@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -25,7 +27,7 @@ class PostController extends AbstractController
         ]);
     }
   
-
+    #[Security("is_granted('Role_User')")]
     #[Route('/post/addtwo', name: 'app_post_addtwo')]
     public function addtwo(Request $request ,SluggerInterface $slugger, EntityManagerInterface $entiyManager, $type = 'post'): Response
     {
@@ -142,7 +144,8 @@ class PostController extends AbstractController
             'post' => $post
         ]);
     }
-
+    #[Security("is_granted('Role_User') and post.author === user")]
+    //user: The current user object
     #[Route('/post/{post}/edit', name: 'app_post_edit')]
     public function edit(Post $post, Request $request, EntityManagerInterface $entiyManager): Response
     {
@@ -163,6 +166,7 @@ class PostController extends AbstractController
             ]
         );
     }
+    #[Security("is_granted('Role_User') and post.author === user")]
     #[Route('/post/{post}/delete', name: 'app_post_delete')]
     public function delete(Post $post, EntityManagerInterface $entityManager,Request $request): Response
     {

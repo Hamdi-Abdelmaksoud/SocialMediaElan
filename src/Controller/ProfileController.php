@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -25,10 +26,34 @@ class ProfileController extends AbstractController
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'posts' => $user->getPosts(),
-            'events' => $postRepository->findby(["type"=>"event"]),
+            'events' => $postRepository->findby(["type" => "event"]),
             'notification' => $notificationRepository->findnotification($user->getId())
 
         ]);
+    }
+    #[Route('/profile', name: 'app_myProfile')]
+    public function myProfile(PostRepository $postRepository, NotificationRepository $notificationRepository): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
+            'posts' => $user->getPosts(),
+            'events' => $postRepository->findby(["type" => "event"]),
+            'notification' => $notificationRepository->findnotification($user->getId())
+
+        ]);
+    }
+    #[Route('/profile', name: 'app_profile_mode')]
+    public function mode(EntityManagerInterface $entityManager,Request $request): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setDarkMode(1);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
     #[Route('/profile/{user}/follows', name: 'app_profile_follows')]
     public function follows(User $user): Response
@@ -43,6 +68,7 @@ class ProfileController extends AbstractController
     {
         return $this->render('profile/followers.html.twig', [
             'user' => $user
+
         ]);
     }
     // #[Route('/profile/edit', name: 'app_profile_edit', priority: 1)]
@@ -86,55 +112,56 @@ class ProfileController extends AbstractController
     //     );
     // }
 
-    #[Route('/profile/edit', name: 'app_profile_edit',priority:1)]
-    public function editProfile(Request $request, 
-    UserPasswordHasherInterface $passwordHasher ,PostRepository $postRepository ,NotificationRepository $notificationRepository,EntityManagerInterface $entityManager): Response
-    {
-             /** @var User $user */
-             $user = $this->getUser();
+    #[Route('/profile/edit', name: 'app_profile_edit', priority: 1)]
+    public function editProfile(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        PostRepository $postRepository,
+        NotificationRepository $notificationRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        /** @var User $user */
+        $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
-         
+
             $password = $form->get('password')->getData();
-    
+
             // Vérifiez le mot de passe actuel
             if ($passwordHasher->isPasswordValid($user, $password)) {
                 // Mot de passe correct, effectuez les modifications
                 $user = $form->getData();
-    
+
                 $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash('success', 'profile edited successfully');
                 $referer = $request->headers->get('referer');
                 return $this->redirect($referer);
-            } 
-            else{
+            } else {
                 $this->addFlash('error', 'wrong password');
                 return $this->render('profile/edit.html.twig', [
                     'form' => $form->createView(),
-                    'events' => $postRepository->findby(["type"=>"event"]),
+                    'events' => $postRepository->findby(["type" => "event"]),
                     'notification' => $notificationRepository->findnotification($user->getId())
                 ]);
-
             }
         }
-    
+
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
-            'events' => $postRepository->findby(["type"=>"event"]),
+            'events' => $postRepository->findby(["type" => "event"]),
             'notification' => $notificationRepository->findnotification($user->getId())
         ]);
     }
-    #[Route('/profile/delete', name: 'app_profile_delete',priority:1)]
-    public function delete(EntityManagerInterface $entityManager):Response
+    #[Route('/profile/delete', name: 'app_profile_delete', priority: 1)]
+    public function delete(EntityManagerInterface $entityManager): Response
     {
-        $user=$this->getUser();
+        $user = $this->getUser(); //On prend l'utilisateur actuel 
         $entityManager->remove($user);
         $entityManager->flush();
         return  $this->redirectToRoute('app_register');
-        
     }
     // public function setModePrefere()
     // {

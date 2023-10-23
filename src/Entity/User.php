@@ -96,6 +96,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'reciver', targetEntity: Notification::class, orphanRemoval: true,cascade:['remove'])]
     private Collection $notifications;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $mode = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $darkMode = null;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -538,6 +544,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setReciver(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isMode(): ?bool
+    {
+        return $this->mode;
+    }
+
+    public function setMode(?bool $mode): static
+    {
+        $this->mode = $mode;
+
+        return $this;
+    }
+
+    public function isDarkMode(): ?bool
+    {
+        return $this->darkMode;
+    }
+
+    public function setDarkMode(?bool $darkMode): static
+    {
+        $this->darkMode = $darkMode;
 
         return $this;
     }

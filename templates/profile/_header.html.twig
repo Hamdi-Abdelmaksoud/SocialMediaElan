@@ -25,11 +25,10 @@
 {% if app.user == user %}
 	<div   class="settings">
 	<a href="{{path('app_profile_edit')}}">Settings</a></div>
-	<div id="mode" style="cursor: pointer;">mode <span class="material-icons">
-dark_mode
-</span></div>
+	 
+	<a id="mode" href="{{ path('app_profile_mode') }}">Activer le mode sombre</a>
+ </div>
  {% endif %} 
 </div>
- 
  	{# <div class="stats"><span>Posts : {{user.posts.count}}</span><span>Follow : {{user.follows.count}}</span><span>Followers : {{user.followers.count}}</span></div> #}
  

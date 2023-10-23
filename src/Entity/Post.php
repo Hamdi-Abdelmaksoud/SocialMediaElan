@@ -31,7 +31,8 @@ class Post
     #[ORM\JoinTable('Likes')]
     private Collection $likedBy;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: PostPics::class, orphanRemoval: true,cascade:['persist','remove'])]
+    #[ORM\OneToMany(mappedBy: 'post',
+     targetEntity: PostPics::class, orphanRemoval: true,cascade:['persist','remove'])]
     private Collection $pics;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
