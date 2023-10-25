@@ -1,44 +1,41 @@
 {% extends 'base.html.twig' %}
 {% block title %}Notifications {% endblock %}
+
 {% block body %}
- {% if app.user.darkMode == 1 %}
-        <script>document.body.classList.add("darkmode");</script>
-    {% endif %}
+
+{% if app.user.darkMode == 1 %}
+    <script>document.body.classList.add("darkmode");</script>
+{% endif %}
+
 <div class="home-main">
 	<div class="side-left">
 		{{ include('home/_side.html.twig') }}
 	</div>
-	 
-		<main >
-		{% if notifications %}
-	 {% for notif in notifications %}
-     <div class="notifications">
-	 
-    <a class="sender" href="{{path('app_profile',{user: notif.sender.id})}}"><div class="author-pic">
-	<img src="{{ asset('uploads/userPic/'~ notif.sender.image)}}" alt='sender of notification'></div>
-    
-		<div>{{notif.sender}}</div></a>
-    {% if notif.type == 'like' %}
-        <div> <p>liked your </p> <a href="#">post</a> </div>
-     
-    {% endif %}
-	{% if notif.type == 'comment' %}
-<div><p> commented your </p> <a href="#">post</a></div>		
-	{% endif %}
-	{% if notif.type == 'follow' %}
-		<div><p> follow you</p></div>
-	{% endif %}
-
-	 </div>
-     {% endfor %}
-		{% else %}
-		<p>you have  not a notifications</p>
+	<main >
+		<div class="allNotification">
+		{% if notification %}
+ 
+		 	{% for notif in notification %}
+			<div class="newNotif">
+ 				{% include "/notification/_notif.html.twig"  with  {'notif' : notif}  %}
+ 			</div>
 			
+		 	{% endfor %}
 		{% endif %}
-		</main>
+		
+		{% if notifications %}
+	 		{% for notif in notifications %}
+     			<div class="ancNotif">
+	   				{% include "/notification/_notif.html.twig"  with  {'notif' : notif}  %}
+	 			</div>
+     		{% endfor %}
+		{% endif %}
+		</div>
+		
+	</main>
 	 
-			<div class="side-right">
-				{{ include("home/_side_right.html.twig") }}
-			</div>
+	<div class="side-right">
+		{{ include("home/_side_right.html.twig") }}
+	</div>
 <div>
 {% endblock %}

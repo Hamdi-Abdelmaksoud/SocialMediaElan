@@ -1,34 +1,71 @@
- 
-	<div id="profile-card">
-		<div class="frame">
-			<img src="{{ asset('uploads/userPic/'~ user.image) }}" alt="profile picture">
-	  	</div>
-		<div id="profile-name"><span>{{user}}</span>
-		<span class="session">Session : {{user.sessionSD |  date("M j,Y")}} - {{user.sessionED |  date("M j,Y")}} </span>
-		<span>{{user.city}}</span>
-		</div>
-	 
-	<div class="header-btn">
-	          <div class="btn-follow"  ><a  href="{{path('app_message_send',{id:user.id})}}">chat</a></div>
-          {% if user in app.user.getFollows() %}
-              <div class="btn-follow"  ><a href="{{path('app_unfollow',{id:user.id})}}">unfollow</a></div>
-          {% else %}
-              <div class="btn-follow"  ><a  href="{{path('app_follow',{id:user.id})}}">follow</a></div>
-          {% endif %}
+<div id="profile-card">
+  <div class="frame">
+    <img src="{{ asset('uploads/userPic/' ~ user.image) }}" alt="profile picture" />
+  </div>
+  <div id="profile-name">
+    <span>{{ user }}</span>
+    <span class="session">Session : {{ user.sessionSD|date('M j,Y') }} - {{ user.sessionED|date('M j,Y') }}</span>
+    <span>{{ user.city }}</span>
+  </div>
+
+  <div class="header-btn">
+    <div class="btn-follow">
+      <a href="{{ path('app_message_send', { id: user.id }) }}">chat</a>
     </div>
-	<div class="links">	
-		<div class="frame-btn"><a href="#"><i class="fa-brands fa-github fa-xl" ></i></a></div>
-		<div class="frame-btn"><a href="#"><i class="fa-brands fa-linkedin fa-xl" ></i></a></div>
-		<div class="frame-btn"><a href="#"><i class="fa-solid fa-at fa-xl"  ></i></a></div>
-	</div>
+    {% if user in app.user.getFollows() %}
+      <div class="btn-follow">
+        <a href="{{ path('app_unfollow', { id: user.id }) }}">unfollow</a>
+      </div>
+    {% else %}
+      <div class="btn-follow">
+        <a href="{{ path('app_follow', { id: user.id }) }}">follow</a>
+      </div>
+    {% endif %}
+  </div>
+  <div class="links">
+    <div class="frame-btn">
+      <a href="#"><i class="fa-brands fa-github fa-xl"></i></a>
+    </div>
+    <div class="frame-btn">
+      <a href="#"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+    </div>
+    <div class="frame-btn">
+      <a href="#"><i class="fa-solid fa-at fa-xl"></i></a>
+    </div>
+  </div>
+
+  {% if app.user == user %}
+    <div class="settings">
+      <a href="{{ path('app_profile_edit') }}">Settings</a>
+    </div>
+{# dark mode btn#}
+<div id="mode">
+<span class="alert">change the mode</span>
+<a href="{{path("app_profile_mode")}}">
  
-{% if app.user == user %}
-	<div   class="settings">
-	<a href="{{path('app_profile_edit')}}">Settings</a></div>
-	 
-	<a id="mode" href="{{ path('app_profile_mode') }}">Activer le mode sombre</a>
- </div>
- {% endif %} 
+  <div class="checkmark">
+    <svg xml:space="preserve" viewBox="0 0 49.548 49.549" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Capa_1" version="1.1">
+<g>
+	<g>
+		<g>
+			<path d="M30.203,4.387v4.385c7.653,2.332,13.238,9.451,13.238,17.857c0,10.293-8.373,18.667-18.667,18.667
+				S6.106,36.922,6.106,26.629c0-8.405,5.585-15.525,13.238-17.857V4.387C9.323,6.835,1.855,15.866,1.855,26.629
+				c0,12.639,10.281,22.92,22.919,22.92s22.92-10.281,22.92-22.92C47.694,15.865,40.224,6.835,30.203,4.387z"></path>
+		</g>
+		<g>
+			<path d="M24.776,27.225c-1.41,0-2.554-1.145-2.554-2.555V2.554c0-1.41,1.144-2.554,2.554-2.554c1.41,0,2.554,1.144,2.554,2.554
+				V24.67C27.33,26.08,26.186,27.225,24.776,27.225z"></path>
+		</g>
+	</g>
+</g>
+</svg>
+  </div>
+
+</a>
 </div>
- 	{# <div class="stats"><span>Posts : {{user.posts.count}}</span><span>Follow : {{user.follows.count}}</span><span>Followers : {{user.followers.count}}</span></div> #}
- 
+{# fin dark mode#}
+    
+  {% endif %}
+
+  {# <div class="stats"><span>Posts : {{user.posts.count}}</span><span>Follow : {{user.follows.count}}</span><span>Followers : {{user.followers.count}}</span></div> #}
+</div>

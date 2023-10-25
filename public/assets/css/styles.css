@@ -25,7 +25,7 @@
         --bgcolor: #1d1e22;
         --boxshadow: -3px -3px 7px #1d1e22, 3px 3px 5px #000000;
         /* --secondboxshadow: inset 8px 8px 8px #514a4a, inset -8px -8px 8px #343030; */
-        --secondboxshadow: 3px 3px 6px rgba(0, 0, 0, 0.5), -1px -1px 4px rgba(255, 255, 255, 0.5), inset 3px 3px 6px rgba(0, 0, 0, 0.5), inset -1px -1px 4px rgba(255, 255, 255, 0.5);
+        --secondboxshadow: 3px 3px 6px rgba(0, 0, 0, 0.5), -1px -1px 4px rgba(156, 151, 151, 0.5), inset 3px 3px 6px rgba(0, 0, 0, 0.5), inset -1px -1px 4px rgba(36, 34, 34, 0.5);
     }
     
     body {

@@ -225,3 +225,36 @@
             display: flex;
             position: relative;
         }
+        
+        .newNotif {
+            display: flex;
+            align-items: center;
+            background-color: blue;
+            gap: 10px;
+            cursor: pointer;
+            border-bottom: 1px gray solid;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        .ancNotif {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border-bottom: 1px gray solid;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        .allNotification {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+        }
+        
+        .notification {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }

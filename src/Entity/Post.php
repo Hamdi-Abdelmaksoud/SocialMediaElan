@@ -41,7 +41,7 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Notification::class)]
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Notification::class,cascade:['remove'])]
     private Collection $notifications;
 
 

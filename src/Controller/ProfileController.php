@@ -48,9 +48,11 @@ class ProfileController extends AbstractController
     public function mode(EntityManagerInterface $entityManager,Request $request): Response
     {
         /** @var User $user */
-        $user = $this->getUser();  
+        $user = $this->getUser();
+        
         if($user->isDarkMode())
         {
+            
         $user->setDarkMode(false);
         }
         else

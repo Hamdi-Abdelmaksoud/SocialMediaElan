@@ -1,163 +1,215 @@
-/* Profile header start */
-
-#profile-card {
-    border-radius: 10px;
-    background: var(--bgcolor);
-    box-shadow: var(--boxshadow);
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    height: 370px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    gap: 5px;
-    position: relative;
-}
-
-#mode {
-    cursor: pointer;
-    position: absolute;
-    right: 30px;
-    top: 30%;
-}
-
-#profile-card img {
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    background-size: cover;
-}
-
-#btn-follow .post-button {
-    width: 90px;
-    height: 45px;
-}
-
-#profile-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 800;
-    gap: 5px;
-}
-
-#profile-name span {
-    color: var(--firstcolor);
-}
-
-.links {
-    display: flex;
-    font-size: 1.5rem;
-    gap: 20px
-}
-
-.links a i {
-    box-shadow: var(--boxshadow);
-}
-
-.frame {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--bgcolor);
-    box-shadow: var(--boxshadow);
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-}
-
-.edit {
-    margin: 20px;
-}
-
-.frame-btn {
-    background: var(--bgcolor);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: var(--boxshadow);
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-}
-
-.frame-btn:hover {
-    box-shadow: var(--secondboxshadow);
-}
-
-#profile-btn {
-    cursor: pointer;
-}
-
-.btn-follow {
-    width: 120px;
-    height: 60px;
-    box-shadow: var(--boxshadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
-
-.settings:hover,
-.btn-follow:hover {
-    box-shadow: var(--secondboxshadow);
-}
-
-.session {
-    font-size: 1rem;
-    color: var(--firstcolor);
-}
-
-.stats {
-    display: flex;
-    gap: 10px;
-}
-
-.stats span {
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.header-btn {
-    display: flex;
-    gap: 10px;
-}
-
-.settings {
-    position: absolute;
-    right: 10px;
-    top: 30px;
-    width: 70px;
-    height: 30px;
-    box-shadow: var(--boxshadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
+    /* Profile header start */
+    
+    #profile-card {
+        border-radius: 10px;
+        background: var(--bgcolor);
+        box-shadow: var(--boxshadow);
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        height: 370px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: 5px;
+        position: relative;
+    }
+    
+    #mode {
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+        top: 30%;
+    }
+    
+    #profile-card img {
+        width: 125px;
+        height: 125px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        background-size: cover;
+    }
+    
+    #btn-follow .post-button {
+        width: 90px;
+        height: 45px;
+    }
+    
+    #profile-name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 800;
+        gap: 5px;
+    }
+    
+    #profile-name span {
+        color: var(--firstcolor);
+    }
+    
+    .links {
+        display: flex;
+        font-size: 1.5rem;
+        gap: 20px
+    }
+    
+    .links a i {
+        box-shadow: var(--boxshadow);
+    }
+    
+    .frame {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--bgcolor);
+        box-shadow: var(--boxshadow);
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+    
+    .edit {
+        margin: 20px;
+    }
+    
+    .frame-btn {
+        background: var(--bgcolor);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: var(--boxshadow);
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+    
+    .frame-btn:hover {
+        box-shadow: var(--secondboxshadow);
+    }
+    
+    #profile-btn {
+        cursor: pointer;
+    }
+    
+    .btn-follow {
+        width: 120px;
+        height: 60px;
+        box-shadow: var(--boxshadow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+    
+    .settings:hover,
+    .btn-follow:hover {
+        box-shadow: var(--secondboxshadow);
+    }
+    
+    .session {
+        font-size: 1rem;
+        color: var(--firstcolor);
+    }
+    
+    .stats {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .stats span {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    
+    .header-btn {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .settings {
+        position: absolute;
+        right: 10px;
+        top: 30px;
+        width: 70px;
+        height: 30px;
+        box-shadow: var(--boxshadow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+    /**darkmodebtn*/
+    /* Hide the default checkbox */
+    
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    
+    .container {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        font-size: 20px;
+        user-select: none;
+    }
+    /* Create a custom checkbox */
+    
+    .checkmark {
+        position: relative;
+        height: 50px;
+        width: 50px;
+        border-radius: 10em;
+        background-color: var(--bgcolor);
+        transition: 0.3s;
+        box-shadow: var(--boxshadow)
+    }
+    
+    .checkmark svg {
+        width: 25px;
+        height: 25px;
+        margin-top: 11px;
+        margin-left: 12.5px;
+        fill: var(--firstcolor);
+        transition: 0.2s;
+    }
+    
+    .checkmark:active {
+        box-shadow: var(--secondboxshadow);
+    }
+    
+    .alert {
+        color: var(--firstcolor);
+        position: absolute;
+        display: none;
+    }
+    
+    #mode:hover .alert {
+        display: flex;
+    }

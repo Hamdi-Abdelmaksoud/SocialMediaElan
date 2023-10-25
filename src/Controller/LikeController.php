@@ -31,6 +31,7 @@ class LikeController extends AbstractController
       $notif->setReceiver($post->getAuthor());
       $notif->setType('like');
       $notif->setLink($post->getId());
+      $notif->setPost($post);
       $entityManager->persist($notif);
       $entityManager->flush();
 

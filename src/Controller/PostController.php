@@ -144,34 +144,60 @@ class PostController extends AbstractController
             'post' => $post
         ]);
     }
-    #[Security("is_granted('Role_User') and post.author === user")]
-    //user: The current user object
+   
     #[Route('/post/{post}/edit', name: 'app_post_edit')]
-    public function edit(Post $post, Request $request, EntityManagerInterface $entiyManager): Response
+    public function edit(Post $post = null, Request $request, EntityManagerInterface $entiyManager): Response
     {
-
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $post = $form->getData();
-            $entiyManager->persist($post);
-            $entiyManager->flush();
-            $this->addFlash('success', 'Post updated successfully');
-            return $this->redirectToRoute('app_home');
+        if($post) {
+            if($this->getUser() && $post->getAuthor() == $this->getUser()) {
+                $form = $this->createForm(PostType::class, $post);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $post = $form->getData();
+                    $entiyManager->persist($post);
+                    $entiyManager->flush();
+                    $this->addFlash('success', 'Post updated successfully');
+                    $referer = $request->headers->get('referer');
+                    return $this->redirect($referer);
+                }
+                return $this->render(
+                    'post/add.html.twig',
+                    [
+                        'form' => $form
+                    ]
+                );
+            }else {
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer);
+            }
+        } else {
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
         }
-        return $this->render(
-            'post/add.html.twig',
-            [
-                'form' => $form
-            ]
-        );
     }
-    #[Security("is_granted('Role_User') and post.author === user")]
+    
     #[Route('/post/{post}/delete', name: 'app_post_delete')]
-    public function delete(Post $post, EntityManagerInterface $entityManager,Request $request): Response
+    public function delete(Post $post = null, EntityManagerInterface $entityManager,Request $request): Response
     {
-        $entityManager->remove($post);
-        $entityManager->flush();
-      return $this->redirectToRoute('app_register');
+        if($post)
+        {
+            if($this->getUser() && $post->getAuthor() == $this->getUser())
+            {
+                $entityManager->remove($post);
+                $entityManager->flush();
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer);
+            }
+            else {
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer);
+            }
+        }    
+        else 
+        {
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+        }  
+    
     }
 }

@@ -32,6 +32,7 @@
     height: 100px;
     border: none;
     outline: none;
+    color: var(--firstcolor);
 }
 
 .new-post .post-button {

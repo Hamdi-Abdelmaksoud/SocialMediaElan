@@ -8,7 +8,10 @@
 {% block body %}
  {% if app.user.darkMode == 1 %}
         <script>document.body.classList.add("darkmode");</script>
+		{% else %}
+			<script>document.body.classList.remove("darkmode");</script>
     {% endif %}
+	
 <div class="home-main">	
 <div class="side-left">
 		{{ include('home/_side.html.twig') }}
@@ -19,7 +22,7 @@
 
 {{ include("profile/_header.html.twig", [user]) }}
  
-		{{ include("post/_allposts.html.twig", [posts])}}
+	<div>	{{ include("post/_allposts.html.twig", [posts])}}</div>
 	</main>
 			<div class="side-right">
 				{{ include('home/_side_right.html.twig') }}

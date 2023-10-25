@@ -39,6 +39,7 @@ class CommentController extends AbstractController
             $notif->setReceiver($post->getAuthor());
             $notif->setType('comment');
             $notif->setLink($post->getId());
+            $notif->setPost($post);
             $entityManager->persist($notif);
             $entityManager->flush();
             
