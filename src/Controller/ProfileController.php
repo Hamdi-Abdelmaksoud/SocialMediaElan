@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controller;
-
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\NotificationRepository;
@@ -22,27 +20,48 @@ class ProfileController extends AbstractController
     #[Route('/profile/{user}', name: 'app_profile')]
     public function show(User $user, PostRepository $postRepository, NotificationRepository $notificationRepository): Response
     {
-
+        if($this->getUser())
+        {    
+           /** @var User $currentUser */
+           $currentUser=$this->getUser(); 
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'posts' => $user->getPosts(),
             'events' => $postRepository->findby(["type" => "event"]),
-            'notification' => $notificationRepository->findnotification($user->getId())
+            'notification' => $notificationRepository->findBy(
+                [
+                    'receiver' => $user->getId(),
+                    'is_read' => false
+                ])
 
         ]);
+    }
+    else
+    {
+    return $this->redirectToRoute('app_login');
+    }
     }
     #[Route('/profile', name: 'app_myProfile')]
     public function myProfile(PostRepository $postRepository, NotificationRepository $notificationRepository): Response
     {
+        if($this->getUser())
+        {
         /** @var User $user */
         $user = $this->getUser();
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'posts' => $user->getPosts(),
             'events' => $postRepository->findby(["type" => "event"]),
-            'notification' => $notificationRepository->findnotification($user->getId())
+            'notification' => $notificationRepository->findBy(
+                [
+                    'receiver' => $user->getId(),
+                    'is_read' => false
+                ])
 
-        ]);
+        ]);}
+        else{
+            return $this->redirectToRoute('app_login');
+        }
     }
     #[Route('/darkmode', name: 'app_profile_mode')]
     public function mode(EntityManagerInterface $entityManager,Request $request): Response
@@ -154,7 +173,11 @@ class ProfileController extends AbstractController
                 return $this->render('profile/edit.html.twig', [
                     'form' => $form->createView(),
                     'events' => $postRepository->findby(["type" => "event"]),
-                    'notification' => $notificationRepository->findnotification($user->getId())
+                    'notification' => $notificationRepository->findBy(
+                        [
+                            'receiver' => $user->getId(),
+                            'is_read' => false
+                        ])
                 ]);
             }
         }
@@ -162,7 +185,11 @@ class ProfileController extends AbstractController
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
             'events' => $postRepository->findby(["type" => "event"]),
-            'notification' => $notificationRepository->findnotification($user->getId())
+            'notification' =>  $notificationRepository->findBy(
+                [
+                    'receiver' => $user->getId(),
+                    'is_read' => false
+                ])
         ]);
     }
     #[Route('/profile/delete', name: 'app_profile_delete', priority: 1)]

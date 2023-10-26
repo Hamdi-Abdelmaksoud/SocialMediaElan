@@ -18,6 +18,8 @@ class NotificationController extends AbstractController
     #[Route('/notification', name: 'app_notification')]
     public function index(NotificationRepository $notificationRepository, EntityManagerInterface $entiyManager, PostRepository $postRepository): Response
     {
+        if($this->getUser())
+        {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
 
@@ -40,7 +42,10 @@ class NotificationController extends AbstractController
 
 
             'events' => $postRepository->findby(["type" => "event"]),
-        ]);
+        ]);}
+        else{
+            return $this->redirectToRoute('app_login');
+        }
     }
     #[Route('/notification/{notif}', name: 'app_notification_read')]
     public function read(Request $request, Notification $notif, NotificationRepository $notificationRepository, EntityManagerInterface $entiyManager, PostRepository $postRepository): Response

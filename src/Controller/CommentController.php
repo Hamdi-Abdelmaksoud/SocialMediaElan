@@ -50,11 +50,16 @@ class CommentController extends AbstractController
     }
     #[Route('/post/{post}/{comment}/edit', name: 'app_comment_edit')]
     public function edit(Post $post, Comment $comment, Request $request, EntityManagerInterface $entiyManager): Response
-    {
-
+    {  
+         if (!$this->getUser()){
+        $currentUser = $this->getUser();
+       return $this->redirectToRoute('app_login');
+      
+    } 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             $comment = $form->getData();
 
             $entiyManager->persist($comment);

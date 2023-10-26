@@ -81,6 +81,7 @@
     
     .edit {
         margin: 20px;
+        color: var(--firstcolor);
     }
     
     .frame-btn {
@@ -163,52 +164,7 @@
     }
     /**darkmodebtn*/
     /* Hide the default checkbox */
-    
-    .container input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
-    
-    .container {
-        display: block;
-        position: relative;
-        cursor: pointer;
-        font-size: 20px;
-        user-select: none;
-    }
     /* Create a custom checkbox */
-    
-    .checkmark {
-        position: relative;
-        height: 50px;
-        width: 50px;
-        border-radius: 10em;
-        background-color: var(--bgcolor);
-        transition: 0.3s;
-        box-shadow: var(--boxshadow)
-    }
-    
-    .checkmark svg {
-        width: 25px;
-        height: 25px;
-        margin-top: 11px;
-        margin-left: 12.5px;
-        fill: var(--firstcolor);
-        transition: 0.2s;
-    }
-    
-    .checkmark:active {
-        box-shadow: var(--secondboxshadow);
-    }
-    
-    .alert {
-        color: var(--firstcolor);
-        position: absolute;
-        display: none;
-    }
     
     #mode:hover .alert {
         display: flex;

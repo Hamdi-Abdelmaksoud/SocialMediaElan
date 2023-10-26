@@ -20,17 +20,30 @@ class NotificationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Notification::class);
     }
-    public function findnotification(string $receiver):array
+    public function findNotification($currentUser,$receiver,$created): ?Notification
     {
         return $this->createQueryBuilder('n')
-        ->andWhere('n.receiver = :receiver')//<-Préparation
-        ->andWhere('n.is_read = :val' )//<-Préparation
-        ->setParameter('val',0)//<-Compilation
-        ->setParameter('receiver',$receiver)//<-Compilation
-        ->orderBy('n.created','DESC')
-        ->getQuery()
-        ->getResult();//<-Execution 
+            ->andWhere('n.sender = :currentUser')
+            ->andWhere('n.receiver = :reveiver')
+            ->andWhere('n.created = :created')
+            ->setParameter('currentUser', $currentUser)
+            ->setParameter('receiver', $receiver)
+            ->setParameter('created', $created)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
+    // public function findMyNotification(string $receiver):array
+    // {
+    //     return $this->createQueryBuilder('n')
+    //     ->andWhere('n.receiver = :receiver')//<-Préparation
+    //     ->andWhere('n.is_read = :val' )//<-Préparation
+    //     ->setParameter('val',0)//<-Compilation
+    //     ->setParameter('receiver',$receiver)//<-Compilation
+    //     ->orderBy('n.created','DESC')
+    //     ->getQuery()
+    //     ->getResult();//<-Execution 
+    // }
 
 //    /**
 //     * @return Notification[] Returns an array of Notification objects
@@ -44,16 +57,6 @@ class NotificationRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Notification
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
 //        ;
 //    }
 }

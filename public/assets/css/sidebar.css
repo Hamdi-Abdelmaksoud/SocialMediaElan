@@ -83,6 +83,7 @@
             font-weight: 700;
             border: none;
             transition-duration: 0.2s;
+            color: var(--firstcolor);
         }
         
         .post-button:hover {

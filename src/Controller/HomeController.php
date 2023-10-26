@@ -14,6 +14,7 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function homePosts(PostRepository $postRepository,NotificationRepository $notificationRepository): Response
     {
+       
         /** @var User $currentUser */
         $currentUser = $this->getUser();
      if (!$currentUser){
@@ -23,9 +24,13 @@ class HomeController extends AbstractController
      else{
         $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('home/index.html.twig', [
-            'posts'=>$postRepository->findHomePosts($authors),
+            'posts'=>$postRepository->findBy(['author' => $authors], ['created' => 'DESC']),
             'events' => $postRepository->findby(["type"=>"event"]),
-            'notification' => $notificationRepository->findnotification($currentUser->getId())
+            'notification' => $notificationRepository->findBy(
+                [
+                    'receiver' => $currentUser->getId(),
+                    'is_read' => false
+                ])
                  
         ]); 
      }

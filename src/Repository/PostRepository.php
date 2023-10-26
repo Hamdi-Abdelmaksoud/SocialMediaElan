@@ -42,17 +42,18 @@ class PostRepository extends ServiceEntityRepository
     //         ->getResult();
     // }
 
-    public function findHomePosts(Collection|array $authors):array
-    {
-        return $this->createQueryBuilder('p') //alias to current entity
-        ->where('p.author IN (:authors)')
-        ->setParameter(
-            'authors',
-            $authors
-        ) ->orderBy('p.created', 'DESC')
-        ->getQuery()
-        ->getResult();
-    }
+    // public function findHomePosts(Collection|array $authors):array
+    // {
+    //     return $this->createQueryBuilder('p') //alias to current entity
+    //     ->where('p.author IN (:authors)')
+    //     ->setParameter(
+    //         'authors',
+    //         $authors
+    //     ) ->orderBy('p.created', 'DESC')
+    //     ->getQuery()
+    //     ->getResult();
+    // }
+ 
       //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

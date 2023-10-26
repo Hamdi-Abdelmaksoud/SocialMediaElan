@@ -1,25 +1,16 @@
-{# <form method="post" action="{{ path('app_profile_edit') }}" enctype="multipart/form-data">
-    <div>
-      
-        <input id="add_photo" type="file" name="pic">
-    </div>
-    <div>
-        <button class="postButton" type="submit">save</button>
-    </div>
-</form> #}
-
+ 
 {% extends 'base.html.twig' %}
-
 {% block title %}
   Edit Profile
 {% endblock %}
-
 {% block body %}
  {% if app.user.darkMode == 1 %}
         <script>document.body.classList.add("darkmode");</script>
     {% endif %}
   <div class="home-main">
-    <div class="side-left">{{ include('home/_side.html.twig') }}</div>
+    <div class="side-left">
+        {{ include('home/_side.html.twig') }}
+    </div>
     <div class="register">
       {% for message in app.flashes('success') %}
         <div class="alert alert-success">{{ message }}</div>
@@ -47,22 +38,23 @@
         <div>{{ form_widget(form.sessionSD) }}</div>
         <div class="session">session End ?</div>
         <div>{{ form_widget(form.sessionED) }}</div>
-        <div>Please enter your password to save the changes</div>
+        <p>Please enter your password to save the changes</p>
         <div>{{ form_widget(form.password) }}</div>
 
         <div class="button">
           <button type="submit" class="post-button" name="password">save</button>
         </div>
-        <div></div>
+        
       </div>
       {{ form_end(form) }}
   <div style="margin: 50px;color:red;font-size:1.5rem; cursor:pointer" onclick="toggle_div_fun('delete')">
     delete my account
     <span id="delete" style="display: none;"><a href="{{path('app_profile_delete')}}">deleting</a></span>   
-</div>
-
-    <div class="side-right">
-				{{ include('home/_side_right.html.twig') }}
-			</div>
   </div>
+  </div>
+  <div class="side-right">
+				{{ include('home/_side_right.html.twig') }}
+			 
+  </div>
+
 {% endblock %}

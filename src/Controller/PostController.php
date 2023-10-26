@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Entity\PostPics;
+use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -145,36 +146,36 @@ class PostController extends AbstractController
         ]);
     }
    
-    #[Route('/post/{post}/edit', name: 'app_post_edit')]
-    public function edit(Post $post = null, Request $request, EntityManagerInterface $entiyManager): Response
-    {
-        if($post) {
-            if($this->getUser() && $post->getAuthor() == $this->getUser()) {
-                $form = $this->createForm(PostType::class, $post);
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $post = $form->getData();
-                    $entiyManager->persist($post);
-                    $entiyManager->flush();
-                    $this->addFlash('success', 'Post updated successfully');
-                    $referer = $request->headers->get('referer');
-                    return $this->redirect($referer);
-                }
-                return $this->render(
-                    'post/add.html.twig',
-                    [
-                        'form' => $form
-                    ]
-                );
-            }else {
-                $referer = $request->headers->get('referer');
-                return $this->redirect($referer);
-            }
-        } else {
-            $referer = $request->headers->get('referer');
-            return $this->redirect($referer);
-        }
-    }
+    // #[Route('/post/{post}/edit', name: 'app_post_edit')]
+    // public function edit(Post $post = null, Request $request, EntityManagerInterface $entiyManager): Response
+    // {
+    //     if($post) {
+    //         if($this->getUser() && $post->getAuthor() == $this->getUser()) {
+    //             $form = $this->createForm(PostType::class, $post);
+    //             $form->handleRequest($request);
+    //             if ($form->isSubmitted() && $form->isValid()) {
+    //                 $post = $form->getData();
+    //                 $entiyManager->persist($post);
+    //                 $entiyManager->flush();
+    //                 $this->addFlash('success', 'Post updated successfully');
+    //                 $referer = $request->headers->get('referer');
+    //                 return $this->redirect($referer);
+    //             }
+    //             return $this->render(
+    //                 'post/add.html.twig',
+    //                 [
+    //                     'form' => $form
+    //                 ]
+    //             );
+    //         }else {
+    //             $referer = $request->headers->get('referer');
+    //             return $this->redirect($referer);
+    //         }
+    //     } else {
+    //         $referer = $request->headers->get('referer');
+    //         return $this->redirect($referer);
+    //     }
+    // }
     
     #[Route('/post/{post}/delete', name: 'app_post_delete')]
     public function delete(Post $post = null, EntityManagerInterface $entityManager,Request $request): Response
@@ -199,5 +200,46 @@ class PostController extends AbstractController
             return $this->redirect($referer);
         }  
     
+    }
+    #[Route('/post/{post}/edit', name: 'app_post_edit')]
+    public function edit(Post $post = null,NotificationRepository $notificationRepository,PostRepository $postRepository, Request $request, EntityManagerInterface $entiyManager): Response
+    {
+        if($post) {
+              
+            if($this->getUser() && $post->getAuthor() == $this->getUser()) {
+                /** @var User $currentUser */
+                $currentUser=$this->getUser();
+                $form = $this->createForm(PostType::class, $post);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $post = $form->getData();
+                    $entiyManager->persist($post);
+                    $entiyManager->flush();
+                    $this->addFlash('success', 'Post updated successfully');
+                    $referer = $request->headers->get('referer');
+                    return $this->redirect($referer);
+                }
+                return $this->render(
+                    'post/showpost.html.twig',
+                    [
+                        'form' => $form,
+                        'post'=>$post,  
+                          'events' => $postRepository->findby(["type"=>"event"]),
+                        'notification' => $notificationRepository->findBy(
+                            [
+                                'receiver' => $currentUser->getId(),
+                                'is_read' => false
+                            ])
+                        
+                    ]
+                );
+            }else {
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer);
+            }
+        } else {
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+        }
     }
 }

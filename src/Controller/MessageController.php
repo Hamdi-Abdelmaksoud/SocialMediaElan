@@ -24,6 +24,10 @@ class MessageController extends AbstractController
     EntityManagerInterface $entiyManager, MessageRepository $messageRepository,
      PostRepository $postRepository): Response
     {
+        if($this->getUser())
+        {       
+             /** @var User $currentUser */
+            $currentUser = $this->getUser();
         //création d'une nouvelle instance de classe message
         $message = new Message;
         /*  on envoie l'objet message stocker 
@@ -35,7 +39,7 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->getData();//on affecte les données du form dans notre objet 
             $now = new \DateTime();
-            $message->setSender($this->getUser());//l'utilisateur connecté en session
+            $message->setSender($currentUser);//l'utilisateur connecté en session
             $message->setRecipient($recipient);//l'utilisateur à qui on envoie le message
             $message->setCreated($now);
             $entiyManager->persist($message);//signaler à doctrine les changements 
@@ -51,8 +55,15 @@ class MessageController extends AbstractController
             'recipient' => $recipient,//à qui on veut envoyer le message on le réccupére de l'url
             'events' => $postRepository->findby(["type" => "event"]),//les evenelents pour le sidebar
             'notification' => $notificationRepository
-            ->findnotification($this->getUser()->getUserIdentifier())
+            ->findBy(
+                [
+                    'receiver' => $currentUser->getId(),
+                    'is_read' => false
+                ])
         //les notifs pour le sidebar
-        ]);
+        ]);}
+        else {
+            $this->redirectToRoute('app_login');
+        }
     }
 }
