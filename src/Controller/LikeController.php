@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Repository\PostRepository;
@@ -14,10 +15,53 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LikeController extends AbstractController
 {
-
+  
+  #[Route('/unlike/comment/{id}', name: 'app_unlike_comment')]
+  public function unlikeComment(Comment $comment, EntityManagerInterface $entityManager, Request $request): Response
+  {
+    if ($this->getUser() && $comment != null) {
+      // Obtient l'utilisateur courant
+      $currentUser = $this->getUser();
+      // Ajoute l'utilisateur courant à la liste des personnes ayant aimé cette publication
+      $comment->removeLikedBy($currentUser);
+      // Persiste les changements en base de données
+      $entityManager->persist($comment);
+      $entityManager->flush();
+      $referer = $request->headers->get('referer');
+      return $this->redirect($referer);
+    } else
+      $referer = $request->headers->get('referer');
+    return $this->redirect($referer);
+  }
+  #[Route('/like/comment/{id}', name: 'app_like_comment')]
+  public function likeComment(Comment $comment, EntityManagerInterface $entityManager, Request $request): Response
+  {
+    if ($this->getUser() && $comment != null) {
+      // Obtient l'utilisateur courant
+      $currentUser = $this->getUser();
+      // Ajoute l'utilisateur courant à la liste des personnes ayant aimé cette publication
+      $comment->addLikedBy($currentUser);
+      // Persiste les changements en base de données
+      $entityManager->persist($comment);
+     
+      // Récupère l'URL de la page précédente (le referer) pour rediriger l'utilisateur.
+      $notif = new Notification();
+      $notif->setSender($currentUser);
+      $notif->setReceiver($comment->getAuthor());
+      $notif->setType('like');
+      $notif->setLink($comment->getId());
+      $notif->setPost($comment->getPost());
+      $entityManager->persist($notif);
+      $entityManager->flush();
+  
+      $referer = $request->headers->get('referer');
+      return $this->redirect($referer);
+    } else
+      $referer = $request->headers->get('referer');
+    return $this->redirect($referer);
+  }
   #[Route('/like/{id}', name: 'app_like')]
-
-  public function like(Post $post, EntityManagerInterface $entityManager, Request $request): Response
+public function like(Post $post, EntityManagerInterface $entityManager, Request $request): Response
   {
     if ($this->getUser() && $post != null) {
       // Obtient l'utilisateur courant

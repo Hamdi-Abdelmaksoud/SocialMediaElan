@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+ {% if app.user.darkMode == 1 %}
+        <script>document.body.classList.add("darkmode");</script>
+    {% endif %}
+
+<div class="home-main">	
+	<div class="side-left">
+		{{ include('home/_side.html.twig') }}
+	</div>
+	<main>
+			 
+				{% if events %}
+                {% set posts = [] %}
+
+    {% set posts = posts|merge(events) %}
+    {{ include('post/_allposts.html.twig', {'posts': posts}) }}
+ 	 
+				{% else %}
+					<p style="margin: 20px;"><strong>Welcom</strong> to  <strong>"Elan formation" comunity</strong> follow friends and share your experiences with them</p>
+				{% endif %}
+			
+	</main> 
+			<div class="side-right">	
+				{{ include('home/_side_right.html.twig') }}
+			</div>
+</div>{# end .home-main #}
+
+
+{% endblock %}

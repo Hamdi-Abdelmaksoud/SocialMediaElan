@@ -10,6 +10,15 @@
 			</span>
 		</label>
 		<input id="add-photo" type="file" placeholder="" name="pics[]" multiple>
+	
+		 
+	 
+		{% if "ROLE_ADMIN" in app.user.roles %}
+		
+<input type="date" id="expiration" name="expiration">
+{% endif %}
+ 
+
 
 	<button class="post-button" type="submit">Post</button>
 	</div>

@@ -102,6 +102,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $darkMode = null;
 
+    #[ORM\ManyToMany(targetEntity: Comment::class, mappedBy: 'likedBy')]
+    private Collection $commmentsLiked;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -112,6 +115,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->sent = new ArrayCollection();
         $this->recived = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->commmentsLiked = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -557,6 +561,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDarkMode(?bool $darkMode): static
     {
         $this->darkMode = $darkMode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getCommmentsLiked(): Collection
+    {
+        return $this->commmentsLiked;
+    }
+
+    public function addCommmentsLiked(Comment $commmentsLiked): static
+    {
+        if (!$this->commmentsLiked->contains($commmentsLiked)) {
+            $this->commmentsLiked->add($commmentsLiked);
+            $commmentsLiked->addLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommmentsLiked(Comment $commmentsLiked): static
+    {
+        if ($this->commmentsLiked->removeElement($commmentsLiked)) {
+            $commmentsLiked->removeLikedBy($this);
+        }
 
         return $this;
     }

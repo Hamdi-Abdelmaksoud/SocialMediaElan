@@ -28,7 +28,7 @@
      .side-left:hover {
          width: 500%;
          z-index: 5000;
-         background-color: white;
+         background-color: var(--bgcolor);
      }
      .side-left:hover .icon-title {
          display: block;
@@ -39,7 +39,7 @@
      }
  }
  
- @media screen and (min-width: 350px)and (max-width: 790px) {
+ @media screen and (max-width: 790px) {
      .side-right {
          display: none;
      }
@@ -74,6 +74,9 @@
      }
      .post-header {
          padding-left: 0px;
+     }
+     .author-name span {
+         font-size: 1.1rem;
      }
      .side-left {
          width: 100%;

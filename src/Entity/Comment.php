@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
@@ -28,11 +30,22 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
+
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: CommentPics::class, orphanRemoval: true)]
+    private Collection $pics;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'commmentsLiked')]
+    private Collection $likedBy;
+
+
     
     public function __construct()
     {
 
         $this->created = new DateTime();
+        $this->pics = new ArrayCollection();
+        $this->likedBy = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -87,4 +100,62 @@ class Comment
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, CommentPics>
+     */
+    public function getPics(): Collection
+    {
+        return $this->pics;
+    }
+
+    public function addPic(CommentPics $pic): static
+    {
+        if (!$this->pics->contains($pic)) {
+            $this->pics->add($pic);
+            $pic->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removePic(CommentPics $pic): static
+    {
+        if ($this->pics->removeElement($pic)) {
+            // set the owning side to null (unless already changed)
+            if ($pic->getComment() === $this) {
+                $pic->setComment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getLikedBy(): Collection
+    {
+        return $this->likedBy;
+    }
+
+    public function addLikedBy(User $likedBy): static
+    {
+        if (!$this->likedBy->contains($likedBy)) {
+            $this->likedBy->add($likedBy);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedBy(User $likedBy): static
+    {
+        $this->likedBy->removeElement($likedBy);
+
+        return $this;
+    }
+
+
+ 
+ 
 }

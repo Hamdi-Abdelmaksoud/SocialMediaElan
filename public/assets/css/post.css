@@ -1,15 +1,15 @@
     .feed-post {
         display: flex;
         flex-direction: column;
-        max-width: 100%;
+        width: 100%;
         min-height: 100px;
         cursor: pointer;
+        gap: 20px;
     }
     
     .post-header {
         display: flex;
         align-items: center;
-        padding-left: 16px;
         gap: 5px;
     }
     
@@ -24,7 +24,7 @@
     }
     
     .author-name span {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .author-action {
@@ -93,11 +93,9 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        padding-left: 60px;
     }
     
     .post-content {
-        margin: 15px 45px 0 0px;
         font-size: 1.5rem;
         max-width: 100%;
     }
@@ -108,15 +106,15 @@
     
     .post-footer {
         display: grid;
-        grid-template-columns: 50% 50%
+        grid-template-columns: 50% 50%;
+        background-color: var(--secondColor);
     }
     
     #likes-post {
-        padding-left: 40px;
+        padding-left: 22%;
         display: flex;
         align-items: inherit;
         gap: 10px;
-        padding-bottom: -80px;
         font-size: 1.5rem;
     }
     
@@ -263,4 +261,10 @@
     .button-background {
         background-color: #C4C4C4;
         height: 50px;
+    }
+    
+    .onePost {
+        display: flex;
+        border-top: 1px solid #514a4a;
+        padding-top: 5px;
     }

@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Entity\PostPics;
-use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\NotificationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,11 +42,17 @@ class PostController extends AbstractController
             if($request->request->get('text') !=NULL)
             {
                 $postText = $request->request->get('text');
-                    if($request->request->has('type'))
-                    {
-                        $type = $request->request->get('type');
-                    }
                 $post = new Post();
+                if($request->request->has('expiration'))
+                {
+                    $expirationString = $request->request->get('expiration');
+
+// Convertissez la chaîne en un objet DateTime
+$expirationDate = DateTime::createFromFormat('Y-m-d', $expirationString);
+                    $post->setAlertExpiration($expirationDate);
+                    $type='event';
+                }
+                
                 $post->setType($type);
                 $post->setText($postText);
                 $post->setAuthor($this->getUser());

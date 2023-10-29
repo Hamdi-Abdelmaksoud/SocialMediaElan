@@ -1,21 +1,6 @@
 <div class="search">
 <input type="text" placeholder="search"></div>
  
- <div> {{ include('post/_events.html.twig',{'events': events}) }}<div> 
-{# <h3>Friends</h3> 
- 
-<div> 
-{% set friends = [] %}
-
- {% for friend in app.user.follows %}
-    {% set friends = friends|merge([friend]) %}
-{% endfor %} 
- 
- 
- 
-{{ include('follower/_friends_list.html.twig', friends) }}
-
-</div>  #}
-</div>
+ <div> {{ include('post/_events.html.twig',{'events': events}) }} </div>
 
  

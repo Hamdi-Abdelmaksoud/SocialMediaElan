@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Post;
-
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
@@ -19,6 +19,7 @@ class PostType extends AbstractType
         $builder
             ->add('text',TextType::class)
             ->add('type',TextType::class)
+            ->add('alertExpiration',DateTime::class)
             ->add('pic', FileType::class, [
                 'label' => 'add pictures',
     
