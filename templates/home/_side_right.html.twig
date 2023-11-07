@@ -1,6 +1,20 @@
 <div class="search">
-<input type="text" placeholder="search"></div>
- 
- <div> {{ include('post/_events.html.twig',{'events': events}) }} </div>
+  <input type="text" placeholder="search" />
+</div>
 
- 
+<div class="events-right">{{ include('post/_events.html.twig', { events: events }) }}</div>
+{% if sugges %}
+  <div class="suggestions">
+    {% for user in sugges %}
+      <div class="user">
+        <div class="author-pic">
+          <img src="{{ asset('uploads/userPic/' ~ user.image) }}" alt="profile picture" />
+        </div>
+        <a href="{{ path('app_profile', { user: user.id }) }}">{{user}}</a>
+        <div class="btn-follow">
+          <a href="{{ path('app_follow', { id: user.id }) }}">follow</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

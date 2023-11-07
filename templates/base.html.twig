@@ -26,7 +26,18 @@
     {% block stylesheets %}
     {% endblock %}
   </head>
-  <body>
+  <body  >
+  {% if app.user %}
+  
+   {% if app.user.darkMode == 1 %}
+        <script>document.body.classList.add("darkmode");</script>
+		{% else %}
+			<script>document.body.classList.remove("darkmode");</script>
+    {% endif %}
+    	{% else %}
+    
+     <script>document.body.classList.add("darkmode");</script>
+    {% endif %}
     {% block body %}
     {% endblock %}
     <footer>

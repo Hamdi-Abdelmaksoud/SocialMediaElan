@@ -13,9 +13,9 @@
 					<div >
 						<span id="postTime">{{comment.created |  date("M j,Y")}}</span>
 					</div>
-					{# si l'utilisateur connécté est postauthor 
-					il peut supprimer ou editer la poste#}
-			{% if app.user == post.author  %}
+					{# si l'utilisateur connécté est commentauthor 
+					il peut supprimer ou editer son commentaire#}
+			{% if app.user == comment.author  %}
 			<div class="author-action">
 				<span class="material-icons">
 						more_horiz
@@ -23,13 +23,13 @@
 				<span class="author-autorisations">
 					<ul >
 						<li>
-							<a href="{{path('app_post_delete',{post:post.id})}}">
-								delete post
+							<a href="{{path('app_comment_delete',{comment:comment.id})}}">
+								delete comment
 							</a>
 						</li>
 						<li>
-							<a href="{{path('app_post_edit',{post:post.id})}}">
-								edit post
+							<a href="{{path('app_comment_edit',{comment:comment.id})}}">
+								edit comment
 							</a>
 						</li>
 					</ul>

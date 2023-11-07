@@ -23,8 +23,8 @@ class UserType extends AbstractType
             ->add('lastName',TextType::class)
                     
             ->add('city',TextType::class)
-            ->add('sessionSD',DateType::class, ['widget' => 'single_text'])
-            ->add('sessionED',DateType::class, ['widget' => 'single_text'])
+            ->add('sessionSD',DateType::class, ['widget' => 'single_text','html5' => false])
+            ->add('sessionED',DateType::class, ['widget' => 'single_text','html5' => false])
             // ->add('image',FileType::class)
             ->add('github' ,UrlType::class)
             ->add('linkedin', UrlType::class)

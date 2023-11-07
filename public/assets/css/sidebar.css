@@ -103,11 +103,32 @@
         .side-right {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             height: 100vh;
             position: sticky;
             top: 0;
-            justify-self: flex-start;
+            justify-self: center;
+            max-width: 100%;
+            gap: 20px;
+        }
+        
+        .events-right {
+            max-height: 100%;
+            /* overflow-y: auto; */
+        }
+        
+        .events-right .onePost {
+            padding: 30px;
+        }
+        
+        .suggestions .user {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user .btn-follow {
+            height: 30px;
         }
         
         .search {

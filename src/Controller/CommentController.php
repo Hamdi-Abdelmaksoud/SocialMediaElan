@@ -32,14 +32,13 @@ class CommentController extends AbstractController
             $comment->setText($commentText);
             $comment->setAuthor($this->getUser());
             $comment->setPost($post);
-            $entityManager->persist($comment);
-            $entityManager->flush();
             $notif = New Notification();
             $notif->setSender($this->getUser());
             $notif->setReceiver($post->getAuthor());
             $notif->setType('comment');
             $notif->setLink($post->getId());
             $notif->setPost($post);
+            $entityManager->persist($comment);
             $entityManager->persist($notif);
             $entityManager->flush();
             
@@ -48,14 +47,14 @@ class CommentController extends AbstractController
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }
-    #[Route('/post/{post}/{comment}/edit', name: 'app_comment_edit')]
-    public function edit(Post $post, Comment $comment, Request $request, EntityManagerInterface $entiyManager): Response
+    #[Route('/comment/{comment}/edit', name: 'app_comment_edit')]
+    public function edit( Comment $comment=null, Request $request, EntityManagerInterface $entiyManager): Response
     {  
-         if (!$this->getUser()){
+         /** @var User $currentUser */
         $currentUser = $this->getUser();
-       return $this->redirectToRoute('app_login');
-      
-    } 
+        if (!$currentUser) {
+            return $this->redirectToRoute('app_login');
+        }
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
@@ -75,8 +74,8 @@ class CommentController extends AbstractController
             ]
         );
     }
-    #[Route('/post/{post}/{comment}/delete', name: 'app_comment_delete')]
-    public function delete(Post $post, Comment $comment, Request $request, EntityManagerInterface $entiyManager): Response
+    #[Route('/comment/{comment}/delete', name: 'app_comment_delete')]
+    public function delete(Comment $comment=null, Request $request, EntityManagerInterface $entiyManager): Response
     {
         $entiyManager->remove($comment);
         $entiyManager->flush();

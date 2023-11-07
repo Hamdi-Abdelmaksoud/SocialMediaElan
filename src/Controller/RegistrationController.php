@@ -39,6 +39,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd("ok");
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(

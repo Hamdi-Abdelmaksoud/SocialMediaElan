@@ -1,9 +1,7 @@
-
-	{% if posts %}
-{% for post in posts %}
-	{% if post %}
-		{% include "/post/_post.html.twig"  with  {'post' : post}  %}
-	{% endif %}
-{% endfor %}  
-	{% endif %}
-
+{% if posts %}
+  {% for post in posts %}
+    {% if post %}
+      {% include '/post/_post.html.twig' with { post: post } %}
+    {% endif %}
+  {% endfor %}
+{% endif %}

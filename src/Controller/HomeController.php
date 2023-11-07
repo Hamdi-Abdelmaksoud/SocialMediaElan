@@ -8,11 +8,19 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use App\Service\DateFormatter;
 class HomeController extends AbstractController
 {
+ 
+    private $dateFormatter;
+
+    public function __construct(DateFormatter $dateFormatter)
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
     #[Route('/events', name: 'app_events')]
-    public function events(PostRepository $postRepository,NotificationRepository $notificationRepository): Response
+    public function events(PostRepository $postRepository, DateFormatter $dateFormatter
+    ,UserRepository $userRepository,NotificationRepository $notificationRepository): Response
     {
             /** @var User $currentUser */
             $currentUser = $this->getUser();
@@ -20,9 +28,12 @@ class HomeController extends AbstractController
                return $this->redirectToRoute('app_login');
               
             }
-        return $this->render('home/events.html.twig',
+            $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
+            return $this->render('home/events.html.twig',
         [
         'events'=>$postRepository->findBy(["type"=>"event"],["created"=>"DESC"]),
+        'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
+        'dateFormatter' => $dateFormatter,
         'notification' => $notificationRepository->findBy(
             [
                 'receiver' => $currentUser->getId(),
@@ -31,7 +42,8 @@ class HomeController extends AbstractController
         ]);
     }
     #[Route('/home', name: 'app_home')]
-    public function homePosts(PostRepository $postRepository,NotificationRepository $notificationRepository): Response
+    public function homePosts(PostRepository $postRepository, DateFormatter $dateFormatter
+  ,UserRepository $userRepository,NotificationRepository $notificationRepository): Response
     {
        
         /** @var User $currentUser */
@@ -45,6 +57,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'posts'=>$postRepository->findBy(['author' => $authors], ['created' => 'DESC']),
             'events' => $postRepository->findby(["type"=>"event"]),
+            'dateFormatter' => $dateFormatter,
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'notification' => $notificationRepository->findBy(
                 [
                     'receiver' => $currentUser->getId(),

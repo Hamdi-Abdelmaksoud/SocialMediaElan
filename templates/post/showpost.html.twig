@@ -4,9 +4,126 @@
 {% endblock %}
 
 {% block body %}
-	{% if post %}
-    {{ include("/post/_post.html.twig", [post]) }}
+ {% if app.user.darkMode == 1 %}
+        <script>document.body.classList.add("darkmode");</script>
+    {% endif %}
+	<main>
 
+<div class="home-main">	
+	<div class="side-left">
+		{{ include('home/_side.html.twig') }}
+	</div>
+	{% if post %}
+	<div>
+	
+    {% include "/post/_post.html.twig"  with  {'post' : post,date:date}  %}
 	{% endif %}
+	<div>
+		 <form class="commentaire" method="post" action="{{path('app_post_comment',{post:post.id}) }}">
+	
+		<textarea class="commentBox" name="comment" id="comment" placeholder="What's happening?"></textarea>
+		<button class="post-comment" type="submit">comment</button>
+		</div>
+		 
+	</form>
+<div class="comments">
+	{% for comment in post.comments %} 
+	<div class="onePost">
+ 
+			<div class="author-pic">
+				<img src="{{ asset('uploads/userPic/'~ comment.author.image)}}" alt="user pic"/>
+
+			</div>
+			 
+			 
+	<div class="feed-post">
+		<div class="post-header">
+			
+			<div class="author-name">
+				<span><a href="{{path('app_profile',{user:comment.author.id})}}"> {{comment.author}}</a></span>
+				<span class="material-icons post-padge">verified</span>
+			</div>
+			<div >
+						<span id="postTime">{{dateFormatter.format(comment.created)}}</span>
+					</div>
+					{% if app.user == comment.author  %}
+			<div class="author-action">
+				<span class="material-icons">
+						more_horiz
+				</span>
+				<span class="author-autorisations">
+					<ul >
+						<li>
+							<a href="{{path('app_comment_delete',{comment:comment.id})}}">
+								delete comment
+							</a>
+						</li>
+						<li>
+							<a href="{{path('app_comment_edit',{comment:comment.id})}}">
+								edit comment
+							</a>
+						</li>
+					</ul>
+				</span>
+			</div>	
+		{% endif %}
+		</div>
+	
+			<div class="post-content">
+		 
+						<div style="display: flex;">
+							<div style="border: 1px solid #718096;
+ 										   margin-left: -3rem;
+    										margin-right: 3.25rem;
+   											 min-height: 100%;
+    										padding-top: 8px;
+    										padding-bottom: 20px;">
+							</div>
+							<p class="text">{{comment.text}}</p>
+						</div>
+		
+			</div>	
+	 
+					 
+					 
+	</div>
+</div>		
+	 
+
+{% endfor %}
+	 
+   
+
+</div>
+ 
+	</div> 
+			<div class="side-right">	
+				{{ include('home/_side_right.html.twig') }}
+				 
+			</div>
+	</main> 
+</div>{# end .home-main #}
+
 
 {% endblock %}
+ 
+
+
+				
+{# 
+{% if form is defined %}
+	  {{ form_start(form) }}
+     <div>{{ form_widget(form.text,{ label: false }) }}</div>
+        {% for pic in post.pics %}
+            <div><img class="post-pics" src="{{ asset('uploads/userPic/' ~ pic.getPic()) }}" alt='post pic'>
+		<span class="material-icons">
+delete
+</span>
+<img id="image-preview" src="#" alt="Aperçu de l'image" style="display: none;">
+			</div>
+	    {% endfor %}
+    {{ form_end(form) }}
+	<div style="margin: 100px;">.</div>
+{% endif %} #}
+			
+

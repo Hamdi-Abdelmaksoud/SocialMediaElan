@@ -18,3 +18,13 @@ function toggle_div_fun(id) {
 //     // Modifiez l'apparence du checkmark (ajoutez une classe CSS)
 //     checkmark.classList.toggle('active');
 // });
+document.getElementById('pic_upload_input').addEventListener('input', function(event) {
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function() {
+        var img = document.getElementById('image-preview');
+        img.src = reader.result;
+        img.style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+});

@@ -105,6 +105,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Comment::class, mappedBy: 'likedBy')]
     private Collection $commmentsLiked;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isEnabled = null;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -588,6 +591,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->commmentsLiked->removeElement($commmentsLiked)) {
             $commmentsLiked->removeLikedBy($this);
         }
+
+        return $this;
+    }
+
+    public function isIsEnabled(): ?bool
+    {
+        return $this->isEnabled;
+    }
+
+    public function setIsEnabled(?bool $isEnabled): static
+    {
+        $this->isEnabled = $isEnabled;
 
         return $this;
     }

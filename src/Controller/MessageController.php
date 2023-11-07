@@ -2,19 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
 use App\Entity\User;
+use App\Entity\Message;
 use App\Form\MessageType;
-use App\Repository\MessageRepository;
-use App\Repository\NotificationRepository;
-use App\Repository\PostRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Notification;
 use PhpParser\Builder\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PostRepository;
+use App\Repository\UserRepository;
+use App\Repository\MessageRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\NotificationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MessageController extends AbstractController
 {
  
@@ -22,7 +23,7 @@ class MessageController extends AbstractController
     public function send(Request $request, User $recipient,
      NotificationRepository $notificationRepository, 
     EntityManagerInterface $entiyManager, MessageRepository $messageRepository,
-     PostRepository $postRepository): Response
+     PostRepository $postRepository,UserRepository $userRepository): Response
     {
         if($this->getUser())
         {       
@@ -42,16 +43,24 @@ class MessageController extends AbstractController
             $message->setSender($currentUser);//l'utilisateur connecté en session
             $message->setRecipient($recipient);//l'utilisateur à qui on envoie le message
             $message->setCreated($now);
+            $notif = New Notification();//pour envoyer une notfication 
+            $notif->setSender($currentUser);
+            $notif->setReceiver($recipient);
+            $notif->setType('message');
+            $notif->setLink($recipient->getId());
             $entiyManager->persist($message);//signaler à doctrine les changements 
+            $entiyManager->persist($notif);
             $entiyManager->flush();//synchorniser avec la base de données 
             $referer = $request->headers->get('referer');
             return $this->redirect($referer);//pour rester sur la meme page
         }
-        //si le formulaire pas encore submitter 
+        //si le formulaire pas encore submitted
+        $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('message/index.html.twig', [
             'form' => $form->createView(),//formulaire d'ajout message
             'discussion' => $messageRepository->findDiscussion($recipient, $this->getUser()),
             //l'ancienne discussion
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'recipient' => $recipient,//à qui on veut envoyer le message on le réccupére de l'url
             'events' => $postRepository->findby(["type" => "event"]),//les evenelents pour le sidebar
             'notification' => $notificationRepository

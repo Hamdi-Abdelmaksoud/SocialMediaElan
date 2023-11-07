@@ -5,11 +5,24 @@
 {% endblock %}
 
 {% block body %}
+<div class="navbar">
+        <div class="logo"><img src="{{ asset('uploads/userPic/logo.png') }}">
+        <div><span>ELAN</span><span style="color: #f49e0e;">FORMATION</span></div>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="menu">
+            <a href="https://elan-formation.fr/accueil" target="_blank">Elan formation</a>
+            <a href="#">About Us</a>
+            <a href="{{path('app_login')}}">Login</a>
+             
+        </div>
+    </div>
+    <img src="{{ asset('uploads/userPic/welcome.png') }}" style="position: absolute; top:10px;min-width:100%">
     {% for flash_error in app.flashes('verify_email_error') %}
       <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
      <div class="register">
-        <h1>Welcome in our comunity</h1>
+       
             {{ form_errors(registrationForm) }}
              {{ form_start(registrationForm) }}
        <div class="login-card">

@@ -17,8 +17,8 @@ class FollowerController extends AbstractController
     public function follow(User $userToFollow, EntityManagerInterface $entityManager, Request $request): Response
     {
         /** @var User $currentUser */
-        if (!$this->getUser()) {
-            $currentUser = $this->getUser();
+        $currentUser = $this->getUser();
+        if (!$currentUser) {
             return $this->redirectToRoute('app_login');
         }
         //on verifie si l'utilisateur n'existe pas dans la liste de follows
@@ -45,10 +45,10 @@ class FollowerController extends AbstractController
     public function unfollow(User $userToUnfollow, ManagerRegistry $managerRegistry, Request $request): Response
     {
         /** @var User $currentUser */
-        if (!$this->getUser()) {
-            $currentUser = $this->getUser();
+        $currentUser = $this->getUser();
+        if (!$currentUser) {
             return $this->redirectToRoute('app_login');
-        }
+        } 
         //on verifie si l'utilisateur deja dans la liste follows
         if ($currentUser->getFollows()->contains($userToUnfollow)) {
             $currentUser->unfollow($userToUnfollow);
@@ -57,4 +57,5 @@ class FollowerController extends AbstractController
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }
+ 
 }

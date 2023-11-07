@@ -1,12 +1,5 @@
-
-	{% if events %}
-{% for event in events %}
-	{% if event %}
-		{% include "/post/_post.html.twig"  with  {'post' : event}  %}
-	{% endif %}
-{% endfor %}  
-
-	<div id="space" style="margin-top: 200px;">...</div>
-	
-	{% endif %}
-
+{% if events %}
+  {% for event in events %}
+      {% include '/post/_post.html.twig' with { post: event } %}
+  {% endfor %}
+{% endif %}

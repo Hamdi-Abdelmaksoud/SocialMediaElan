@@ -31,8 +31,8 @@ class RegistrationFormType extends AbstractType
         ->add('linkedin',UrlType::class)
         ->add('github',UrlType::class)
         ->add('city',TextType::class)
-        ->add('sessionSD',DateType::class, ['widget' => 'single_text'])
-        ->add('sessionED',DateType::class, ['widget' => 'single_text'])
+        ->add('sessionSD',DateType::class, ['widget' => 'single_text','html5' => true])
+        ->add('sessionED',DateType::class, ['widget' => 'single_text','html5' => true])
         ->add('plainPassword', RepeatedType::class, [
             'constraints' => [
                 new Regex('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{14,}$/',

@@ -3,15 +3,13 @@
 {% endblock %}
 
 {% block body %}
- {% if app.user.darkMode == 1 %}
-        <script>document.body.classList.add("darkmode");</script>
-    {% endif %}
+ 
 
-<div class="home-main">	
+<div class="home-main" >	
 	<div class="side-left">
 		{{ include('home/_side.html.twig') }}
 	</div>
-	<main>
+	<main >
 				<form method="post" action="{{ path('app_post_addtwo') }}" enctype="multipart/form-data">
 					  <input type="hidden" name="token" value="{{ csrf_token('add-post') }}">
 					<div class="new-post">
@@ -25,11 +23,11 @@
 					<p style="margin: 20px;"><strong>Welcom</strong> to  <strong>"Elan formation" comunity</strong> follow friends and share your experiences with them</p>
 				{% endif %}
 			
+<div style="margin-bottom: 100px;"></div>
 	</main> 
 			<div class="side-right">	
 				{{ include('home/_side_right.html.twig') }}
 			</div>
 </div>{# end .home-main #}
-
 
 {% endblock %}

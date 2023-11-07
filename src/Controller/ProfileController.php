@@ -4,6 +4,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\NotificationRepository;
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,20 +15,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Notifier\Notifier;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
+use App\Service\DateFormatter;
 class ProfileController extends AbstractController
 {
+     private $dateFormatter;
+    public function __construct(DateFormatter $dateFormatter)
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    
+    // ...
+ 
     #[Route('/profile/{user}', name: 'app_profile')]
-    public function show(User $user, PostRepository $postRepository, NotificationRepository $notificationRepository): Response
+    public function show(User $user,  DateFormatter $dateFormatter,PostRepository $postRepository,UserRepository $userRepository ,NotificationRepository $notificationRepository): Response
     {
         if($this->getUser())
         {    
            /** @var User $currentUser */
            $currentUser=$this->getUser(); 
+           $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('profile/show.html.twig', [
             'user' => $user,
-            'posts' => $user->getPosts(),
+            'posts' => $postRepository->findBy(['author' => $currentUser], ['created' => 'DESC']),
+            'dateFormatter' => $dateFormatter,
             'events' => $postRepository->findby(["type" => "event"]),
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'notification' => $notificationRepository->findBy(
                 [
                     'receiver' => $user->getId(),
@@ -42,19 +54,22 @@ class ProfileController extends AbstractController
     }
     }
     #[Route('/profile', name: 'app_myProfile')]
-    public function myProfile(PostRepository $postRepository, NotificationRepository $notificationRepository): Response
+    public function myProfile(PostRepository $postRepository,DateFormatter $dateFormatter,UserRepository $userRepository ,NotificationRepository $notificationRepository): Response
     {
         if($this->getUser())
         {
-        /** @var User $user */
-        $user = $this->getUser();
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+        $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('profile/show.html.twig', [
-            'user' => $user,
-            'posts' => $user->getPosts(),
+            'user' => $currentUser,
+            'posts' =>$postRepository->findBy(['author' => $authors], ['created' => 'DESC']),
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'events' => $postRepository->findby(["type" => "event"]),
+            'dateFormatter' => $dateFormatter,
             'notification' => $notificationRepository->findBy(
                 [
-                    'receiver' => $user->getId(),
+                    'receiver' => $currentUser->getId(),
                     'is_read' => false
                 ])
 
@@ -146,12 +161,15 @@ class ProfileController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
         PostRepository $postRepository,
+        UserRepository $userRepository,
         NotificationRepository $notificationRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        
     ): Response {
-        /** @var User $user */
-        $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+        $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
+        $form = $this->createForm(UserType::class, $currentUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -159,7 +177,7 @@ class ProfileController extends AbstractController
             $password = $form->get('password')->getData();
 
             // Vérifiez le mot de passe actuel
-            if ($passwordHasher->isPasswordValid($user, $password)) {
+            if ($passwordHasher->isPasswordValid($currentUser, $password)) {
                 // Mot de passe correct, effectuez les modifications
                 $user = $form->getData();
 
@@ -173,9 +191,10 @@ class ProfileController extends AbstractController
                 return $this->render('profile/edit.html.twig', [
                     'form' => $form->createView(),
                     'events' => $postRepository->findby(["type" => "event"]),
+                    
                     'notification' => $notificationRepository->findBy(
                         [
-                            'receiver' => $user->getId(),
+                            'receiver' => $currentUser->getId(),
                             'is_read' => false
                         ])
                 ]);
@@ -185,9 +204,10 @@ class ProfileController extends AbstractController
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
             'events' => $postRepository->findby(["type" => "event"]),
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'notification' =>  $notificationRepository->findBy(
                 [
-                    'receiver' => $user->getId(),
+                    'receiver' => $currentUser->getId(),
                     'is_read' => false
                 ])
         ]);

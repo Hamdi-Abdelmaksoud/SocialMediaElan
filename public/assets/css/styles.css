@@ -110,6 +110,7 @@ p {
     flex-direction: column;
     gap: 20px;
     position: relative;
+    margin: 10px 10px 20px 52%;
 }
 
 .register .login-card {
@@ -125,6 +126,7 @@ p {
 
 #register-path {
     align-self: center;
+    color: var(--btncolor);
 }
 
 .form-group {
@@ -280,4 +282,63 @@ footer {
 
 footer:hover {
     opacity: 1;
+}
+
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo span {
+    font-size: large;
+    margin-left: 5px;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+    }
+}
+
+.content {
+    padding: 20px;
+}
+
+#card-login {
+    margin: 10% 0 0 50%;
 }

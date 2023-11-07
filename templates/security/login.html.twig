@@ -3,6 +3,20 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+<div class="navbar">
+        <div class="logo"><img src="{{ asset('uploads/userPic/logo.png') }}">
+        <div><span>ELAN</span><span style="color: #f49e0e;">FORMATION</span></div>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="menu">
+            <a href="https://elan-formation.fr/accueil" target="_blank">Elan formation</a>
+            <a href="#">About Us</a>
+            <a href="{{path('app_register')}}">Register</a>
+             
+        </div>
+    </div>
+    <img src="{{ asset('uploads/userPic/welcome.png') }}" style="position: absolute; top:10px;min-width:100%">
+   
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -13,9 +27,9 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-<div class="login-card">
+     
+<div class="login-card" id="card-login">
 <div class="card-header">
-    <h1>Please sign in</h1>
    </div>
    <div class="form-group">
     <label for="inputEmail">Email</label>

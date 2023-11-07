@@ -7,13 +7,13 @@
     {% if notif.type == 'like' %}
         <div class="notification"> 
 			<p>liked your </p>
-		 	<a href="{{path('app_post_show',{post:notif.link})}}"><strong>post</strong></a> 
+		 	<a href="{{path('app_show_post',{post:notif.link})}}"><strong>post</strong></a> 
 		</div>
     {% endif %} 
 	{% if notif.type == 'comment' %}
 		<div class="notification">
 			<p> commented your </p>
-			<a href="{{path('app_post_show',{post:notif.link})}}"><strong>post</strong></a>
+			<a href="{{path('app_show_post',{post:notif.link})}}"><strong>post</strong></a>
 		</div>		
 	{% endif %}
 	{% if notif.type == 'follow' %}
