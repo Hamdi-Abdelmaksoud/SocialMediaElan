@@ -12,12 +12,8 @@
 <div class="side-left">
 		{{ include('home/_side.html.twig') }}
 	</div>
-	
-		
 	<main>
-
 {{ include("profile/_header.html.twig", [user]) }}
- 
 	<div>	{{ include("post/_allposts.html.twig", [posts])}}</div>
 	</main>
 			<div class="side-right">

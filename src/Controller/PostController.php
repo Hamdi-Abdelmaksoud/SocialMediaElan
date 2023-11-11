@@ -334,28 +334,73 @@ class PostController extends AbstractController
         }
     }
     #[Route('/post/{post}/edit', name: 'app_post_edit')]
-    public function edit(Post $post = null, DateFormatter $dateFormatter,UserRepository $userRepository,NotificationRepository $notificationRepository, PostRepository $postRepository, Request $request, EntityManagerInterface $entiyManager): Response
+    public function editpost(Post $post = null, DateFormatter $dateFormatter,SluggerInterface $slugger,UserRepository $userRepository,NotificationRepository $notificationRepository, PostRepository $postRepository, Request $request, EntityManagerInterface $entiyManager): Response
     {
         if ($post) {
 
             if ($this->getUser() && $post->getAuthor() == $this->getUser()) {
                 /** @var User $currentUser */
                 $currentUser = $this->getUser();
-                $form = $this->createForm(PostType::class, $post);
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $post = $form->getData();
-                    $entiyManager->persist($post);
-                    $entiyManager->flush();
-                    $this->addFlash('success', 'Post updated successfully');
-                    $referer = $request->headers->get('referer');
-                    return $this->redirect($referer);
-                }
+                
+                    if ($request->files->has('pic')) 
+                    {
+                        $pic = $request->files->get('pic'); 
+                        $allowedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                        $maxFileSize = 5 * 1024 * 1024; // 5 MB    
+                        $fileExtension = $pic->guessExtension();
+                        if (!in_array(strtolower($fileExtension), $allowedFileTypes)) {
+                            $this->addFlash('error', 'please choose a valid extension (jpeg,jpg,png,gif)');
+                            $referer = $request->headers->get('referer');
+                            return $this->redirect($referer); 
+                        }
+                    
+                        // Validate file size
+                        if ($pic->getSize() > $maxFileSize) {
+                            $this->addFlash('error', 'the file size should be less tha, 5MB');
+                            $referer = $request->headers->get('referer');
+                            return $this->redirect($referer); 
+                        }         
+                         $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
+                         // this is needed to safely include the file name as part of the URL
+                         $safeFilename = $slugger->slug($originalFilename);
+                         $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
+                         // Move the file to the directory where brochures are stored
+                         try {
+                            $pic->move(
+                               $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
+                                $newFilename
+                             );
+                         } catch (FileException $e) {
+                         // ... handle exception if something happens during file upload
+                         }
+                        $postPics = new PostPics();
+                        $postPics->setPic($newFilename);
+                        $postPics->setPost($post);
+                        $post->addPic($postPics);
+                    } 
+              
+                    if ($request->request->has('text'))
+                    {
+                        $text = $request->request->get('text');
+                        $post->setText($text);
+                        if ($request->request->has('expiration'))
+                        {
+                            $dateString = $request->request->get('expiration');
+
+                            // Convert the string to a DateTime object
+                            $date = new \DateTime($dateString);
+                            $post->setAlertExpiration($date);
+                        }
+                        $entiyManager->persist($post);
+                        $entiyManager->flush();
+                        $this->addFlash('success', 'Post updated successfully');
+                        return $this->redirectToRoute('app_home');
+                    }
                 $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
                 return $this->render(
-                    'post/showpost.html.twig',
+                    'post/edit.html.twig',
                     [
-                        'form' => $form,
+                         
                         'post' => $post,
                         'sugges' => $userRepository->findSuggestions($authors, $currentUser->getCity()),
                         'date'=>$dateFormatter->format($post->getCreated()),
@@ -370,10 +415,7 @@ class PostController extends AbstractController
 
                     ]
                 );
-            } else {
-                $referer = $request->headers->get('referer');
-                return $this->redirect($referer);
-            }
+            }  
         } else {
             $referer = $request->headers->get('referer');
             return $this->redirect($referer);

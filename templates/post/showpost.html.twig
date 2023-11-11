@@ -19,12 +19,11 @@
     {% include "/post/_post.html.twig"  with  {'post' : post,date:date}  %}
 	{% endif %}
 	<div>
-		 <form class="commentaire" method="post" action="{{path('app_post_comment',{post:post.id}) }}">
-	
-		<textarea class="commentBox" name="comment" id="comment" placeholder="What's happening?"></textarea>
-		<button class="post-comment" type="submit">comment</button>
+		<form class="commentaire" method="post" action="{{path('app_post_comment',{post:post.id}) }}">
+		<div class="comment-input"><textarea class="commentBox" name="comment" id="comment" placeholder="What's happening?"></textarea>
+		<button class="post-button" type="submit">comment</button>
+		</div>		
 		</div>
-		 
 	</form>
 <div class="comments">
 	{% for comment in post.comments %} 
@@ -68,24 +67,9 @@
 			</div>	
 		{% endif %}
 		</div>
-	
-			<div class="post-content">
-		 
-						<div style="display: flex;">
-							<div style="border: 1px solid #718096;
- 										   margin-left: -3rem;
-    										margin-right: 3.25rem;
-   											 min-height: 100%;
-    										padding-top: 8px;
-    										padding-bottom: 20px;">
-							</div>
+			<div class="post-content">			 
 							<p class="text">{{comment.text}}</p>
-						</div>
-		
 			</div>	
-	 
-					 
-					 
 	</div>
 </div>		
 	 

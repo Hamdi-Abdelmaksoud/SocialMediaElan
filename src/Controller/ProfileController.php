@@ -63,7 +63,7 @@ class ProfileController extends AbstractController
         $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('profile/show.html.twig', [
             'user' => $currentUser,
-            'posts' =>$postRepository->findBy(['author' => $authors], ['created' => 'DESC']),
+            'posts' =>$postRepository->findBy(['author' => $currentUser], ['created' => 'DESC']),
             'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'events' => $postRepository->findby(["type" => "event"]),
             'dateFormatter' => $dateFormatter,
@@ -115,72 +115,97 @@ class ProfileController extends AbstractController
 
         ]);
     }
-    // #[Route('/profile/edit', name: 'app_profile_edit', priority: 1)]
-    // public function edit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
-    // {
+     #[Route('/profile/pic/edit', name: 'app_profile_pic_edit', priority: 1)]
+     public function edit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
+     {
 
 
-    //     if ($request->isMethod('POST')) {
-    //         /** @var User $currentUser */
-    //         $currentUser = $this->getUser();
-    //         $pic = $request->files->get('pic');
-    //         if ($pic)
-    //          {
-    //             $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
-    //             // this is needed to safely include the file name as part of the URL
-    //             $safeFilename = $slugger->slug($originalFilename);
-    //             $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
-    //             // Move the file to the directory where brochures are stored
-    //             try {
-    //                 $pic->move(
-    //                     $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
-    //                     $newFilename
-    //                 );
-    //             } catch (FileException $e) {
-    //                 // ... handle exception if something happens during file upload
-    //             }
-    //             $currentUser->setImage($newFilename);
-    //             $entiyManager->persist($currentUser);
-    //             $entiyManager->flush();
-    //             return $this->render(
-    //                 'profile/show.html.twig',
-    //                 [
-    //                     'user' => $currentUser,
-    //                     'posts' => $currentUser->getPosts()
-    //                 ]
-    //             );
-    //         }
-    //     }
-    //     return $this->render(
-    //         '/profile/edit.html.twig'
-    //     );
-    // }
+        if ($request->isMethod('POST')) {
+            if ($this->isCsrfTokenValid('add-pic',  $request->request->get('token'))) 
+            {
+             /** @var User $currentUser */
+             $currentUser = $this->getUser();
+            
+             if ($request->files->has('pic')) {
+                $pic = $request->files->get('pic');
+             }
+             else
+             {
+                $this->addFlash('error', 'no pic selected');
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer); 
+             }   
+                $allowedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+                $maxFileSize = 5 * 1024 * 1024; // 5 MB    
+                $fileExtension = $pic->guessExtension();
+                if (!in_array(strtolower($fileExtension), $allowedFileTypes)) {
+                    $this->addFlash('error', 'please choose a valid extension (jpeg,jpg,png,gif)');
+                    $referer = $request->headers->get('referer');
+                    return $this->redirect($referer); 
+                }
+            
+                // Validate file size
+                if ($pic->getSize() > $maxFileSize) {
+                    $this->addFlash('error', 'the file size should be less tha, 5MB');
+                    $referer = $request->headers->get('referer');
+                    return $this->redirect($referer); 
+                }         
+                 $originalFilename = pathinfo($pic->getClientOriginalName(), PATHINFO_FILENAME);
+                 // this is needed to safely include the file name as part of the URL
+                 $safeFilename = $slugger->slug($originalFilename);
+                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $pic->guessExtension();
+                 // Move the file to the directory where brochures are stored
+                 try {
+                    $pic->move(
+                       $this->getParameter('brochures_directory'), //brochures_directory dans parametres  services.yaml
+                        $newFilename
+                     );
+                 } catch (FileException $e) {
+                 // ... handle exception if something happens during file upload
+                 }
+                 $currentUser->setImage($newFilename);
+                $entiyManager->persist($currentUser);
+                 $entiyManager->flush();
+                 $referer = $request->headers->get('referer');
+                 return $this->redirect($referer);
+             
+         }
+        }
+        $this->addFlash('error', 'invalid CSRF');
+         $referer = $request->headers->get('referer');
+         return $this->redirect($referer);
+     }
 
-    #[Route('/profile/edit', name: 'app_profile_edit', priority: 1)]
-    public function editProfile(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        PostRepository $postRepository,
-        UserRepository $userRepository,
-        NotificationRepository $notificationRepository,
-        EntityManagerInterface $entityManager,
-        
-    ): Response {
-        /** @var User $currentUser */
-        $currentUser = $this->getUser();
-        $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
-        $form = $this->createForm(UserType::class, $currentUser);
+
+     
+     
+     
+     #[Route('/profile/edite', name: 'app_profile_edite', priority: 1)]
+     public function editProfile(
+         Request $request,
+         UserPasswordHasherInterface $passwordHasher,
+         PostRepository $postRepository,
+         UserRepository $userRepository,
+         NotificationRepository $notificationRepository,
+         EntityManagerInterface $entityManager,
+         DateFormatter $dateFormatter
+         
+         ): Response {
+             /** @var User $currentUser */
+             $currentUser = $this->getUser();
+             $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
+             $form = $this->createForm(UserType::class, $currentUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
             $password = $form->get('password')->getData();
-
+            
             // Vérifiez le mot de passe actuel
             if ($passwordHasher->isPasswordValid($currentUser, $password)) {
                 // Mot de passe correct, effectuez les modifications
                 $user = $form->getData();
-
+                
                 $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash('success', 'profile edited successfully');
@@ -196,45 +221,52 @@ class ProfileController extends AbstractController
                         [
                             'receiver' => $currentUser->getId(),
                             'is_read' => false
-                        ])
-                ]);
-            }
-        }
-
-        return $this->render('profile/edit.html.twig', [
-            'form' => $form->createView(),
-            'events' => $postRepository->findby(["type" => "event"]),
-            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
-            'notification' =>  $notificationRepository->findBy(
-                [
-                    'receiver' => $currentUser->getId(),
-                    'is_read' => false
-                ])
-        ]);
-    }
-    #[Route('/profile/delete', name: 'app_profile_delete', priority: 1)]
-    public function delete(EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser(); //On prend l'utilisateur actuel 
-        $entityManager->remove($user);
-        $entityManager->flush();
-        return  $this->redirectToRoute('app_register');
-    }
-    // public function setModePrefere()
-    // {
-    //     // Définir le mode préféré de l'utilisateur
-    //     $modePrefere = 'clair';
-
-    //     // Créer un cookie avec un nom distinctif en ajoutant un préfixe
-    //     $cookie = new Cookie('monsite_mode_prefere', $modePrefere, time() + 3600 * 24 * 365); // expire après 1 an
-
-    //     // Ajouter le cookie à la réponse
-    //     $response = new Response();
-    //     $response->headers->setCookie($cookie);
-    //     $response->send();
+                            ])
+                        ]);
+                    }
+                }
+                
+                return $this->render('profile/edit.html.twig', [
+                    'form' => $form->createView(),
+                    'dateFormatter' => $dateFormatter,
+                    'events' => $postRepository->findby(["type" => "event"]),
+                    'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
+                    'notification' =>  $notificationRepository->findBy(
+                        [
+                            'receiver' => $currentUser->getId(),
+                            'is_read' => false
+                            ])
+                        ]);
+                    }
+                    #[Route('/profile/delete', name: 'app_profile_delete', priority: 1)]
+                    public function delete(EntityManagerInterface $entityManager): Response
+                    {
+                        $user = $this->getUser(); //On prend l'utilisateur actuel 
+                        $entityManager->remove($user);
+                        $entityManager->flush();
+                        return  $this->redirectToRoute('app_register');
+                    }
+                    // public function setModePrefere()
+                    // {
+                        //     // Définir le mode préféré de l'utilisateur
+                        //     $modePrefere = 'clair';
+                        
+                        //     // Créer un cookie avec un nom distinctif en ajoutant un préfixe
+                        //     $cookie = new Cookie('monsite_mode_prefere', $modePrefere, time() + 3600 * 24 * 365); // expire après 1 an
+                        
+                        //     // Ajouter le cookie à la réponse
+                        //     $response = new Response();
+                        //     $response->headers->setCookie($cookie);
+                        //     $response->send();
 
     //     // ... Faire quelque chose d'autre après avoir défini le cookie
 
     //     return $this->redirectToRoute('nom_de_votre_route');
     // }
+    #[Route('/error/', name: 'app_error')]
+    public function error(): Response
+    {
+       return $this->render('profile/error.html.twig');
+    }
 }
+

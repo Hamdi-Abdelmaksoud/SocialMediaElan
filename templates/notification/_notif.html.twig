@@ -4,6 +4,10 @@
 	</div>	
 		<div><strong>{{notif.sender}}</strong></div>
 	</a>
+    {% if notif.type == 'message' %}
+		<a href="{{path('app_profile',{user:notif.id})}}"> 	<p>sends to you a <a href="{{path('app_message_send',{id:notif.sender.id})}}"><strong>message</strong> </p></a> 
+	
+   {% endif %} 
     {% if notif.type == 'like' %}
         <div class="notification"> 
 			<p>liked your </p>

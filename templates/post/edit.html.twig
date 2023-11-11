@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}add comment
+{% endblock %}
+
+{% block body %}
+ <div class="home-main">
+    <div class="side-left">
+        {{ include('home/_side.html.twig') }}
+    </div>
+    <div>
+	
+    <div class="container">
+        
+        <form method="post" action="{{ path('app_post_edit', {'post': post.id}) }}">
+            <div class="form-group">
+                
+                <textarea class="form-control" id="text" name="text">{{ post.text }}</textarea>
+            {% if post.type == 'event' %}
+          <input type="date" id="expiration" name="expiration">
+            {% endif %}
+            
+            </div>
+{% if post.pics %}
+
+            <div>
+            {% for pic in post.pics %}
+	<img class="post-pics"src="{{ asset('uploads/userPic/'~ pic.pic)}}" alt='post pic'>
+            {% endfor %}
+            </div>
+            {% endif %}
+            <button type="submit" class="post-button">Save Changes</button>
+        </form>
+    </div>
+ 
+    </div>
+      <div class="side-right">
+				{{ include('home/_side_right.html.twig') }}
+			 
+  </div>
+</div>
+	
+{% endblock %}

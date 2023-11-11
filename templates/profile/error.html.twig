@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello ProfileController!
+{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name="description" content="page profile d'un utilisateur">
+{% endblock %}
+{% block body %}
+
+	 <div class="error-container">
+   <div class="error-code">403</div>
+        <div class="error-message">Access Denied: You do not have the necessary permissions to access this page.</div>
+        <a href="{{path('app_home')}}" class="back-to-home">Back to Home Page</a>
+          <div></div><img src="{{ asset('uploads/userPic/logo.png') }}" style="width:30%;"></div>
+     </div>
+    
+{% endblock %}
+
+ 
+
+
+
+

@@ -13,44 +13,31 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('text',TextType::class)
-        
-            ->add('pic', FileType::class, [
-                'label' => 'add pictures',
+            ->add('text', TextType::class, [
                 'attr' => [
-                    'id' => 'pic_upload_input', 
-                ],
-                // unmapped means that this field is not associated to any entity property
-                'mapped' => false,
-                'multiple'=>true,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false,
-    
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
-               /* 'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/gif',
-                            'image/jpeg',
-                            'image/jpg',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid picture document',
-                    ])
-                ],*/
+                    'class' => 'editText', // Ajoutez la classe CSS pour le champ texte
+                    'placeholder' => "What's happening?",
+                ]
             ])
-               
+            ->add('pics', CollectionType::class, [
+                'entry_type' => PostPicsType::class, // Créez un nouveau formulaire de type PostPicsType pour chaque image
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'publish',
+                'attr' => [
+                    'class' => 'publish-button',
+                ],
+            ]);
             
-            ->add('submit', SubmitType::class, ['label' => 'publish'])    
-        ;
     }
       public function configureOptions(OptionsResolver $resolver): void
     {
