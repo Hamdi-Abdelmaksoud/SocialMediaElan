@@ -36,7 +36,67 @@ class ProfileController extends AbstractController
            $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('profile/show.html.twig', [
             'user' => $user,
+            'follow'=>NULL,
+            'followers'=>NULL,
             'posts' => $postRepository->findBy(['author' => $currentUser], ['created' => 'DESC']),
+            'dateFormatter' => $dateFormatter,
+            'events' => $postRepository->findby(["type" => "event"]),
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
+            'notification' => $notificationRepository->findBy(
+                [
+                    'receiver' => $user->getId(),
+                    'is_read' => false
+                ])
+
+        ]);
+    }
+    else
+    {
+    return $this->redirectToRoute('app_login');
+    }
+    }
+    #[Route('/profile/follow/{user}', name: 'app_profile_follow')]
+    public function showFollow(User $user,  DateFormatter $dateFormatter,PostRepository $postRepository,UserRepository $userRepository ,NotificationRepository $notificationRepository): Response
+    {
+        if($this->getUser())
+        {    
+           /** @var User $currentUser */
+           $currentUser=$this->getUser(); 
+           $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
+            'follow'=>$user->getFollows(),
+            'followers'=>NULL,
+            'posts' => NULL,
+            'dateFormatter' => $dateFormatter,
+            'events' => $postRepository->findby(["type" => "event"]),
+            'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
+            'notification' => $notificationRepository->findBy(
+                [
+                    'receiver' => $user->getId(),
+                    'is_read' => false
+                ])
+
+        ]);
+    }
+    else
+    {
+    return $this->redirectToRoute('app_login');
+    }
+    }
+    #[Route('/profile/follower/{user}', name: 'app_profile_follower')]
+    public function showFollowers(User $user,  DateFormatter $dateFormatter,PostRepository $postRepository,UserRepository $userRepository ,NotificationRepository $notificationRepository): Response
+    {
+        if($this->getUser())
+        {    
+           /** @var User $currentUser */
+           $currentUser=$this->getUser(); 
+           $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
+            'followers'=>$user->getFollowers(),
+            'follow'=>NULL,
+            'posts' => NULL,
             'dateFormatter' => $dateFormatter,
             'events' => $postRepository->findby(["type" => "event"]),
             'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
@@ -63,6 +123,8 @@ class ProfileController extends AbstractController
         $authors = array_merge($currentUser->getFollows()->toArray(), [$currentUser]);
         return $this->render('profile/show.html.twig', [
             'user' => $currentUser,
+            'follow'=>NULL,
+            'followers'=>NULL,
             'posts' =>$postRepository->findBy(['author' => $currentUser], ['created' => 'DESC']),
             'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'events' => $postRepository->findby(["type" => "event"]),
@@ -118,8 +180,6 @@ class ProfileController extends AbstractController
      #[Route('/profile/pic/edit', name: 'app_profile_pic_edit', priority: 1)]
      public function edit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entiyManager): Response
      {
-
-
         if ($request->isMethod('POST')) {
             if ($this->isCsrfTokenValid('add-pic',  $request->request->get('token'))) 
             {

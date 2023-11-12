@@ -1,24 +1,14 @@
-{% if users|length >0 %}
-  <div class="hello">
-    {% for otherUser in users %}
-    <div class="hi">
-      <div class="author-pic">
-		<img src="{{ asset('uploads/userPic/'~ otherUser.image)}}" alt="user pic"/>
 
-	</div>
-      <div>
-        <a href="{{ path('app_profile', { user: otherUser.id }) }}">
-        
-          <div class="what">
-            {{ otherUser.firstName}}
-            {{ otherUser.lastName}}
-          </div>
-        </a>
+{% if users|length >0 %}
+   <div class="followers">
+    {% for otherUser in users %}
+ <div class="follow">
+ 		<img class="small-image" src="{{ asset('uploads/userPic/'~ otherUser.image)}}" alt="user pic"/>
+<div>{{otherUser.firstName}} {{otherUser.lastName}}</div>
+  <div class="btn-follow">
+        <a href="{{ path('app_unfollow', { id: user.id }) }}">Unfollow</a>
       </div>
-      {# <div>
-        {{ include('follower/_follow_button.html.twig', { userToFollow: otherUser }) }}
-      </div> #}
-    </div>
+ </div>
     {% endfor %}
   </div>
 

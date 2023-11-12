@@ -1,4 +1,4 @@
-<div id="profile-card">
+ <div id="profile-card">
   <div class="frame">
     <img src="{{ asset('uploads/userPic/' ~ user.image) }}" alt="profile picture" />
   </div>
@@ -10,34 +10,43 @@
 
   <div class="header-btn">
     <div class="btn-follow">
-      <a href="{{ path('app_message_send', { id: user.id }) }}">chat</a>
+      <a href="{{ path('app_message_send', { id: user.id }) }}">Chat</a>
     </div>
+    {% if user != app.user %}
     {% if user in app.user.getFollows() %}
       <div class="btn-follow">
-        <a href="{{ path('app_unfollow', { id: user.id }) }}">unfollow</a>
+        <a href="{{ path('app_unfollow', { id: user.id }) }}">Unfollow</a>
       </div>
     {% else %}
       <div class="btn-follow">
-        <a href="{{ path('app_follow', { id: user.id }) }}">follow</a>
+        <a href="{{ path('app_follow', { id: user.id }) }}">Follow</a>
       </div>
     {% endif %}
+    {% endif %}
   </div>
+  <div class="infos">
   <div class="links">
     <div class="frame-btn">
-      <a href="#"><i class="fa-brands fa-github fa-xl"></i></a>
+      <a href="{{user.github}}" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
     </div>
     <div class="frame-btn">
-      <a href="#"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+      <a href="{{user.linkedin}}" target="_blank"><i class="fa-brands fa-linkedin fa-xl"></i></a>
     </div>
     <div class="frame-btn">
       <a href="#"><i class="fa-solid fa-at fa-xl"></i></a>
     </div>
   </div>
+     <div class="stats">
+   <div><a href="{{path('app_profile',{user:user.id})}}" >Posts</a><span>{{user.posts.count}}</span></div>
+   <div><a href="{{path('app_profile_follow',{user:user.id})}}">Follows</a> <span>{{user.follows.count}}</span></div>
+   <div><a href="{{path('app_profile_follower',{user:user.id})}}">Followers </a><span>{{user.followers.count}}</span></div>
+    </div>
+    </div>
 
   {% if app.user == user %}
     <div class="settings">
       <a href="{{ path('app_profile_edite') }}">Settings</a>
-    </div>
+</div>
 {# dark mode btn#}
 <div id="mode">
 

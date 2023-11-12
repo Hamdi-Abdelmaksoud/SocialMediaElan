@@ -11,10 +11,20 @@
 <div class="home-main">	
 <div class="side-left">
 		{{ include('home/_side.html.twig') }}
-	</div>
+	</div> 
 	<main>
 {{ include("profile/_header.html.twig", [user]) }}
+{% if posts %}
 	<div>	{{ include("post/_allposts.html.twig", [posts])}}</div>
+{% endif %}
+{% if follow %}
+<div>	{{ include ('follower/_follower_list.html.twig', { users: user.follows }) }}</div>
+{% endif %}
+{% if followers %}
+
+<div>	{{ include ('follower/_follower_list.html.twig', { users: user.followers }) }}</div>
+{% endif %}
+
 	</main>
 			<div class="side-right">
 				{{ include('home/_side_right.html.twig') }}

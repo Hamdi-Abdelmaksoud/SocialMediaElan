@@ -25,7 +25,8 @@
       <div>
 <form method="post" action="{{ path('app_profile_pic_edit') }}" enctype="multipart/form-data">
    <input type="hidden" name="token" value="{{ csrf_token('add-pic') }}"> 
-  <input type="file" name="pic" >
+ 
+  <input type="file" name="pic" id="edit-photo" >
   <button class="post-button" type="submit">change</button>
 	 
 				</form>

@@ -1,51 +1,94 @@
-.form-control {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    resize: none;
-    /* Désactiver la redimension automatique */
-}
-
-#eror {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.error-container {
-    text-align: center;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    justify-content: center;
-}
-
-.error-code {
-    font-size: 72px;
-    color: #e74c3c;
-}
-
-.error-message {
-    font-size: 24px;
-    margin-top: 10px;
-    color: #333;
-}
-
-.back-to-home {
-    margin-top: 20px;
-    text-decoration: none;
-    color: #3498db;
-    font-weight: bold;
-}
-
-.back-to-home:hover {
-    text-decoration: underline;
-}
+    .form-control {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        resize: none;
+        /* Désactiver la redimension automatique */
+    }
+    
+    #eror {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    .error-container {
+        text-align: center;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .error-code {
+        font-size: 72px;
+        color: #e74c3c;
+    }
+    
+    .error-message {
+        font-size: 24px;
+        margin-top: 10px;
+        color: #333;
+    }
+    
+    .back-to-home {
+        margin-top: 20px;
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+    }
+    
+    .back-to-home:hover {
+        text-decoration: underline;
+    }
+    
+    .caroussel-container {
+        position: relative;
+    }
+    
+    .caroussel {
+        width: 500px;
+    }
+    
+    .caroussel-hide {
+        display: none;
+    }
+    
+    .previous {
+        position: absolute;
+        top: 35%;
+        background-color: #333;
+        padding: 2px;
+        cursor: pointer;
+    }
+    
+    .next {
+        position: absolute;
+        top: 35%;
+        color: #333;
+        left: 90%;
+        background-color: #333;
+        padding: 2px;
+        cursor: pointer;
+    }
+    
+    #edit-photo {
+        /* Add your desired styles here */
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 5px;
+        margin-top: 10px;
+        /* Add more styles as needed */
+    }
+    
+    #edit-photo label {
+        color: #3498db;
+    }

@@ -57,5 +57,6 @@ class FollowerController extends AbstractController
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }
+
  
 }

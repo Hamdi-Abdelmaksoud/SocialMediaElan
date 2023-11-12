@@ -397,6 +397,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
 
     /**
      * @return Collection<int, self>
@@ -417,13 +418,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function removeFollower(self $follower): static
-    {
-        if ($this->followers->removeElement($follower)) {
-            $follower->unfollow($this);
-        }
-
-        return $this;
+{
+    if ($this->followers->contains($follower)) {
+        $this->followers->removeElement($follower);
+        $follower->unfollow($this);
     }
+
+    return $this;
+}
 
     public function getImage(): ?string
     {
