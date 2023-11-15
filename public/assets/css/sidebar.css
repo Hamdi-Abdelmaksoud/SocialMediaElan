@@ -208,6 +208,22 @@
             -moz-border-radius: 10px;
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
+            /* Cacher la barre de défilement sur Firefox */
+            scrollbar-width: thin;
+            /* Cacher la barre de défilement sur Chrome et Safari */
+            &::-webkit-scrollbar {
+                width: 8px;
+                /* Ajustez la largeur selon vos préférences */
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: var(--firstcolor);
+                /* Couleur de la poignée de défilement */
+                border-radius: 4px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: var(--bgcolor);
+                /* Couleur de la piste de défilement */
+            }
         }
         
         #list-cachee a {

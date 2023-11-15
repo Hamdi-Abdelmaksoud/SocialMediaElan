@@ -3,10 +3,15 @@
    <div class="followers">
     {% for otherUser in users %}
  <div class="follow">
- 		<img class="small-image" src="{{ asset('uploads/userPic/'~ otherUser.image)}}" alt="user pic"/>
-<div>{{otherUser.firstName}} {{otherUser.lastName}}</div>
+ <img class="small-image" src="{{ asset('uploads/userPic/'~ otherUser.image)}}" alt="user pic"/>
+<div><a href="{{path('app_profile',{user:otherUser.id})}}">{{otherUser.firstName}} {{otherUser.lastName}}</a></div>
   <div class="btn-follow">
-        <a href="{{ path('app_unfollow', { id: user.id }) }}">Unfollow</a>
+  {% if otherUser in app.user.getFollows %}
+        <a href="{{ path('app_unfollow', { id: otherUser.id }) }}">Unfollow</a>
+         {% else %}
+           
+        <a href="{{ path('app_follow', { id: otherUser.id }) }}">Follow</a>
+            {% endif %}
       </div>
  </div>
     {% endfor %}
@@ -15,3 +20,5 @@
 {% else %} 
 <div class="font-bold text-gray-600">The list is currently empty </div>
 {% endif %}
+ 
+    

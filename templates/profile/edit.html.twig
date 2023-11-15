@@ -12,13 +12,7 @@
         {{ include('home/_side.html.twig') }}
     </div>
     <div class="register">
-      {% for message in app.flashes('success') %}
-        <div class="alert-success">{{ message }}</div>
-      {% endfor %}
-
-      {% for message in app.flashes('error') %}
-        <div style=" color:red;" class="alert alert-danger">{{ message }}</div>
-      {% endfor %}
+    
 
       <h1 class="edit">Edit your profile</h1>
    

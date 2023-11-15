@@ -14,7 +14,8 @@ class EventExpirationListener
         if ($post->getAlertExpiration() < new \DateTime() && $post->getAlertExpiration() != NULL) {
             $entityManager = $args->getEntityManager();
             // Supprimez l'événement de la base de données
-            $entityManager->remove($post);
+            $post->setType('post');
+            $post->setAlertExpiration(NULL);
             $entityManager->flush(); 
         }
     }

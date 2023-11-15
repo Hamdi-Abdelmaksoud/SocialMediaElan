@@ -359,6 +359,15 @@
         font-size: medium;
     }
     
+    .alert-danger {
+        background-color: #b90a19;
+        border-radius: 20px;
+        margin: 5px;
+        height: 30px;
+        padding: 5px;
+        font-size: medium;
+    }
+    
     .comment-input {
         position: relative;
     }

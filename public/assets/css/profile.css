@@ -26,8 +26,8 @@
         }
         
         #profile-card img {
-            width: 125px;
-            height: 125px;
+            width: 85%;
+            height: 85%;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -84,6 +84,11 @@
             -moz-border-radius: 50%;
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
+        }
+        
+        .frame img:hover img {
+            width: 200px;
+            height: 200px;
         }
         
         .edit {

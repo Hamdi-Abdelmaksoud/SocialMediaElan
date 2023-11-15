@@ -37,7 +37,7 @@
     </div>
   </div>
      <div class="stats">
-   <div><a href="{{path('app_profile',{user:user.id})}}" >Posts</a><span>{{user.posts.count}}</span></div>
+   <div><a href="{{path('app_profile',{user:user.id})}}" >Posts</a> <span>{{user.posts.count}}</span></div>
    <div><a href="{{path('app_profile_follow',{user:user.id})}}">Follows</a> <span>{{user.follows.count}}</span></div>
    <div><a href="{{path('app_profile_follower',{user:user.id})}}">Followers </a><span>{{user.followers.count}}</span></div>
     </div>

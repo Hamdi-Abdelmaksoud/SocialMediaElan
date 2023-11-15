@@ -39,6 +39,13 @@
     
      <script>document.body.classList.add("darkmode");</script>
     {% endif %}
+      {% for message in app.flashes('success') %}
+        <div class="alert-success" id="successMessage">{{ message }}</div>
+      {% endfor %}
+
+      {% for message in app.flashes('error') %}
+        <div style=" color:red;" class="alert-danger">{{ message }}</div>
+      {% endfor %}
     {% block body %}
     {% endblock %}
     <footer>
