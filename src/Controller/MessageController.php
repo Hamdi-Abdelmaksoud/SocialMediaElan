@@ -15,13 +15,15 @@ use App\Repository\NotificationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\DateFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 class MessageController extends AbstractController
 {
  
     #[Route('/message/{id}', name: 'app_message_send')]
     public function send(Request $request, User $recipient,
-     NotificationRepository $notificationRepository, 
+     NotificationRepository $notificationRepository, DateFormatter $dateFormatter,
     EntityManagerInterface $entiyManager, MessageRepository $messageRepository,
      PostRepository $postRepository,UserRepository $userRepository): Response
     {
@@ -60,6 +62,7 @@ class MessageController extends AbstractController
             'form' => $form->createView(),//formulaire d'ajout message
             'discussion' => $messageRepository->findDiscussion($recipient, $this->getUser()),
             //l'ancienne discussion
+            'dateFormatter' => $dateFormatter,
             'sugges'=>$userRepository->findSuggestions($authors,$currentUser->getCity()),
             'recipient' => $recipient,//à qui on veut envoyer le message on le réccupére de l'url
             'events' => $postRepository->findby(["type" => "event"]),//les evenelents pour le sidebar
